@@ -8,8 +8,6 @@ class SalesEngineTest < Minitest::Test
 
   def test_sales_engine_can_startup
     engine = SalesEngine.new
-    assert_equal 'vroom!', engine.startup
+    assert engine.startup
   end
-
-
 end
