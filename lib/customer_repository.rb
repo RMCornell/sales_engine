@@ -1,4 +1,5 @@
  class CustomerRepository
+
    attr_reader :customer_data, :parent, :customers, :engine
 
   def initialize(customer_data, parent)
