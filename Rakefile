@@ -1,3 +1,10 @@
+
+task :test do
+  Dir.glob('./test/**/*_test.rb') { |file| require file }
+end
+task default: [:test]
+
+
 namespace :sanitation do
   desc "Check line lengths & whitespace with Cane"
   task :lines do
