@@ -1,5 +1,5 @@
  class CustomerRepository
-   attr_accessor :customer_data, :parent, :customers,
+   attr_accessor :customer_data, :parent, :customers
 
   def initialize(customer_data, parent)
     @parent = parent

@@ -21,7 +21,7 @@ class SalesEngine
   def startup
     customer_data = Parser.parse("#{dir}/customers.csv")
     # binding.pry
-    @customer_repository = CustomerRepository.new#(customer_data, self)
+    @customer_repository = CustomerRepository.new(customer_data, self)
 
     #@invoices  = InvoiceRepository.new(invoice_file, self)
   end
