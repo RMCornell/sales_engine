@@ -1,5 +1,5 @@
 
-class CsvParser
+class Parser
 
   def self.parse(file)
     if File.exist?(file)
