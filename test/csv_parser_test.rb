@@ -6,4 +6,5 @@ class ParserTest < Minitest::Test
     assert CsvParser.new
   end
 
+
 end
