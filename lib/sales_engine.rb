@@ -19,18 +19,24 @@ class SalesEngine
   end
 
   def startup
-    customer_data = Parser.parse("#{dir}/customers.csv")
-    # binding.pry
-    @customer_repository = CustomerRepository.new#(customer_data, self)
+    customer_data            = Parser.parse("#{dir}/customers.csv")
+    @customer_repository     = CustomerRepository.new(customer_data, self)
 
-    #@invoices  = InvoiceRepository.new(invoice_file, self)
+    invoice_data             = Parser.parse("#{dir}/invoices.csv")
+    @invoice_repository      = InvoiceRepository.new(invoice_data, self)
+
+    transaction_data         = Parser.parse("#{dir}/transactions.csv")
+    @transaction_repository  = TransactionRepository.new(transaction_data, self)
+
+    merchant_data            = Parser.parse("#{dir}/merchants.csv")
+    @merchant_repository     = MerchantRepository.new(merchant_data, self)
+
+    item_data                = Parser.parse("#{dir}/items.csv")
+    @item_repository         = ItemRepository.new(item_data, self)
+
+    invoice_item_data        =Parser.parse("#{dir}/invoice_items.csv")
+    @invoice_item_repository = InvoiceItemRepository.new(invoice_item_data, self)
   end
-
-
-  # def invoice_repository
-  #   # todo want this to be array of Invoice instances
-  #   #@invoices = InvoiceRepository.new(invoices)
-  # end
 end
 
 #
