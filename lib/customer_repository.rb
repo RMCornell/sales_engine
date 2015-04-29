@@ -22,6 +22,10 @@
      @customers
    end
 
+   def random
+     @customers.sample
+   end
+
    def find_customer_by_id(id)
      # customers[id] # todo gives wrong value?
    end
