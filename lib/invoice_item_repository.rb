@@ -8,7 +8,7 @@ class InvoiceItemRepository
   end
 
   def load_items(invoice_items_data)
-    invoice_item.map do |row|
+    invoice_items_data.map do |row|
       InvoiceItem.new(row, self)
     end
   end

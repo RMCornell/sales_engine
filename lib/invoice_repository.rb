@@ -1,5 +1,5 @@
 class InvoiceRepository
-  attr_reader :invoice_data, :parent, :invoices
+  attr_reader :invoice_data, :parent, :invoice
 
   def initialize(invoice_data, parent)
     @parent = parent

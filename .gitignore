@@ -1,2 +1,4 @@
 #rubymine idea file
 .idea/
+
+/test/coverage/

@@ -1,5 +1,5 @@
 class TransactionRepository
-  attr_reader :transaction_data, :parent, :transations
+  attr_reader :transaction_data, :parent, :transactions
 
   def initialize(transaction_data, parent)
     @parent = parent
@@ -8,7 +8,7 @@ class TransactionRepository
   end
 
   def load_transactions(transaction_data)
-    @transaction_data.map do |row|
+    transaction_data.map do |row|
       Transaction.new(row, self)
     end
   end
