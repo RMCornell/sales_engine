@@ -51,7 +51,7 @@ class InvoiceItemRepository
 
   def find_all_by_invoice_id
     #todo find_all_by_invoice_id
-    #engine.invoice_repository.invoice_id
+    engine.invoice_repository.invoice_id
   end
 
   def find_all_by_quantity
@@ -62,5 +62,3 @@ class InvoiceItemRepository
     #todo find_all_by_unit_price
   end
 end
-
-#id,item_id,invoice_id,quantity,unit_price,

@@ -1,4 +1,5 @@
 class InvoiceRepository
+  include Enumerable
   attr_reader :invoice_data, :parent, :invoice
 
   def initialize(invoice_data, parent)
@@ -6,6 +7,11 @@ class InvoiceRepository
     @invoice_data = invoice_data
     @invoice = load_invoices(invoice_data)
   end
+
+  def each(&block)
+    @invoice.each(&block)
+  end
+
 
   def load_invoices(invoice_data)
     invoice_data.map do |row|

@@ -2,11 +2,11 @@ require_relative 'test_helper'
 
 class SalesEngineTest < Minitest::Test
 
-    # todo bad practice?
-    # 7.95 to 1.68 seconds
-    @@engine = SalesEngine.new('./data')
-    @@engine.startup
+   @@engine = SalesEngine.new('./data')
+   @@engine.startup
 
+  # todo bad practice?
+    # 7.95 to 1.68 seconds
 
   def test_sales_engine_exists?
     assert @@engine
