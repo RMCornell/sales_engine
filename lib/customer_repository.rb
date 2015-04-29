@@ -34,7 +34,7 @@
    end
 
    def find_customer_by_id(id)
-     @customers.select { |customer| customer.id == id}
+     @customers.detect { |customer| customer.id == id}
    end
 
    # todo need .downcase and possibly regex

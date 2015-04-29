@@ -10,7 +10,7 @@ class Merchant
     @id = merchant[:id]
     @name = merchant[:name]
     @created_at = merchant[:created_at]
-    @updated_at = merchang[:updated_at]
+    @updated_at = merchant[:updated_at]
   end
 
   def items
