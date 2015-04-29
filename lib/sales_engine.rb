@@ -46,21 +46,9 @@ class SalesEngine
     invoice_item_data        = Parser.parse("#{dir}/invoice_items.csv")
     @invoice_item_repository = InvoiceItemRepository.new(invoice_item_data, self)
   end
-end
 
-#
-# if __FILE__ == $0
-#   engine = SalesEngine.new('./data/customers.csv', './data/invoices.csv')
-#   engine.startup
-#
-#   engine.customer_repository
-#
-#
-#  binding.pry
-#  puts 'asdf'
-#   # engine.merchant_repository
-#   # p engine.invoice_repository
-#   # engine.item_repository
-#   # engine.invoice_item_repository
-#   # engine.transaction_repository
-# end
+
+  def find_invoices_by_customer_id(id)
+    invoice_repository.select { |customer_id| id == customer_id }
+  end
+end
