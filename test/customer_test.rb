@@ -4,7 +4,11 @@ class CustomerTest < Minitest::Test
 
   @@engine = SalesEngine.new('./data')
   @@engine.startup
-  @@customers = @@engine.customer_repository
+  @customer_data           = Parser.parse("./data/customers.csv")
+  @customer_repository     = CustomerRepository.new(@customer_data, self)
+
+
+  @@customers = @customer_repository
 
   def setup
 
@@ -12,11 +16,12 @@ class CustomerTest < Minitest::Test
 
 
   def test_customers_can_exist
+    binding.pry
     assert @@customers
   end
 
-  # def test_customers_have_a_unique_id(id)
-  #
-  # end
+  def test_customers_have_an_id
+    #@@customers { |customer| customer.id.nil? }
+  end
 
 end

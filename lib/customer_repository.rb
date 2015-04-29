@@ -1,4 +1,6 @@
  class CustomerRepository
+   include Enumerable
+
 
    attr_reader :customer_data, :engine, :customers
 
@@ -8,11 +10,19 @@
       @customers     = load_customers(customer_data)
    end
 
+
+
    def load_customers(customer_data)
      customer_data.map do |row|
        Customer.new(row, self)
      end
    end
+
+   def each(&block)
+     @customers.each(&block)
+   end
+
+
 
    def find_invoices_by_customer_id(id)
      engine.find_invoices_by_customer_id(id)
@@ -31,7 +41,7 @@
    end
 
    def find_customer_by_last_name(last_name)
-     # todo
+     @customers.select {|customer| last_name == customer.last_name}
    end
 
    def find_customer_by_created_at(time)

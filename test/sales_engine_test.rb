@@ -4,14 +4,9 @@ class SalesEngineTest < Minitest::Test
 
     # todo bad practice?
     # 7.95 to 1.68 seconds
-
     @@engine = SalesEngine.new('./data')
     @@engine.startup
 
-  # def setup
-  #   @engine = SalesEngine.new('./data')
-  #   @engine.startup unless @engine.startup
-  #  end
 
   def test_sales_engine_exists?
     assert @@engine
