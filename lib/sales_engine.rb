@@ -49,15 +49,15 @@ class SalesEngine
   end
 
 
-  def find_invoices_by_customer_id(id)
-    invoice_repository.select { |customer_id| id == customer_id }
+  def find_invoices_by_customer_id(customer_id)
+    invoice_repository.select { |invoice| invoice.customer_id == customer_id }
   end
 
   def find_by_invoice_id(invoice_id)
-    invoice_repository.select { |invoice| invoice == invoice_id}
+    invoice_repository.select { |invoice| invoice.id == invoice_id}
   end
 
-  def find_items_by_merchant_id
-    item_repository.select { |item| item == merchant_id}
-  end
+  # def find_items_by_merchant_id
+  #   item_repository.select { |item| item == merchant_id }
+  # end
 end

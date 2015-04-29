@@ -8,10 +8,10 @@ class CustomerTest < Minitest::Test
     @customer1 = @engine.customer_repository.find_customer_by_id(1)
     @customers = @engine.customer_repository
   end
-
-  def test_customers_can_exist
-    assert @customers
-  end
+  #
+  # # def test_customers_can_exist
+  #   assert @customers
+  # end
 
   def test_customers_have_a_repository
     refute @customers.any? { |customer| customer.repository.nil? }
@@ -43,8 +43,8 @@ class CustomerTest < Minitest::Test
   end
 
   def test_find_invoices_by_customer
-    skip
-    assert_equal 8, @customer1.invoices
-    puts 'asdf'
+    require 'pry'
+    #binding.pry
+    assert_equal 8, @customer1.invoices.size
   end
 end
