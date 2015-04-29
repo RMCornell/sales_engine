@@ -19,7 +19,8 @@ require_relative 'item_repository'
 
 
 class SalesEngine
-  attr_reader :customer_repository, :dir
+  attr_reader :customer_repository, :invoice_repository, :transaction_repository,
+              :merchant_repository, :item_repository, :invoice_item_repository, :dir
 
   def initialize(dir)
     @dir = dir
