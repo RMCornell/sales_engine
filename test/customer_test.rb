@@ -16,7 +16,7 @@ class CustomerTest < Minitest::Test
 
 
   def test_customers_can_exist
-    binding.pry
+
     assert @@customers
   end
 
