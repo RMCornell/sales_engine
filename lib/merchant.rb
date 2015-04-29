@@ -1,5 +1,6 @@
 class Merchant
-  attr_reader :id,
+  attr_reader :repository,
+              :id,
               :name,
               :created_at,
               :updated_at
@@ -7,7 +8,7 @@ class Merchant
   def initialize(merchant, repository)
     @merchant = merchant
     @repository = repository
-    @id = merchant[:id]
+    @id = merchant[:id].to_i
     @name = merchant[:name]
     @created_at = merchant[:created_at]
     @updated_at = merchant[:updated_at]
@@ -21,4 +22,6 @@ class Merchant
 # todo invoices returns a collection of Invoice instances associated with that merchant from their known orders
   end
 end
+
+
 
