@@ -11,9 +11,8 @@ class ParserTest < Minitest::Test
   end
 
   def test_parser_raises_error_if_file_is_not_found
-    #todo how to make this work?
-    skip
-    Parser.parse('./my/file')
-    assert_raises IOError, './file/not/found not found!'
+    # todo how to make this work?
+
+    assert_equal "file not found", Parser.parse('./my/file')
   end
 end

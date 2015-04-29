@@ -1,5 +1,5 @@
 class ItemRepository
-  attr reader :item_data, :parent, :items
+  attr_reader :item_data, :parent, :items
 
   def initialize(item_data, parent)
     @parent = parent
