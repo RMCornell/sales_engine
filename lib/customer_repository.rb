@@ -10,8 +10,6 @@
       @customers     = load_customers(customer_data)
    end
 
-
-
    def load_customers(customer_data)
      customer_data.map do |row|
        Customer.new(row, self)
@@ -21,7 +19,6 @@
    def each(&block)
      @customers.each(&block)
    end
-
 
 
    def find_invoices_by_customer_id(id)
@@ -37,7 +34,12 @@
    end
 
    def find_customer_by_id(id)
-     # customers[id] # todo gives wrong value?
+     @customers.select { |customer| customer.id == id}
+   end
+
+   # todo need .downcase and possibly regex
+   def find_customer_by_first_name(first_name)
+     @customers.select {|customer| first_name == customer.first_name}
    end
 
    def find_customer_by_last_name(last_name)
