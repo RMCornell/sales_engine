@@ -42,6 +42,8 @@ class CustomerTest < Minitest::Test
   end
 
   def test_find_invoices_by_customer
+    binding.pry
     assert_equal 8, @customer1.invoices
+    puts 'asdf'
   end
 end
