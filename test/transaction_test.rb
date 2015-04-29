@@ -53,6 +53,7 @@ class TransactionTest < Minitest::Test
   end
 
   def test_it_finds_invoice_by_invoice_id
+    skip
     assert_equal "some shit", transaction.invoice(1)
   end
 end
