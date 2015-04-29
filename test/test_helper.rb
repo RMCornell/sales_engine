@@ -1,4 +1,5 @@
 require 'simplecov'
+require 'csv'
 SimpleCov.start
 
 require "minitest"
