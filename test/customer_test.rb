@@ -32,15 +32,16 @@ class CustomerTest < Minitest::Test
     refute @customers.any? { |customer| customer.created_at.nil? }
   end
 
+  def test_customers_can_exist
+    assert @@customers
+  end
+
   def test_customer_knows_when_it_was_last_modified
     # todo need these probably set to 'created_at'
     refute @customers.any? { |customer| customer.updated_at.nil? }
   end
 
   def test_find_invoices_by_customer
-    assert_equal 8, @customer1.invoices.id
-    binding.pry
-    puts 'asdf'
+    assert_equal 8, @customer1.invoices
   end
-
 end
