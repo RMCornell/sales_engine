@@ -37,15 +37,8 @@ class SalesEngine
     initialize_invoice_repository
     initialize_transaction_repository
     initialize_merchant_repository
-    initalize_item_repository
+    initialize_item_repository
     initialize_invoice_item_repository
-
-    #@customer_repository     ||= CustomerRepository.new(self, dir)
-    #@invoice_repository      ||= InvoiceRepository.new(self, dir)
-    #@transaction_repository  ||= TransactionRepository.new(self, dir)
-    #@merchant_repository     ||= MerchantRepository.new(self, dir)
-    #@item_repository         ||= ItemRepository.new(self, dir)
-    #@invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
   def initialize_customer_repository
@@ -64,7 +57,7 @@ class SalesEngine
     @merchant_repository ||= MerchantRepository.new(self, dir)
   end
 
-  def initalize_item_repository
+  def initialize_item_repository
     @item_repository ||= ItemRepository.new(self, dir)
   end
 
