@@ -1,22 +1,39 @@
 class InvoiceRepository
   include Enumerable
-  attr_reader :invoice_data, :engine, :invoices
+  attr_reader :engine, :invoices
 
-  def initialize(invoice_data, engine)
+  def initialize(engine, dir)
     @engine = engine
-    @invoice_data = invoice_data
-    @invoices = load_invoices(invoice_data)
+    @invoices = load_invoices(dir)
   end
 
   def each(&block)
     @invoices.each(&block)
   end
 
-  def load_invoices(invoice_data)
-    invoice_data.map do |row|
+  def load_invoices(dir)
+    Parser.parse("#{dir}/invoices.csv").map do |row|
       Invoice.new(row, self)
     end
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def find_by_invoice_id(invoice_id)
     invoices.find { |invoice| invoice.id == invoice_id }

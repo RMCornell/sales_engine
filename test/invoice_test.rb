@@ -8,6 +8,7 @@ class InvoiceTest < Minitest::Test
 
     @invoice1 = @engine.invoice_repository.find_by_invoice_id(1)
     @invoices = @engine.invoice_repository
+    @transaction = @engine.transaction_repository.find_by_invoice_id(1)
   end
 
   def test_invoice_can_find_its_customer
@@ -15,9 +16,7 @@ class InvoiceTest < Minitest::Test
   end
 
   def test_invoice_can_find_its_transaction
-    binding.pry
-    test = @invoice1.transactions
-    puts 'asdf'
-    assert_equal [], @invoice1.transactions
+    @transaction = @invoice1.transactions
+    assert_equal '2012-03-27 14:54:09 UTC', @transaction.created_at
   end
 end

@@ -1,17 +1,24 @@
 class InvoiceItemRepository
-  attr_reader :invoice_item_data, :parent, :invoice_item
+  attr_reader :engine, :invoice_items
 
-  def initialize(invoice_item_data, parent)
-    @parent = parent
-    @invoice_item_data = invoice_item_data
-    @invoice_item = load_items(invoice_item_data)
+  def initialize(engine, dir)
+    @engine = engine
+    @invoice_items = load_items(dir)
   end
 
-  def load_items(invoice_items_data)
-    invoice_items_data.map do |row|
+  def load_items(dir)
+    Parser.parse("#{dir}/invoice_items.csv").map do |row|
       InvoiceItem.new(row, self)
     end
   end
+
+
+
+
+
+
+
+
 
   def find_all
     #todo find_all

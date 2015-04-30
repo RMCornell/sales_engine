@@ -19,33 +19,25 @@ require_relative 'item_repository'
 
 
 class SalesEngine
-  attr_reader :customer_repository, :invoice_repository, :transaction_repository,
-              :merchant_repository, :item_repository, :invoice_item_repository, :dir
+  attr_reader :customer_repository,
+              :invoice_repository,
+              :transaction_repository,
+              :merchant_repository,
+              :item_repository,
+              :invoice_item_repository,
+              :dir
 
   def initialize(dir)
     @dir = dir
-    # startup
   end
 
   def startup
-
-    customer_data            ||= Parser.parse("#{dir}/customers.csv")
-    @customer_repository     ||= CustomerRepository.new(customer_data, self)
-
-    invoice_data             ||= Parser.parse("#{dir}/invoices.csv")
-    @invoice_repository      ||= InvoiceRepository.new(invoice_data, self)
-
-    transaction_data         ||= Parser.parse("#{dir}/transactions.csv")
-    @transaction_repository  ||= TransactionRepository.new(transaction_data, self)
-
-    merchant_data            ||= Parser.parse("#{dir}/merchants.csv")
-    @merchant_repository     ||= MerchantRepository.new(merchant_data, self)
-
-    item_data                ||= Parser.parse("#{dir}/items.csv")
-    @item_repository         ||= ItemRepository.new(item_data, self)
-
-    invoice_item_data        ||= Parser.parse("#{dir}/invoice_items.csv")
-    @invoice_item_repository ||= InvoiceItemRepository.new(invoice_item_data, self)
+    @customer_repository     ||= CustomerRepository.new(self, dir)
+    @invoice_repository      ||= InvoiceRepository.new(self, dir)
+    @transaction_repository  ||= TransactionRepository.new(self, dir)
+    @merchant_repository     ||= MerchantRepository.new(self, dir)
+    @item_repository         ||= ItemRepository.new(self, dir)
+    @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
 

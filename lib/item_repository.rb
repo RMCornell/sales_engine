@@ -1,17 +1,33 @@
 class ItemRepository
-  attr_reader :item_data, :parent, :items
+  attr_reader :engine, :items
 
-  def initialize(item_data, parent)
-    @parent = parent
-    @item_data = item_data
-    @item = load_items(item_data)
+  def initialize(engine, dir)
+    @engine = engine
+    @items = load_items(dir)
   end
 
-  def load_items(item_data)
-    item_data.map do |row|
+  def load_items(dir)
+    Parser.parse("#{dir}/items.csv").map do |row|
       Item.new(row, self)
     end
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def find_all
     #todo find all
