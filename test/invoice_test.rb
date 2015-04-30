@@ -14,5 +14,10 @@ class InvoiceTest < Minitest::Test
     assert_equal 'Joey', @invoice1.customer.first_name
   end
 
-
+  def test_invoice_can_find_its_transaction
+    binding.pry
+    test = @invoice1.transactions
+    puts 'asdf'
+    assert_equal [], @invoice1.transactions
+  end
 end

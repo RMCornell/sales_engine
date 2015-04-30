@@ -3,6 +3,7 @@ require 'minitest/autorun'
 
 
 class InvoiceRepositoryTest < Minitest::Test
+
   def setup
     @engine = SalesEngine.new('./data')
     @engine.startup
@@ -14,7 +15,6 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_invoices_have_a_repository
-
     assert @invoice_repository
   end
 

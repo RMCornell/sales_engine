@@ -1,8 +1,8 @@
 class TransactionRepository
-  attr_reader :transaction_data, :parent, :transactions
+  attr_reader :transaction_data, :engine, :transactions
 
-  def initialize(transaction_data, parent)
-    @parent = parent
+  def initialize(transaction_data, engine)
+    @engine = engine
     @transaction_data = transaction_data
     @transactions = load_transactions(transaction_data)
   end
@@ -25,9 +25,22 @@ class TransactionRepository
     # todo find_by_id
   end
 
-  def find_by_invoice_id(id)
-    # todo find_by_invoice_id
+  def find_by_invoice_id(invoice_id)
+    @transactions.select { |transaction| transaction.invoice_id == invoice_id }
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def find_by_credit_card_number(credit_card_number)
     # todo

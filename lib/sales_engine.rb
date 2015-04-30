@@ -57,6 +57,12 @@ class SalesEngine
     customer_repository.find_by_customer_id(customer_id)
   end
 
+  def find_transactions_by_invoice_id(id)
+    transaction_repository.find_by_invoice_id(id)
+  end
+
+
+
 end
 
 
