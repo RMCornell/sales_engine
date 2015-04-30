@@ -6,6 +6,7 @@ class TransactionRepositoryTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new('./data')
+    @engine.initialize_transaction_repository
     @transactions = @engine.transaction_repository
   end
 

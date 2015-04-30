@@ -4,6 +4,7 @@ class SalesEngineTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new('./data')
+    @engine.startup
   end
 
   def test_sales_engine_exists?

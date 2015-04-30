@@ -4,6 +4,7 @@ class CustomerTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new('./data')
+    @engine.initialize_customer_repository
     @customer1 = @engine.customer_repository.find_by_customer_id(1)
     @customers = @engine.customer_repository
   end

@@ -5,6 +5,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new('./data')
+    @engine.initialize_invoice_repository
     @invoice_repository = @engine.invoice_repository
   end
 

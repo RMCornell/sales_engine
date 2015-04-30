@@ -4,7 +4,7 @@ class InvoiceTest < Minitest::Test
   
   def setup
     @engine = SalesEngine.new('./data')
-
+    @engine.initialize_invoice_repository
     @invoice1 = @engine.invoice_repository.find_by_invoice_id(1)
     @invoices = @engine.invoice_repository
   end

@@ -29,15 +29,46 @@ class SalesEngine
 
   def initialize(dir)
     @dir = dir
-    startup
+    #startup
   end
 
   def startup
-    @customer_repository     ||= CustomerRepository.new(self, dir)
-    @invoice_repository      ||= InvoiceRepository.new(self, dir)
-    @transaction_repository  ||= TransactionRepository.new(self, dir)
-    @merchant_repository     ||= MerchantRepository.new(self, dir)
-    @item_repository         ||= ItemRepository.new(self, dir)
+    initialize_customer_repository
+    initialize_invoice_repository
+    initialize_transaction_repository
+    initialize_merchant_repository
+    initalize_item_repository
+    initialize_invoice_item_repository
+
+    #@customer_repository     ||= CustomerRepository.new(self, dir)
+    #@invoice_repository      ||= InvoiceRepository.new(self, dir)
+    #@transaction_repository  ||= TransactionRepository.new(self, dir)
+    #@merchant_repository     ||= MerchantRepository.new(self, dir)
+    #@item_repository         ||= ItemRepository.new(self, dir)
+    #@invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
+  end
+
+  def initialize_customer_repository
+    @customer_repository ||= CustomerRepository.new(self, dir)
+  end
+
+  def initialize_invoice_repository
+    @invoice_repository ||= InvoiceRepository.new(self, dir)
+  end
+
+  def initialize_transaction_repository
+    @transaction_repository ||= TransactionRepository.new(self, dir)
+  end
+
+  def initialize_merchant_repository
+    @merchant_repository ||= MerchantRepository.new(self, dir)
+  end
+
+  def initalize_item_repository
+    @item_repository ||= ItemRepository.new(self, dir)
+  end
+
+  def initialize_invoice_item_repository
     @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
