@@ -20,6 +20,11 @@ class InvoiceItem
     @updated_at   = invoice_item[:updated_at]
   end
 
+  def inspect
+    "#<#{self.class}: id:#{@id.inspect} item_id: #{@item_id.inspect} invoice_id: #{@invoice_id.inspect} quantity: #{@quantity.inspect} unit_price: #{@unit_price.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
+  end
+
+
   def invoice
   # todo invoice returns an instance of Invoice associated with this object
   end
