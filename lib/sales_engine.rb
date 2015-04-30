@@ -29,6 +29,7 @@ class SalesEngine
 
   def initialize(dir)
     @dir = dir
+    startup
   end
 
   def startup

@@ -1,5 +1,4 @@
-require_relative './test_helper'
-#require "./lib/transaction"
+require_relative 'test_helper'
 
 class TransactionTest < Minitest::Test
   attr_reader :transaction

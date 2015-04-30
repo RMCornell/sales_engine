@@ -1,12 +1,10 @@
 require_relative 'test_helper'
-require 'minitest/autorun'
 
 
 class InvoiceRepositoryTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new('./data')
-    @engine.startup
     @invoice_repository = @engine.invoice_repository
   end
 

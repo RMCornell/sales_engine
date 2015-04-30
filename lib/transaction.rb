@@ -10,6 +10,7 @@ class Transaction
 
   def initialize(transaction, repository)
     @repository                  = repository
+
     @id                          = transaction[:id].to_i
     @invoice_id                  = transaction[:invoice_id].to_i
     @credit_card_number          = transaction[:credit_card_number]

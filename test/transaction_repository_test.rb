@@ -1,5 +1,4 @@
 require_relative 'test_helper'
-require 'minitest/autorun'
 
 
 class TransactionRepositoryTest < Minitest::Test
@@ -7,7 +6,6 @@ class TransactionRepositoryTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new('./data')
-    @engine.startup
     @transactions = @engine.transaction_repository
   end
 
