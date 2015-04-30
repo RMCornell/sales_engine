@@ -1,10 +1,8 @@
 class InvoiceRepository
   include Enumerable
-  attr_reader :engine, :invoices
 
-  def initialize(engine, dir)
+  def initialize(engine)
     @engine = engine
-    @invoices = load_invoices(dir)
   end
 
   def each(&block)
@@ -12,36 +10,40 @@ class InvoiceRepository
   end
 
   def load_invoices(dir)
-    Parser.parse("#{dir}/invoices.csv").map do |row|
-      Invoice.new(row, self)
-    end
+    file = Parser.parse("#{dir}/invoices.csv")
+    @invoices = file.map { |row| Invoice.new(row, self) }
   end
 
+  def inspect
+    "#<InvoiceRepository: id: #{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id:#{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
+  end
 
+  def find_customer_by_customer_id(customer_id)
+    @engine.find_customer_by_customer_id(customer_id)
+  end
 
+  def all
+    @invoices
+  end
 
+  def find_by_id(id)
+    @invoices.detect { |invoice| invoice.id == id}
+  end
 
-
-
-
-
-
-
-
-
-
+  def find_by_customer_id(customer_id)
+    @invoices.select { |invoice| invoice.customer.id == customer_id }
+  end
 
 
 
 
 
   def find_by_invoice_id(invoice_id)
-    invoices.find { |invoice| invoice.id == invoice_id }
+    @invoices.find { |invoice| invoice.id == invoice_id }
   end
 
-  def find_customer_by_customer_id(customer_id)
-    engine.find_customer_by_customer_id(customer_id)
-  end
+
+
 
   def find_transactions_by_invoice_id(id)
     engine.find_transactions_by_invoice_id(id)
@@ -49,14 +51,6 @@ class InvoiceRepository
 
 
 end
-
-
-
-
-
-
-
-
 
 
 
