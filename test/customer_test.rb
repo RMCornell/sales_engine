@@ -42,7 +42,8 @@ class CustomerTest < Minitest::Test
   end
 
 
-  # def test_find_invoices_by_customer
-  #   assert_equal 8, @customer1.find_by_customer_id(1)
-  # end
+  def test_find_invoices_by_customer
+    skip
+    #assert_equal 8, @customer1.find_by_customer_id(1)
+  end
 end
