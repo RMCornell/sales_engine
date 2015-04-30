@@ -12,6 +12,10 @@ class Customer
     @updated_at  = customer[:updated_at]
   end
 
+  def inspect
+    "#<Customer: id: #{@id.inspect} first_name: #{@first_name.inspect} last_name:#{@last_name.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
+  end
+
   def invoices
     repository.find_invoices_by_customer_id(id)
   end

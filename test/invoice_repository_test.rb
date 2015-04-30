@@ -2,44 +2,47 @@ require_relative 'test_helper'
 
 
 class InvoiceRepositoryTest < Minitest::Test
+  attr_reader :engine, :invoices
 
   def setup
-    @engine = SalesEngine.new('./data')
+    @engine = SalesEngine.new('./test/fixtures')
     @engine.initialize_invoice_repository
-    @invoice_repository = @engine.invoice_repository
+    # @invoices...
+    @invoices = []
   end
 
   def test_invoices_can_exist
-    assert @invoice_repository
+    assert invoices
   end
 
   def test_invoices_have_a_repository
-    assert @invoice_repository
+    assert invoices
   end
 
   def test_invoices_have_an_id
-    refute @invoice_repository.invoices.any? { |invoice| invoice.id.nil? }
+    refute invoices.any? { |invoice| invoice.id.nil? }
   end
 
   def test_invoices_have_a_customer_id
-    refute @invoice_repository.invoices.any? { |invoice| invoice.customer_id.nil? }
+    refute invoices.any? { |invoice| invoice.customer_id.nil? }
   end
 
   def test_invoices_have_a_merchant_id
-    refute @invoice_repository.invoices.any? { |invoice| invoice.merchant_id.nil? }
+    refute invoices.any? { |invoice| invoice.merchant_id.nil? }
   end
 
   def test_invoice_has_a_status
-    refute @invoice_repository.invoices.any? { |invoice| invoice.status.nil? }
+    refute invoices.any? { |invoice| invoice.status.nil? }
   end
 
   def test_invoice_knows_when_it_was_created
-    refute @invoice_repository.invoices.any? { |invoice| invoice.created_at.nil? }
+    refute invoices.any? { |invoice| invoice.created_at.nil? }
   end
 
   def test_invoice_knows_when_it_was_updated
-    refute @invoice_repository.invoices.any? { |invoice| invoice.updated_at.nil? }
+    refute invoices.any? { |invoice| invoice.updated_at.nil? }
   end
+
 
 end
 

@@ -19,6 +19,7 @@ require_relative 'item_repository'
 
 
 class SalesEngine
+  include Enumerable
   attr_reader :customer_repository,
               :invoice_repository,
               :transaction_repository,
@@ -42,11 +43,14 @@ class SalesEngine
   end
 
   def initialize_customer_repository
-    @customer_repository ||= CustomerRepository.new(self, dir)
+    @customer_repository ||= CustomerRepository.new(self)
+    @customer_repository.load_customers(dir)
+
   end
 
   def initialize_invoice_repository
-    @invoice_repository ||= InvoiceRepository.new(self, dir)
+    @invoice_repository ||= InvoiceRepository.new(self)
+    @invoice_repository.load_invoices(dir)
   end
 
   def initialize_transaction_repository
@@ -65,34 +69,21 @@ class SalesEngine
     @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
-
-
-
-
-
   def find_invoices_by_customer_id(customer_id)
-    invoice_repository.select { |invoice| invoice.customer_id == customer_id }
+    #@invoice_repository.select { |invoice| invoice.customer_id == customer_id }
+    @invoice_repository.find_by_customer_id(customer_id)
   end
 
   def find_customer_by_customer_id(customer_id)
-    customer_repository.find_by_customer_id(customer_id)
+ #   customer_repository.find_by_customer_id(customer_id)
   end
 
   def find_transactions_by_invoice_id(id)
-    transaction_repository.find_by_invoice_id(id)
+  #  transaction_repository.find_by_invoice_id(id)
   end
 
 
 end
-
-
-
-
-
-
-
-
-
 
 
 # def find_by_invoice_id(invoice_id)
