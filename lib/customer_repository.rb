@@ -1,7 +1,5 @@
  class CustomerRepository
    include Enumerable
-
-
    attr_reader :engine, :customers
 
    def initialize(engine)
@@ -21,70 +19,55 @@
      "#<#{self.class} #{@customers.size} rows>"
    end
 
+#Customer Repository Methods
+  def all
+    customers
+  end
 
-   def find_invoices_by_customer_id(id)
-     engine.find_invoices_by_customer_id(id)
+  def random
+   customers.sample(1)
+  end
+
+#Find_by Methods
+   def find_by_id(id)
+     customers.detect {|customer| id == customer.id}
    end
 
-   def all
-     @customers
+   def find_by_first_name(first_name)
+     customers.detect {|customer| first_name == customer.first_name}
    end
 
-   def random
-     @customers.sample
+   def find_by_last_name(last_name)
+     customers.detect {|customer| last_name == customer.last_name}
    end
 
-   def find_by_customer_id(id)
-     @customers.detect { |customer| customer.id == id }
+   def find_by_created_at(created_at)
+     customers.detect {|customer| created_at == customer.created_at}
    end
 
-
-
-
-
-
-
-
-
-
-
-
-
-   # todo need .downcase and possibly regex
-   def find_customer_by_first_name(first_name)
-     @customers.select {|customer| first_name == customer.first_name}
+   def find_by_updated_at(updated_at)
+     customers.detect {|customer| updated_at == customer.updated_at}
    end
 
-   def find_customer_by_last_name(last_name)
-     @customers.select {|customer| last_name == customer.last_name}
+#Find_all_by Methods
+   def find_all_by_id(id)
+     customers.select {|customer| id == customer.id}
    end
 
-   def find_customer_by_created_at(time)
-     # todo
+   def find_all_by_first_name(first_name)
+     customers.select {|customer| first_name == customer.first_name}
    end
 
-   def find_customer_by_updated_at(time)
-     # todo
+   def find_all_by_last_name(last_name)
+     customers.select {|customer| last_name == customer.last_name}
    end
 
-   def find_all_customers_by_id(id)
-     # todo
+   def find_all_by_created_at(created_at)
+     customers.select {|customer| created_at == customer.created_at}
    end
 
-   def find_all_customers_by_last_name(last_name)
-     # todo
-   end
-
-   def find_all_customers_by_first_name(first_name)
-     # todo
-   end
-
-   def find_all_customers_by_created_at(time)
-     # todo
-   end
-
-   def find_all_customers_by_modified_at(time)
-     # todo
+   def find_all_by_updated_at(updated_at)
+     customers.select {|customer| updated_at == customer.updated_at}
    end
  end
 
