@@ -31,7 +31,7 @@ class InvoiceRepository
   end
 
   def find_by_customer_id(customer_id)
-    @invoices.select { |invoice| invoice.customer.id == customer_id }
+    @invoices.detect { |invoice| invoice.customer_id == customer_id }
   end
 
 
