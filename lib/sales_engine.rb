@@ -44,42 +44,47 @@ class SalesEngine
 
   def initialize_customer_repository
     @customer_repository ||= CustomerRepository.new(self)
-    @customer_repository.load_customers(dir)
-
+    customer_repository.load_customers(dir)
   end
 
   def initialize_invoice_repository
     @invoice_repository ||= InvoiceRepository.new(self)
-    @invoice_repository.load_invoices(dir)
+    invoice_repository.load_invoices(dir)
   end
 
   def initialize_transaction_repository
-    @transaction_repository ||= TransactionRepository.new(self, dir)
+    @transaction_repository ||= TransactionRepository.new(self)
+    transaction_repository.load_transactions(dir)
   end
 
   def initialize_merchant_repository
-    @merchant_repository ||= MerchantRepository.new(self, dir)
+    @merchant_repository ||= MerchantRepository.new(self)
+    merchant_repository.load_merchants(dir)
   end
 
   def initialize_item_repository
-    @item_repository ||= ItemRepository.new(self, dir)
+    @item_repository ||= ItemRepository.new(self)
+    item_repository.load_items(dir)
   end
 
   def initialize_invoice_item_repository
-    @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
+    @invoice_item_repository ||= InvoiceItemRepository.new(self)
+    invoice_item_repository.load_invoice_items(dir)
   end
 
+
+
   def find_invoices_by_customer_id(customer_id)
-    #@invoice_repository.select { |invoice| invoice.customer_id == customer_id }
+    #invoice_repository.select { |invoice| invoice.customer_id == customer_id }
     @invoice_repository.find_by_customer_id(customer_id)
   end
 
   def find_customer_by_customer_id(customer_id)
- #   customer_repository.find_by_customer_id(customer_id)
+    customer_repository.find_by_customer_id(customer_id)
   end
 
   def find_transactions_by_invoice_id(id)
-  #  transaction_repository.find_by_invoice_id(id)
+    transaction_repository.find_by_invoice_id(id)
   end
 
 
