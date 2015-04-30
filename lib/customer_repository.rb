@@ -2,15 +2,16 @@
    include Enumerable
 
 
-   attr_reader :engine, :customers
+   attr_reader :engine, :customers, :load_path
 
    def initialize(engine, dir)
      @engine        = engine
-     @customers     = load_customers(dir)
+     @load_path     = "#{dir}/customers.csv"
+     @customers     = load_customers(load_path)
    end
 
-   def load_customers(dir)
-     Parser.parse("#{dir}/customers.csv").map do |row|
+   def load_customers(load_path)
+     Parser.parse(load_path).map do |row|
        Customer.new(row, self)
      end
    end
