@@ -3,7 +3,7 @@ require 'minitest/autorun'
 
 
 class InvoiceRepositoryTest < Minitest::Test
-  @@engine            = SalesEngine.new('/data')
+  @@engine            = SalesEngine.new('./data')
   @invoice_item_data       = Parser.parse('./data/invoice_items.csv')
   @invoice_item_repository = InvoiceItemRepository.new(@invoice_item_data, self)
 

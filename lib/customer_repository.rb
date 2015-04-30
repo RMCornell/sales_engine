@@ -32,9 +32,21 @@
      @customers.sample
    end
 
-   def find_customer_by_id(id)
-     @customers.detect { |customer| customer.id == id}
+   def find_by_customer_id(id)
+     @customers.detect { |customer| customer.id == id }
    end
+
+
+
+
+
+
+
+
+
+
+
+
 
    # todo need .downcase and possibly regex
    def find_customer_by_first_name(first_name)

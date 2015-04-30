@@ -5,12 +5,12 @@ class CustomerTest < Minitest::Test
   def setup
     @engine = SalesEngine.new('./data')
     @engine.startup
-    @customer1 = @engine.customer_repository.find_customer_by_id(1)
+    @customer1 = @engine.customer_repository.find_by_customer_id(1)
     @customers = @engine.customer_repository
   end
 
   def test_customers_can_exist
-    assert @customers
+     assert @customers
   end
 
   def test_customers_have_a_repository
@@ -33,18 +33,12 @@ class CustomerTest < Minitest::Test
     refute @customers.any? { |customer| customer.created_at.nil? }
   end
 
-  def test_customers_can_exist
-    assert @customers
-  end
-
   def test_customer_knows_when_it_was_last_modified
     # todo need these probably set to 'created_at'
     refute @customers.any? { |customer| customer.updated_at.nil? }
   end
 
   def test_find_invoices_by_customer
-    skip
-    assert_equal 8, @customer1.invoices
-    puts 'asdf'
+    assert_equal 8, @customer1.invoices.size
   end
 end
