@@ -18,7 +18,10 @@ class Transaction
     @result                      = transaction[:result]
     @created_at                  = transaction[:created_at]
     @updated_at                  = transaction[:updated_at]
+  end
 
+  def inspect
+    "#<#{self.class}: id:#{@id.inspect} invoice_id: #{@invoice_id.inspect} credit_card_number: #{@credit_card_number.inspect} credit_card_expiration_date: #{@credit_card_expiration_date.inspect} result: #{@result.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
   def invoice(invoice_id)

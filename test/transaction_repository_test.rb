@@ -2,20 +2,20 @@ require_relative 'test_helper'
 
 
 class TransactionRepositoryTest < Minitest::Test
-
+  attr_reader :engine, :transactions
 
   def setup
     @engine = SalesEngine.new('./data')
     @engine.initialize_transaction_repository
-    @transactions = @engine.transaction_repository
+    @transactions = engine.transaction_repository
   end
 
   def test_transactions_can_exist
-    assert @transactions
+    assert transactions
   end
 
   def test_transactions_have_a_repository
-    assert @transactions
+    assert transactions
   end
 
   def test_transactions_have_an_id

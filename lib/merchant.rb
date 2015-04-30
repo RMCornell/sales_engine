@@ -14,6 +14,10 @@ class Merchant
     @updated_at = merchant[:updated_at]
   end
 
+  def inspect
+    "#<#{self.class}: id:#{@id.inspect} name: #{@name.inspect}  created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
+  end
+
   def items
 # todo items returns a collection of Item instances associated with that merchant for the products they sell
   end

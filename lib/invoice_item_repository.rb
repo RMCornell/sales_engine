@@ -1,23 +1,24 @@
 class InvoiceItemRepository
+  include Enumerable
+
   attr_reader :engine, :invoice_items
 
-  def initialize(engine, dir)
+  def initialize(engine)
     @engine = engine
-    @invoice_items = load_items(dir)
   end
 
-  def load_items(dir)
-    Parser.parse("#{dir}/invoice_items.csv").map do |row|
-      InvoiceItem.new(row, self)
-    end
+  def load_invoice_items(dir)
+    file = Parser.parse("#{dir}/invoice_items.csv")
+    @invoice_items = file.map { |row| InvoiceItem.new(row, self) }
   end
 
+  def inspect
+    "#<#{self.class}: #{@invoice_items.size} rows>"
+  end
 
-
-
-
-
-
+  def each(&block)
+    @invoice_items.each(&block)
+  end
 
 
   def find_all

@@ -1,40 +1,25 @@
 class MerchantRepository
   attr_reader :engine, :merchants
 
-  def initialize(engine, dir)
+  def initialize(engine)
     @engine = engine
-    @merchants = load_merchants(dir)
   end
 
   def load_merchants(dir)
-    Parser.parse("#{dir}/merchants.csv").map do |row|
-      Merchant.new(row, self)
-    end
+    file = Parser.parse("#{dir}/merchants.csv")
+    @merchants = file.map { |row| Merchant.new(row, self) }
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-  def find_all
-    #todo create all
+  def inspect
+    "#<#{self.class}: #{@merchants.size} rows>"
   end
 
-  def find_random
-    #todo find random
+  def all
+    @merchants
+  end
+
+  def random
+    @merchants.sample
   end
 
   def find_by_merchant_id
