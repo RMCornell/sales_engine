@@ -66,6 +66,10 @@ class SalesEngine
   end
 
 
+
+
+
+
   def find_invoices_by_customer_id(customer_id)
     invoice_repository.select { |invoice| invoice.customer_id == customer_id }
   end

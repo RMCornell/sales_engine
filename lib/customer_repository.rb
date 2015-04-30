@@ -6,6 +6,7 @@
 
    def initialize(engine, dir)
      @engine        = engine
+
      @customers     = load_customers(dir)
    end
 
