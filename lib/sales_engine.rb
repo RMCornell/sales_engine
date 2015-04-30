@@ -19,33 +19,57 @@ require_relative 'item_repository'
 
 
 class SalesEngine
-  attr_reader :customer_repository, :invoice_repository, :transaction_repository,
-              :merchant_repository, :item_repository, :invoice_item_repository, :dir
+  attr_reader :customer_repository,
+              :invoice_repository,
+              :transaction_repository,
+              :merchant_repository,
+              :item_repository,
+              :invoice_item_repository,
+              :dir
 
   def initialize(dir)
     @dir = dir
-    # startup
+    #startup
   end
 
   def startup
+    initialize_customer_repository
+    initialize_invoice_repository
+    initialize_transaction_repository
+    initialize_merchant_repository
+    initalize_item_repository
+    initialize_invoice_item_repository
 
-    customer_data            ||= Parser.parse("#{dir}/customers.csv")
-    @customer_repository     ||= CustomerRepository.new(customer_data, self)
+    #@customer_repository     ||= CustomerRepository.new(self, dir)
+    #@invoice_repository      ||= InvoiceRepository.new(self, dir)
+    #@transaction_repository  ||= TransactionRepository.new(self, dir)
+    #@merchant_repository     ||= MerchantRepository.new(self, dir)
+    #@item_repository         ||= ItemRepository.new(self, dir)
+    #@invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
+  end
 
-    invoice_data             ||= Parser.parse("#{dir}/invoices.csv")
-    @invoice_repository      ||= InvoiceRepository.new(invoice_data, self)
+  def initialize_customer_repository
+    @customer_repository ||= CustomerRepository.new(self, dir)
+  end
 
-    transaction_data         ||= Parser.parse("#{dir}/transactions.csv")
-    @transaction_repository  ||= TransactionRepository.new(transaction_data, self)
+  def initialize_invoice_repository
+    @invoice_repository ||= InvoiceRepository.new(self, dir)
+  end
 
-    merchant_data            ||= Parser.parse("#{dir}/merchants.csv")
-    @merchant_repository     ||= MerchantRepository.new(merchant_data, self)
+  def initialize_transaction_repository
+    @transaction_repository ||= TransactionRepository.new(self, dir)
+  end
 
-    item_data                ||= Parser.parse("#{dir}/items.csv")
-    @item_repository         ||= ItemRepository.new(item_data, self)
+  def initialize_merchant_repository
+    @merchant_repository ||= MerchantRepository.new(self, dir)
+  end
 
-    invoice_item_data        ||= Parser.parse("#{dir}/invoice_items.csv")
-    @invoice_item_repository ||= InvoiceItemRepository.new(invoice_item_data, self)
+  def initalize_item_repository
+    @item_repository ||= ItemRepository.new(self, dir)
+  end
+
+  def initialize_invoice_item_repository
+    @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
 
@@ -56,6 +80,12 @@ class SalesEngine
   def find_customer_by_customer_id(customer_id)
     customer_repository.find_by_customer_id(customer_id)
   end
+
+  def find_transactions_by_invoice_id(id)
+    transaction_repository.find_by_invoice_id(id)
+  end
+
+
 
 end
 

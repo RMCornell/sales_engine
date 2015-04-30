@@ -23,18 +23,27 @@ class Invoice
     repository.find_customer_by_customer_id(customer_id)
   end
 
-
-
-
-
-
-
-
-
-
   def transactions
-    #todo transactions returns a collection of associated Transaction instances
+    repository.find_transactions_by_invoice_id(id)
   end
+  #todo transactions returns a collection of associated Transaction instances
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def invoice_items
     # todo invoice_items returns a collection of associated InvoiceItem instances

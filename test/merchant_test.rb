@@ -1,5 +1,4 @@
-require_relative './test_helper'
-require "./lib/merchant"
+require_relative 'test_helper'
 
 class MerchantTest < Minitest::Test
   attr_reader :merchant

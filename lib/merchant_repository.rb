@@ -1,17 +1,33 @@
 class MerchantRepository
-  attr_reader :merchant_data, :parent, :merchants
+  attr_reader :engine, :merchants
 
-  def initialize(merchant_data, parent)
-    @parent = parent
-    @merchant_data = merchant_data
-    @merchants = load_merchants(merchant_data)
+  def initialize(engine, dir)
+    @engine = engine
+    @merchants = load_merchants(dir)
   end
 
-  def load_merchants(merchant_data)
-    merchant_data.map do |row|
+  def load_merchants(dir)
+    Parser.parse("#{dir}/merchants.csv").map do |row|
       Merchant.new(row, self)
     end
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
   def find_all
     #todo create all

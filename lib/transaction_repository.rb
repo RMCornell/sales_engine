@@ -1,17 +1,39 @@
 class TransactionRepository
-  attr_reader :transaction_data, :parent, :transactions
+  attr_reader :engine, :transactions
 
-  def initialize(transaction_data, parent)
-    @parent = parent
-    @transaction_data = transaction_data
-    @transactions = load_transactions(transaction_data)
+  def initialize(engine, dir)
+    @engine = engine
+    @transactions = load_transactions(dir)
   end
 
-  def load_transactions(transaction_data)
-    transaction_data.map do |row|
+  def load_transactions(dir)
+    Parser.parse("#{dir}/transactions.csv").map do |row|
       Transaction.new(row, self)
     end
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def all
     @transactions
@@ -25,9 +47,22 @@ class TransactionRepository
     # todo find_by_id
   end
 
-  def find_by_invoice_id(id)
-    # todo find_by_invoice_id
+  def find_by_invoice_id(invoice_id)
+    @transactions.select { |transaction| transaction.invoice_id == invoice_id }
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   def find_by_credit_card_number(credit_card_number)
     # todo

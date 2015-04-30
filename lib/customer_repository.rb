@@ -2,16 +2,15 @@
    include Enumerable
 
 
-   attr_reader :customer_data, :engine, :customers
+   attr_reader :engine, :customers
 
-   def initialize(customer_data, engine)
-      @customer_data = customer_data
-      @engine        = engine
-      @customers     = load_customers(customer_data)
+   def initialize(engine, dir)
+     @engine        = engine
+     @customers     = load_customers(dir)
    end
 
-   def load_customers(customer_data)
-     customer_data.map do |row|
+   def load_customers(dir)
+     Parser.parse("#{dir}/customers.csv").map do |row|
        Customer.new(row, self)
      end
    end
@@ -19,6 +18,22 @@
    def each(&block)
      @customers.each(&block)
    end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    def find_invoices_by_customer_id(id)
      engine.find_invoices_by_customer_id(id)
