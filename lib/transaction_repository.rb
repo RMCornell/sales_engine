@@ -1,18 +1,18 @@
 class TransactionRepository
   attr_reader :engine, :transactions
 
-  def initialize(engine, dir)
+  def initialize(engine)
     @engine = engine
-    @transactions = load_transactions(dir)
   end
 
   def load_transactions(dir)
-    Parser.parse("#{dir}/transactions.csv").map do |row|
-      Transaction.new(row, self)
-    end
+    file = Parser.parse("#{dir}/transactions.csv")
+    @transactions = file.map { |row| Transaction.new(row, self) }
   end
 
-
+  def inspect
+    "#<#{self.class}: #{@transactions.size} rows>"
+  end
 
 
 

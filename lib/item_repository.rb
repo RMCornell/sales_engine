@@ -1,44 +1,31 @@
 class ItemRepository
+  include Enumerable
+
   attr_reader :engine, :items
 
-  def initialize(engine, dir)
+  def initialize(engine)
     @engine = engine
-    @items = load_items(dir)
   end
 
   def load_items(dir)
-    Parser.parse("#{dir}/items.csv").map do |row|
-      Item.new(row, self)
-    end
+    file = Parser.parse("#{dir}/items.csv")
+    @items = file.map { |row| Item.new(row, self) }
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  def find_all
-    #todo find all
+  def inspect
+    "#<#{self.class}: #{@items.size} rows>"
   end
 
-  def find_random
-    #todo find_random
+  def all
+    items
   end
 
-  def find_by_id
-    #todo find_by_id
+  def random
+    items.sample
+  end
+
+  def find_by_id(id)
+    items.detect { |item| item.id == id }
   end
 
   def find_by_name
