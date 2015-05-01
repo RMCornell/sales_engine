@@ -1,5 +1,6 @@
 
 task :test do
+  puts `clear && printf '\e[3J'` # clear terminal buffer
   Dir.glob('./test/**/*_test.rb') { |file| require file }
 end
 task default: [:test]
