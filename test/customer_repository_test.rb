@@ -19,6 +19,7 @@ class CustomerRepositoryTest < Minitest::Test
     # assert there are 8 invoices
 
     customer = customer_repository.find_by_id(1)
+    binding.pry
     invoices = customer.invoices
     assert_equal 8, invoices.length
   end
@@ -28,7 +29,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_customer_repository_contains_data
-    assert_equal 100,  customer_repository.length
+    assert_equal 100,  customer_repository.all.length
   end
 
   def test_customer_repository_returns_all_customers

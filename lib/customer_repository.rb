@@ -34,11 +34,11 @@
 
 #Find_by Methods
    def find_by_id(id)
-     customers.detect {|customer| id == customer.id}
+     customers.detect { |customer| id == customer.id }
    end
 
    def find_by_first_name(first_name)
-     customers.detect {|customer| first_name == customer.first_name}
+     customers.detect { |customer| first_name == customer.first_name }
    end
 
    def find_by_last_name(last_name)
