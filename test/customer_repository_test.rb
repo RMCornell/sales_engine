@@ -3,6 +3,7 @@ require './lib/customer_repository'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customer_repository, :engine
+
   def setup
     @engine = SalesEngine.new('./test/fixtures')
     @customer_repository = @engine.initialize_customer_repository
