@@ -6,8 +6,9 @@ class TransactionRepositoryTest < Minitest::Test
 
 #Basic SetUp Tests
   def setup
-    @engine = SalesEngine.new('./test/fixtures')
-    @transaction_repository = @engine.initialize_transaction_repository
+    @engine = SalesEngine.new('./test/fixtures') ### correct
+    @engine.initialize_transaction_repository ### correct
+    @transactions = engine.transaction_repository ### correct
   end
 
   def test_transaction_repository_exists

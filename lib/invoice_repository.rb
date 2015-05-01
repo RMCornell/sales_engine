@@ -27,23 +27,16 @@ class InvoiceRepository
   end
 
   def find_by_id(id)
-    @invoices.detect { |invoice| invoice.id == id}
+    @invoices.detect { |invoice| invoice.id == id }
   end
 
   def find_by_customer_id(customer_id)
-    @invoices.detect { |invoice| invoice.customer_id == customer_id }
+    @invoices.select { |invoice| invoice.customer_id == customer_id }
   end
-
-
-
-
 
   def find_by_invoice_id(invoice_id)
     @invoices.find { |invoice| invoice.id == invoice_id }
   end
-
-
-
 
   def find_transactions_by_invoice_id(id)
     engine.find_transactions_by_invoice_id(id)
