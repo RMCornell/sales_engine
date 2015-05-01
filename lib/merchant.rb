@@ -20,19 +20,18 @@ class Merchant
   end
 
 
-  ### merchant(id) --> invoices(merchant_id)
+  ### merchant(id) --> invoice(merchant_id)
   # merchant#invoices
 
-  def items
-    
+  def invoices
+    repository.find_items_by_(id)
   end
 
-
-  ### merchant(id) --> items(merchant_id)
+  ### merchant(id) --> item(merchant_id)
   # merchant#items
 
-  def invoices
-# todo invoices returns a collection of Invoice instances associated with that merchant from their known orders
+  def items
+    repository.find_invoices_by(id)
   end
 
 end

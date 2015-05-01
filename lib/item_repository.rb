@@ -17,6 +17,10 @@ class ItemRepository
     "#<#{self.class}: #{@items.size} rows>"
   end
 
+  def each(&block)
+    @customers.each(&block)
+  end
+
   def all
     items
   end
@@ -41,8 +45,8 @@ class ItemRepository
     #todo find_by_unit_price
   end
 
-  def find_by_merchant_id
-    #todo find_by_merchant_id
+  def find_by_merchant_id(id)
+    @items.select { |item| item.merchant.id == id }
   end
 
   def find_by_created_at

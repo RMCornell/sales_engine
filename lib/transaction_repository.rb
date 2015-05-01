@@ -39,12 +39,13 @@ class TransactionRepository
   end
 
 # Find_by Methods
+
   def find_by_id(id)
     transactions.detect { |transaction| id == transaction.id }
   end
 
   def find_by_invoice_id(invoice_id)
-    transactions.detect { |transaction| invoice_id == transaction.invoice_id }
+    transactions.select { |transaction| invoice_id == transaction.invoice_id }
   end
 
   def find_by_credit_card_number(credit_card_number)

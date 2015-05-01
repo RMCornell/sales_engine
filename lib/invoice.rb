@@ -20,14 +20,17 @@ class Invoice
     "#<Invoice: id:#{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id: #{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
+  ### invoice(id) --> transaction(invoice_id)
+
+  def transactions # invoice#transactions
+    repository.find_transactions_by_(id)
+  end
 
   # def customer
   #   @repository.find_customer_by_customer_id(customer_id)
   # end
   #
-  # def transactions
-  #   @repository.find_transactions_by_invoice_id(id)
-  # end
+
   #todo transactions returns a collection of associated Transaction instances
 
 

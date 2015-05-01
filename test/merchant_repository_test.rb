@@ -68,4 +68,23 @@ class MerchantRepositoryTest < Minitest::Test
     all_by_updated_at = engine.merchant_repository.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
     assert_equal 8, all_by_updated_at.count
   end
+
+
+
+  ### relationship tests
+
+# merchant#items
+  def test_find_items_by_merchant_id
+    merchant = merchant_repository.find_by_id(3)
+    items = merchant.items
+    assert_equal 8, items
+  end
+
+# merchant#invoices
+  def find_invoices_by_merchant_id
+    merchant = merchant_repository.find_by_id(1)
+    invoices = merchant.invoices
+    assert_equal 8, invoices.length
+  end
+
 end

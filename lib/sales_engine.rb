@@ -68,19 +68,40 @@ class SalesEngine
     @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
-  # //---------- Relationships-------------------------------------------//
+  # //---------- Relationships -------------------------------------------//
 
   ### customer(id) --> invoice(customer_id)
-  # customer#invoices
-  def find_invoices_by_(id)
+
+  def find_invoices_by_(id) # customer#invoices
     invoice_repository.find_by_customer_id(id)
   end
 
   ### transactions(invoice_id) --> invoice(id)
-  # transaction#invoice
-  def find_invoice_by_(invoice_id)
-    invoice_repository.find_by_invoice_id(invoice_id)
+
+  def find_invoice_by_(invoice_id) # transaction#invoice
+    invoice_repository.find_by_id(invoice_id)
   end
+
+  ### merchant(id) --> invoices(merchant_id)
+
+  def find_invoices_by_(merchant_id) # merchant#invoices
+    invoice_repository.find_by_merchant_id(merchant_id)
+  end
+
+  ### merchant(id) --> items(merchant_id)
+
+  def find_items_by_(merchant_id) # merchant#items
+    item_repository.find_by_merchant_id(merchant_id)
+  end
+
+  ### invoice(id) --> transaction(invoice_id)
+
+  def find_transactions_by_(invoice_id) # invoice#transactions
+    transaction_repository.find_by_invoice_id(invoice_id)
+  end
+
+
+  # //---------- Divorced -------------------------------------------//
 
 
 
@@ -88,9 +109,6 @@ class SalesEngine
     customer_repository.find_by_customer_id(customer_id)
   end
 
-  def find_transactions_by_invoice_id(id)
-    transaction_repository.find_by_invoice_id(id)
-  end
 
 
 end

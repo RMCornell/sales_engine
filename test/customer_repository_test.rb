@@ -9,7 +9,7 @@ class CustomerRepositoryTest < Minitest::Test
     @customer_repository = engine.customer_repository
   end
 
-  # customer#items
+  # customer#items test
 
   def test_it_finds_all_invoices_for_a_customer
     customer = customer_repository.find_by_id(1)

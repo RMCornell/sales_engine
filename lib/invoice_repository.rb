@@ -1,9 +1,12 @@
 class InvoiceRepository
   include Enumerable
 
+  attr_reader :invoices
+
   def initialize(engine, dir)
     @engine = engine
     load_invoices(dir)
+    @invoices = []
   end
 
   def each(&block)
@@ -20,34 +23,43 @@ class InvoiceRepository
   end
 
 
-
   def all
-    @invoices
+    invoices
   end
 
   def find_by_id(id)
-    @invoices.detect { |invoice| invoice.id == id }
+    invoices.detect { |invoice| invoice.id == id }
   end
-
-
-  # def find_invoices_by_customer_id(customer_id)
-  #   @invoices.select { |invoice| invoice.customer_id == customer_id }
-  # end
-
 
   def find_by_customer_id(customer_id)
-    @invoices.select { |invoice| invoice.customer_id == customer_id }
+    invoices.select { |invoice| invoice.customer_id == customer_id }
+  end
+
+  def find_by_merchant_id(merchant_id)
+    invoices.select { |invoice| invoice.merchant_id == merchant_id}
+  end
+
+  def find_by_status(status)
+    #todo find_by_status
+  end
+
+  def find_by_created_at(created_at)
+    #todo find_by_created_at
+  end
+
+  def find_by_updated_at(updated_at)
+    #todo find_by_updated_at
   end
 
 
 
-  def find_by_invoice_id(invoice_id)
-    @invoices.find { |invoice| invoice.id == invoice_id }
+  ### invoice relationships
+
+  # invoice#transactions
+  def find_transactions_by_(id)
+    engine.find_transactions_by_(id)
   end
 
-  def find_transactions_by_invoice_id(id)
-    engine.find_transactions_by_invoice_id(id)
-  end
 
 
 end
@@ -65,18 +77,5 @@ end
 #
 #
 #
-# def find_by_merchant_id(merchant_id)
-#   #todo find_by_merchant_id
-# end
+
 #
-# def find_by_status(status)
-#   #todo find_by_status
-# end
-#
-# def find_by_created_at(created_at)
-#   #todo find_by_created_at
-# end
-#
-# def find_by_updated_at(updated_at)
-#   #todo find_by_updated_at
-# end

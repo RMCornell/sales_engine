@@ -17,6 +17,8 @@ class Customer
     "#{@last_name.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}"
   end
 
+  ### customer relationships
+
   ### customer(id) --> invoice(customer_id)
   # customer#invoices
 

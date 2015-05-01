@@ -7,7 +7,7 @@ class InvoiceTest < Minitest::Test
     @engine = SalesEngine.new('./test/fixtures')
     @invoices = engine.invoice_repository
 
-    @invoice_id_1 = invoices.find_by_invoice_id(1)
+    @invoice_id_1 = invoices.find_by_id(1)
   end
 
   def test_invoice_can_find_a_customers_invoices
