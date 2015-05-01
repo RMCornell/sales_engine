@@ -18,9 +18,10 @@ class InvoiceRepository
     "#<InvoiceRepository: id: #{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id:#{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
   end
 
-  def find_customer_by_customer_id(customer_id)
-    @engine.find_customer_by_customer_id(customer_id)
-  end
+
+  # def find_customer_by_customer_id(customer_id)
+  #   @engine.find_customer_by_customer_id(customer_id)
+  # end
 
   def all
     @invoices
@@ -30,9 +31,17 @@ class InvoiceRepository
     @invoices.detect { |invoice| invoice.id == id }
   end
 
+
+  def find_invoices_by_customer_id(customer_id)
+    @invoices.select { |invoice| invoice.customer_id == customer_id }
+  end
+
+
   def find_by_customer_id(customer_id)
     @invoices.select { |invoice| invoice.customer_id == customer_id }
   end
+
+
 
   def find_by_invoice_id(invoice_id)
     @invoices.find { |invoice| invoice.id == invoice_id }

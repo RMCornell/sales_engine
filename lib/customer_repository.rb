@@ -20,7 +20,8 @@
    end
 
    def find_invoices_by_id(id)
-     engine.find_invoices_by_customer_id(id)
+     engine.find_invoices_by_id(id)
+     #@engine.find_invoices_by_customer_id(id)
    end
 
 #Customer Repository Methods
