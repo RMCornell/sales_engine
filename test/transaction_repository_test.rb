@@ -47,9 +47,16 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_transaction_repository_returns_random_transaction
-    skip
-    assert_equal "some random shit", transactions.random
-    #This works in practice but needs a better test to test it.
+
+    transaction1, transaction2 = transactions.random, transactions.random
+
+    total_random_transactions = 0
+    until total_random_transactions == 100
+      total_random_transactions += 1 if transaction1 == transaction2
+      return total_random_transactions
+    end
+
+    assert_equal 500, total_random_transactions
   end
 
   def test_transaction_repository_returns_transaction_by_id
@@ -68,8 +75,8 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_transaction_repository_returns_transactions_credit_card_expiration_date
-    skip
-    #This value is nil throughout the database
+    check_expiration_date = transactions.find_by_credit_card_expiration_date(5)
+    assert check_expiration_date.nil?
   end
 
   def test_transaction_repository_returns_transactions_by_result

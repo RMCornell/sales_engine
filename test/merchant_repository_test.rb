@@ -23,8 +23,15 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_merchant_repository_returns_random_merchant
-    skip
-    assert_equal "some random shit", merchants.random
+    merchant1, merchant2 = merchants.random, merchants.random
+
+    total_random_merchants = 0
+    until total_random_merchants == 100
+      total_random_merchants += 1 if merchant1 == merchant2
+      return total_random_merchants
+    end
+
+    assert_equal 100, total_random_merchants
   end
 
 #Find_by Method Tests
