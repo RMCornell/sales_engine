@@ -1,5 +1,4 @@
 require_relative 'test_helper'
-#require './lib/customer_repository'
 
 class CustomerRepositoryTest < Minitest::Test
   attr_reader :customers, :engine

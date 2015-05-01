@@ -13,14 +13,14 @@ class Item
     @id          = item[:id].to_i
     @name        = item[:name]
     @description = item[:description]
-    @unit_price  = item[:unit_price]
+    @unit_price  = item[:unit_price].to_i
     @merchant_id = item[:merchant_id]
     @created_at  = item[:created_at]
     @updated_at  = item[:updated_at]
   end
 
   def inspect
-    "#<#{self.class}: id:#{@id.inspect} name: #{@name.inspect} decription: #{@description.inspect} unit_price: #{@unit_price.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
+    "#<#{self.class}: id:#{@id.inspect} name: #{@name.inspect} description: #{@description.inspect} unit_price: #{@unit_price.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
   def invoice_items
