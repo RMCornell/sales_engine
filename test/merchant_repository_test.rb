@@ -6,10 +6,7 @@ class MerchantRepositoryTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new('./test/fixtures')
-    @merchant_repository = @engine.initialize_merchant_repository
-
-    # @engine.initalize_merchant_repository
-    # @merchant_repository = @engine.merchant_repository
+    @merchant_repository = engine.merchant_repository
   end
 
 #Base Tests
@@ -18,7 +15,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_merchant_repository_contains_data
-    assert_equal 100, merchant_repository.length
+    assert_equal 100, merchant_repository.all.length
   end
 
   def test_merchant_repository_returns_all_merchants
