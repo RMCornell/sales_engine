@@ -20,6 +20,16 @@ class TransactionRepository
     "#<#{self.class}: #{@transactions.size} rows>"
   end
 
+  # transactions#invoice
+  def find_invoice_by_(invoice_id)
+    engine.find_invoice_by_(invoice_id)
+  end
+
+
+
+
+
+
   def all
     transactions
   end

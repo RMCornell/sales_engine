@@ -20,10 +20,11 @@
      "#<#{self.class} #{@customers.size} rows>"
    end
 
-   def find_invoices_by_id(id)
-     engine.find_invoices_by_id(id)
-     #@engine.find_invoices_by_customer_id(id)
+   # customer#invoices
+   def find_invoices_by_(id)
+     engine.find_invoices_by_(id)
    end
+
 
 #Customer Repository Methods
   def all

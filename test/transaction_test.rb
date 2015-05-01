@@ -51,8 +51,8 @@ class TransactionTest < Minitest::Test
     assert_equal "2012-03-27 14:54:09 UTC", transaction.updated_at
   end
 
-  def test_it_finds_invoice_by_invoice_id
-    skip
-    assert_equal "some shit", transaction.invoice(1)
-  end
+  # def test_it_finds_invoice_by_invoice_id
+  #   skip
+  #   assert_equal "some shit", transaction.invoice(1)
+  # end
 end
