@@ -20,11 +20,9 @@ class TransactionRepository
     "#<#{self.class}: #{@transactions.size} rows>"
   end
 
-  ### transactions(invoice_id) --> invoice(id)
-  # invoice =
-
-  def find_invoice_by_(id)
-    engine.find_invoice_by_(id)
+  # transactions#invoice
+  def find_invoice_by_(invoice_id)
+    engine.find_invoice_by_(invoice_id)
   end
 
 
