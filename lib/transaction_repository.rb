@@ -1,4 +1,5 @@
 class TransactionRepository
+  include Enumerable
   attr_reader :engine, :transactions
 
   def initialize(engine)
@@ -10,105 +11,92 @@ class TransactionRepository
     @transactions = file.map { |row| Transaction.new(row, self) }
   end
 
+  def each(&block)
+    @transactions.each(&block)
+  end
+
   def inspect
     "#<#{self.class}: #{@transactions.size} rows>"
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   def all
-    @transactions
+    transactions
   end
 
   def random
-    # todo random
+    transactions.sample(1)
   end
 
+# Find_by Methods
   def find_by_id(id)
-    # todo find_by_id
+    transactions.detect { |transaction| id == transaction.id }
   end
 
   def find_by_invoice_id(invoice_id)
-    @transactions.select { |transaction| transaction.invoice_id == invoice_id }
+    transactions.detect { |transaction| invoice_id == transaction.invoice_id }
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   def find_by_credit_card_number(credit_card_number)
-    # todo
+    transactions.detect { |transaction| credit_card_number == transaction.credit_card_number}
   end
 
-  def find_by_credit_card_expiration_date(exp_date)
-    # todo
+  def find_by_result(result)
+    transactions.detect {|transaction| result == transaction.result}
   end
 
-  def find_by_result
-    #todo
+  def find_by_created_at(created_at)
+    transactions.detect {|transaction| created_at == transaction.created_at}
   end
 
-  def find_by_created_at(time)
-    # todo
+  def find_by_updated_at(updated_at)
+    transactions.detect {|transaction| updated_at == transaction.updated_at}
   end
 
-  def find_by_updated_at(time)
-    # todo
-  end
-
+#Find_by_all Methods
   def find_all_by_id(id)
-    # todo
+    transactions.select {|transaction| id == transaction.id}
   end
 
-  def find_all_by_invoice_id(id)
-    # todo
+  def find_all_by_invoice_id(invoice_id)
+    transactions.select {|transaction| invoice_id == transaction.invoice_id}
   end
 
   def find_all_by_credit_card_number(credit_card_number)
-    # todo
+    transactions.select {|transaction| credit_card_number == transaction.credit_card_number}
   end
 
-  def find_all_by_credit_card_expiration_date(exp_date)
-    #todo
+  def find_all_by_result(result)
+    transactions.select {|transaction| result == transaction.result}
   end
 
-  def find_all_by_result
-    #todo
-  end
-  
-  def find_all_by_created_at(time)
-    #todo 
+  def find_all_by_created_at(created_at)
+    transactions.select {|transaction| created_at == transaction.created_at}
   end
 
-  def find_all_by_updated_at(time)
-    # todo
+  def find_all_by_updated_at(updated_at)
+    transactions.select {|transaction| updated_at == transaction.updated_at}
   end
+
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
