@@ -83,6 +83,12 @@ class SalesEngine
   end
 
 
+  def find_items_by_(merchant_id)
+    item_repository.find_items_by_(merchant_id)
+  end
+
+
+
 
   def find_customer_by_customer_id(customer_id)
     customer_repository.find_by_customer_id(customer_id)

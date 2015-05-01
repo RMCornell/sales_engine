@@ -20,7 +20,16 @@ class MerchantRepository
     "#<#{self.class} #{@merchants.size} rows>"
   end
 
+  def items
+    repository.find_items_by_(merchant_id)
+  end
+
 #Merchant Repository Methods
+
+  def find_items_by_(id)
+    engine.find_items_by_(id)
+  end
+
 
   def all
     merchants

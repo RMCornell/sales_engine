@@ -58,9 +58,8 @@ class InvoiceItemRepository
     #todo find_all_by_item_id
   end
 
-  def find_all_by_invoice_id
-    #todo find_all_by_invoice_id
-    engine.invoice_repository.invoice_id
+  def find_all_by_invoice_id(invoice_id)
+    invoice_items.select { |invoice_item| invoice_item.invoice_id == invoice_id }
   end
 
   def find_all_by_quantity
