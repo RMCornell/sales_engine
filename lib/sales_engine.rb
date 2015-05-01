@@ -68,14 +68,18 @@ class SalesEngine
     @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
+  # //---------- Relationships-------------------------------------------//
 
-
-  def find_invoices_by_id(id)
+  ### customer(id) --> invoice(customer_id)
+  # customer#invoices
+  def find_invoices_by_(id)
     invoice_repository.find_by_customer_id(id)
   end
 
-  def find_invoice_by_(id)
-    invoice_repository.find_by_invoice_id(id)
+  ### transactions(invoice_id) --> invoice(id)
+  # transaction#invoice
+  def find_invoice_by_(invoice_id)
+    invoice_repository.find_by_invoice_id(invoice_id)
   end
 
 
@@ -87,4 +91,6 @@ class SalesEngine
   def find_transactions_by_invoice_id(id)
     transaction_repository.find_by_invoice_id(id)
   end
+
+
 end
