@@ -72,7 +72,10 @@ class SalesEngine
 
   def find_invoices_by_id(id)
     invoice_repository.find_by_customer_id(id)
-    #invoice_repository.find_invoices_by_customer_id(id)
+  end
+
+  def find_invoice_by_(id)
+    invoice_repository.find_by_invoice_id(id)
   end
 
 

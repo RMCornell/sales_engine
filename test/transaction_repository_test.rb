@@ -4,11 +4,34 @@ require './lib/transaction_repository'
 class TransactionRepositoryTest < Minitest::Test
   attr_reader :engine, :transactions
 
-#Basic SetUp Tests
   def setup
     @engine = SalesEngine.new('./test/fixtures')
     @transactions = engine.transaction_repository
   end
+
+
+  # transactions#invoice
+
+  def test_transactions_can_find_their_invoice
+    transaction = transactions.find_by_id(1)
+    invoice = transaction.invoice.id
+
+    assert_equal 1, invoice
+  end
+
+  # # customer#items
+  #
+  # def test_it_finds_all_invoices_for_a_customer
+  #   customer = customer_repository.find_by_id(1)
+  #   invoices = customer.invoices
+  #   assert_equal 8, invoices.length
+  # end
+
+
+
+
+
+  # Basic SetUp Tests
 
   def test_transaction_repository_exists
     assert transactions
