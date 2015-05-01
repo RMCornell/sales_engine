@@ -5,10 +5,9 @@ class InvoiceRepositoryTest < Minitest::Test
   attr_reader :engine, :invoices
 
   def setup
-    @engine = SalesEngine.new('./test/fixtures')
-    @engine.initialize_invoice_repository
-    # @invoices...
-    @invoices = []
+    @engine = SalesEngine.new('./test/fixtures') ### correct
+    @engine.initialize_invoice_repository ### correct
+    @invoices = engine.invoice_repository ## correct
   end
 
   def test_invoices_can_exist

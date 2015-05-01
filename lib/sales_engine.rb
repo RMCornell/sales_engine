@@ -72,12 +72,14 @@ class SalesEngine
     invoice_item_repository.load_invoice_items(dir)
   end
 
-
-
-  def find_invoices_by_customer_id(customer_id)
-    #invoice_repository.select { |invoice| invoice.customer_id == customer_id }
-    @invoice_repository.find_by_customer_id(customer_id)
+  def find_invoices_by_customer_id(id)
+    invoice_repository.find_by_customer_id(id)
   end
+
+  # def find_invoices_by_customer_id(customer_id)
+  #   #invoice_repository.select { |invoice| invoice.customer_id == customer_id }
+  #   @invoice_repository.find_by_customer_id(customer_id)
+  # end
 
   def find_customer_by_customer_id(customer_id)
     customer_repository.find_by_customer_id(customer_id)

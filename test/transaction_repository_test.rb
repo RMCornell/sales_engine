@@ -5,9 +5,9 @@ class TransactionRepositoryTest < Minitest::Test
   attr_reader :engine, :transactions
 
   def setup
-    @engine = SalesEngine.new('./data')
-    @engine.initialize_transaction_repository
-    @transactions = engine.transaction_repository
+    @engine = SalesEngine.new('./test/fixtures') ### correct
+    @engine.initialize_transaction_repository ### correct
+    @transactions = engine.transaction_repository ### correct
   end
 
   def test_transactions_can_exist
