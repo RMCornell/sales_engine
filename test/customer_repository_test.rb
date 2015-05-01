@@ -17,8 +17,6 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal 8, invoices.length
   end
 
-
-
   def test_customer_repository_exists
     assert customers
   end
@@ -32,9 +30,16 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_customer_repository_returns_random_customer
-    skip
-    assert_equal "some_shit", customers.random
-    #this is working but needs to have an array comparision written
+
+    customer1, customer2 = customers.random, customers.random
+
+    total_random_customers = 0
+    until total_random_customers == 100
+      total_random_customers += 1 if customer1 == customer2
+      return total_random_customers
+    end
+
+    assert_equal 100, total_random_customers
   end
 
   def test_customer_repository_returns_customer_first_name_by_id
