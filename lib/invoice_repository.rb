@@ -1,8 +1,9 @@
 class InvoiceRepository
   include Enumerable
 
-  def initialize(engine)
+  def initialize(engine, dir)
     @engine = engine
+    load_invoices(dir)
   end
 
   def each(&block)
@@ -19,9 +20,6 @@ class InvoiceRepository
   end
 
 
-  # def find_customer_by_customer_id(customer_id)
-  #   @engine.find_customer_by_customer_id(customer_id)
-  # end
 
   def all
     @invoices
@@ -32,9 +30,9 @@ class InvoiceRepository
   end
 
 
-  def find_invoices_by_customer_id(customer_id)
-    @invoices.select { |invoice| invoice.customer_id == customer_id }
-  end
+  # def find_invoices_by_customer_id(customer_id)
+  #   @invoices.select { |invoice| invoice.customer_id == customer_id }
+  # end
 
 
   def find_by_customer_id(customer_id)

@@ -3,8 +3,9 @@ class InvoiceItemRepository
 
   attr_reader :engine, :invoice_items
 
-  def initialize(engine)
+  def initialize(engine, dir)
     @engine = engine
+    load_invoice_items(dir)
   end
 
   def load_invoice_items(dir)

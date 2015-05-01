@@ -2,8 +2,9 @@
    include Enumerable
    attr_reader :engine, :customers
 
-   def initialize(engine)
+   def initialize(engine, dir)
      @engine = engine
+     load_customers(dir)
    end
 
    def load_customers(dir)

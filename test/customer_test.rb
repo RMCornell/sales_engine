@@ -4,22 +4,20 @@ class CustomerTest < Minitest::Test
   attr_reader :engine, :customers
 
   def setup
-    @engine = SalesEngine.new('./test/fixtures') ### this initializes SE
-
-    engine.initialize_customer_repository  ### this initializes CR
-    @customers = engine.customer_repository  ### this stores the CR object in @customers var
+    @engine = SalesEngine.new('./test/fixtures')
+    @customers = engine.customer_repository
   end
 
   def test_customers_can_exist
-     assert @customers
+     assert customers
   end
 
   def test_customers_have_a_repository
-    refute @customers.any? { |customer| customer.repository.nil? }
+    refute customers.any? { |customer| customer.repository.nil? }
   end
 
   def test_customers_have_an_id
-    refute @customers.any? { |customer| customer.id.nil? }
+    refute customers.any? { |customer| customer.id.nil? }
   end
 
   def test_customers_have_a_first_name
