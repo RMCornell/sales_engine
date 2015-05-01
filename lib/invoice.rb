@@ -26,10 +26,10 @@ class Invoice
     repository.find_transactions_by_(id)
   end
 
-  # def customer
-  #   @repository.find_customer_by_customer_id(customer_id)
-  # end
-  #
+  def customer
+    @repository.find_customer_by_customer_id(customer_id)
+  end
+
 
   #todo transactions returns a collection of associated Transaction instances
 

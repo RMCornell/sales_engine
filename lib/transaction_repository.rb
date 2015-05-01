@@ -5,6 +5,7 @@ class TransactionRepository
   def initialize(engine, dir)
     @engine = engine
     load_transactions(dir)
+    @transactions = []
   end
 
   def load_transactions(dir)
