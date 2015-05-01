@@ -5,9 +5,8 @@ class InvoiceRepositoryTest < Minitest::Test
   attr_reader :engine, :invoices
 
   def setup
-    @engine = SalesEngine.new('./test/fixtures') ### correct
-    @engine.initialize_invoice_repository ### correct
-    @invoices = engine.invoice_repository ## correct
+    @engine = SalesEngine.new('./test/fixtures')
+    @invoices = engine.invoice_repository
   end
 
   def test_invoices_can_exist
@@ -41,8 +40,6 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_invoice_knows_when_it_was_updated
     refute invoices.any? { |invoice| invoice.updated_at.nil? }
   end
-
-
 end
 
 

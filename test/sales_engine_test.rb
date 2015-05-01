@@ -3,7 +3,7 @@ require_relative 'test_helper'
 class SalesEngineTest < Minitest::Test
 
   def setup
-    @engine = SalesEngine.new('./data')
+    @engine = SalesEngine.new('./test/fixtures')
     @engine.startup
   end
 

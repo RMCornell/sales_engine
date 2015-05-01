@@ -6,29 +6,25 @@ class CustomerRepositoryTest < Minitest::Test
 
   def setup
     @engine = SalesEngine.new('./test/fixtures')
-    # @customer_repository = @engine.initialize_customer_repository
-    @engine.initialize_customer_repository ############## do not delete
-    @customer_repository = @engine.customer_repository ###### do not delete
+    @customer_repository = engine.customer_repository
   end
 
   # customer#items
 
   def test_it_finds_all_invoices_for_a_customer
-    # custerom = single customer (in fixutres, make sure you know how many invoices they have)
-    # invoices = customer.invoices
-    # assert there are 8 invoices
-
     customer = customer_repository.find_by_id(1)
     invoices = customer.invoices
     assert_equal 8, invoices.length
   end
+
+
 
   def test_customer_repository_exists
     assert customer_repository
   end
 
   def test_customer_repository_contains_data
-    assert_equal 100,  customer_repository.length
+    assert_equal 100,  customer_repository.all.length
   end
 
   def test_customer_repository_returns_all_customers

@@ -3,7 +3,7 @@ require_relative 'test_helper'
 class ParserTest < Minitest::Test
 
   def setup
-    @file = './data/customers.csv'
+    @file = './test/fixtures/customers.csv'
   end
 
   def test_parser_can_load_a_file

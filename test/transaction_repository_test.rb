@@ -2,21 +2,20 @@ require_relative 'test_helper'
 require './lib/transaction_repository'
 
 class TransactionRepositoryTest < Minitest::Test
-  attr_reader :transaction_repository, :engine
+  attr_reader :engine, :transactions
 
 #Basic SetUp Tests
   def setup
-    @engine = SalesEngine.new('./test/fixtures') ### correct
-    @engine.initialize_transaction_repository ### correct
-    @transactions = engine.transaction_repository ### correct
+    @engine = SalesEngine.new('./test/fixtures')
+    @transactions = engine.transaction_repository
   end
 
   def test_transaction_repository_exists
-    assert transaction_repository
+    assert transactions
   end
 
   def test_transaction_repository_contatins_data
-    assert_equal 99, transaction_repository.length
+    assert_equal 99, transactions.all.length
   end
 
 #Find_by Method Tests
@@ -26,7 +25,7 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_transaction_repository_returns_random_transaction
     skip
-    assert_equal "some random shit", engine.transaction_repository.random
+    assert_equal "some random shit", transactions.random
     #This works in practice but needs a better test to test it.
   end
 

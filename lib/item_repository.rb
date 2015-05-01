@@ -3,8 +3,9 @@ class ItemRepository
 
   attr_reader :engine, :items
 
-  def initialize(engine)
+  def initialize(engine, dir)
     @engine = engine
+    load_items(dir)
   end
 
   def load_items(dir)

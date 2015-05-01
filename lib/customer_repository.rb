@@ -2,8 +2,9 @@
    include Enumerable
    attr_reader :engine, :customers
 
-   def initialize(engine)
+   def initialize(engine, dir)
      @engine = engine
+     load_customers(dir)
    end
 
    def load_customers(dir)
@@ -20,7 +21,8 @@
    end
 
    def find_invoices_by_id(id)
-     engine.find_invoices_by_customer_id(id)
+     engine.find_invoices_by_id(id)
+     #@engine.find_invoices_by_customer_id(id)
    end
 
 #Customer Repository Methods
@@ -34,11 +36,11 @@
 
 #Find_by Methods
    def find_by_id(id)
-     customers.detect {|customer| id == customer.id}
+     customers.detect { |customer| id == customer.id }
    end
 
    def find_by_first_name(first_name)
-     customers.detect {|customer| first_name == customer.first_name}
+     customers.detect { |customer| first_name == customer.first_name }
    end
 
    def find_by_last_name(last_name)

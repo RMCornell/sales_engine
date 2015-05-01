@@ -4,16 +4,14 @@ class InvoiceTest < Minitest::Test
   attr_reader :engine, :invoices
 
   def setup
-    @engine = SalesEngine.new('./test/fixtures') ### correct
-    engine.initialize_invoice_repository ### correct
-    @invoices = engine.invoice_repository ## correct
+    @engine = SalesEngine.new('./test/fixtures')
+    @invoices = engine.invoice_repository
 
-    @invoice_id_1 = @invoices.find_by_invoice_id(1)
+    @invoice_id_1 = invoices.find_by_invoice_id(1)
   end
 
-  def test_invoice_can_find_its_customer
-
-    assert_equal 'Joey', invoices.find_by_customer_id(1)
+  def test_invoice_can_find_a_customers_invoices
+    assert_equal 8, invoices.find_by_customer_id(1).length
   end
 
   def test_invoice_can_find_its_transaction

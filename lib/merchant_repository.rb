@@ -2,8 +2,9 @@ class MerchantRepository
   include Enumerable
   attr_reader :engine, :merchants
 
-  def initialize(engine)
+  def initialize(engine, dir)
     @engine = engine
+    load_merchants(dir)
   end
 
   def load_merchants(dir)

@@ -2,8 +2,9 @@ class TransactionRepository
   include Enumerable
   attr_reader :engine, :transactions
 
-  def initialize(engine)
+  def initialize(engine, dir)
     @engine = engine
+    load_transactions(dir)
   end
 
   def load_transactions(dir)
