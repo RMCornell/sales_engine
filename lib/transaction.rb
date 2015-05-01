@@ -24,9 +24,6 @@ class Transaction
     "#<#{self.class}: id:#{@id.inspect} invoice_id: #{@invoice_id.inspect} credit_card_number: #{@credit_card_number.inspect} credit_card_expiration_date: #{@credit_card_expiration_date.inspect} result: #{@result.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
-  def invoice(invoice_id)
-    repository.find_by_invoice_id(invoice_id)
-  end
 end
 
 
