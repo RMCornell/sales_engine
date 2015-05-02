@@ -8,6 +8,7 @@ class CustomerRepositoryTest < Minitest::Test
     @customers = engine.customer_repository
   end
 
+  #  --- customer relationship tests ---------------------------------
   # customer#items
 
   def test_it_finds_all_invoices_for_a_customer
@@ -17,7 +18,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
 
-
+  # ---------------------------------------------------------
 
 
 
