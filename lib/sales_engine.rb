@@ -105,9 +105,23 @@ class SalesEngine
   end
 
   # invoice(merchant_id) --> merchant(id) --> invoice#merchant
-  # todo
+  # todo invoice merchant
+
 
   # //---------- InvoiceItem Relationships-------------------------------------------//
+
+  # invoice_item(invoice_id) --> invoice(id) --> invoice_item#invoice
+
+  def find_invoice_by_invoice_(id)
+    invoice_repository.find_by_id(id)
+  end
+
+  def find_item_by_item_(id)
+    item_repository.find_by_id(id)
+  end
+
+
+
   #invoice returns an instance of Invoice associated with this object
   #item returns an instance of Item associated with this object
 
@@ -121,7 +135,7 @@ class SalesEngine
   # //---------- Transaction Relationships-------------------------------------------//
   ### transactions(invoice_id) --> invoice(id) --> transaction#invoice
   def find_invoice_by_(invoice_id)
-    invoice_repository.find_by_invoice_id(invoice_id)
+    invoice_repository.find_by_id(invoice_id)
   end
 
 

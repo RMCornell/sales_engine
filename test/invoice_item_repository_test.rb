@@ -56,10 +56,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_unit_price
-    skip
     by_unit_price = invoice_item.find_by_unit_price(79140)
-    assert_equal 5, by_unit_price.length
-    #unclear why this is not working
+    assert_equal 7, by_unit_price.quantity
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_created_at
@@ -111,6 +109,24 @@ class InvoiceItemRepositoryTest < Minitest::Test
     refute invoice_item.invoice_items.any? { |invoice_item| invoice_item.updated_at.nil? }
   end
 
+  # --- relationship tests ------------------------------------------------------
+   def test_invoice_item_can_find_its_invoice # invoice_item#invoice
+     item = invoice_item.find_by_invoice_id(1)
+     invoice_for_invoice_item_1 = item.invoice
+
+     assert invoice_for_invoice_item_1.is_a?(Invoice)
+     assert_equal 1, invoice_for_invoice_item_1.id
+     assert_equal "2012-03-25 09:54:09 UTC", invoice_for_invoice_item_1.created_at
+   end
+
+
+  def test_invoice_item_can_find_its_item # invoice_item#item
+    item = invoice_item.find_by_invoice_id(1)
+    instance_of_item = item.item
+
+    assert instance_of_item.is_a?(Item)
+    assert_equal 1, instance_of_item.id
+    assert_equal "2012-03-27 14:53:59 UTC", instance_of_item.created_at
+  end
 end
 
-  #id,item_id,invoice_id,quantity,unit_price,created_at,updated_at
