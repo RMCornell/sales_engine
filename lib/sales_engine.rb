@@ -83,8 +83,11 @@ class SalesEngine
   end
 
 
+  ### merchant(id) --> items(merchant_id)
+  # merchant#items
+
   def find_items_by_(merchant_id)
-    item_repository.find_items_by_(merchant_id)
+    item_repository.find_by_merchant_id(merchant_id)
   end
 
 

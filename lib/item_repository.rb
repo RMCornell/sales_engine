@@ -30,8 +30,26 @@ class ItemRepository
   end
 
   def find_by_name(name)
-
     items.detect {|item| name == item.name}
   end
 
+  def find_by_description(description)
+    
   end
+
+  def find_by_unit_price(unit_price)
+
+  end
+
+  def find_by_merchant_id(id)
+    items.select { |item| item.merchant_id == id }
+  end
+
+  def find_by_created_at(time)
+
+  end
+
+  def find_by_updated_at(time)
+
+  end
+end

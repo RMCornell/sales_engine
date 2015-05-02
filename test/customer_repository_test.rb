@@ -16,6 +16,11 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal 8, invoices.length
   end
 
+
+
+
+
+
   def test_customer_repository_exists
     assert customers
   end

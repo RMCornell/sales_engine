@@ -20,7 +20,6 @@ class Merchant
 
   ### merchant(id) --> items(merchant_id)
   # merchant#items
-
   def items
     repository.find_items_by_(id)
   end

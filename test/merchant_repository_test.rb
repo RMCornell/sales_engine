@@ -9,7 +9,32 @@ class MerchantRepositoryTest < Minitest::Test
     @merchants = engine.merchant_repository
   end
 
-#Base Tests
+
+
+
+  # Merchant relationship tests
+
+  # merchant#items
+  def test_merchant_can_find_its_items
+    merchant = merchants.find_by_id(1)
+    merchant_items = merchant.items
+    assert_equal 15, merchant_items.size
+    assert merchant_items.first.is_a?(Item)
+  end
+
+  
+
+
+
+
+
+  def test_it_finds_all_invoices_for_a_customer
+    customer = engine.customer_repository.find_by_id(1)
+    invoices = customer.invoices
+    assert_equal 8, invoices.length
+  end
+
+  #Base Tests
   def test_merchant_repository_exists
     assert merchants
   end
