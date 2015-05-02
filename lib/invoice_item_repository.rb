@@ -21,6 +21,7 @@ class InvoiceItemRepository
     @invoice_items.each(&block)
   end
 
+#-------------------- Base Repository Methods --------------------
   def all
     invoice_items
   end

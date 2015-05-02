@@ -17,7 +17,7 @@ class Invoice
   end
 
   def inspect
-    "#<Invoice: id:#{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id: #{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
+    "#<Invoice: id:#{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id: #{@merchant_id.inspect} status:#{@status.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
 
