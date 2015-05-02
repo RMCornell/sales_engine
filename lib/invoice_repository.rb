@@ -29,16 +29,13 @@ class InvoiceRepository
     @invoices.detect { |invoice| invoice.id == id }
   end
 
-
-  # def find_invoices_by_customer_id(customer_id)
-  #   @invoices.select { |invoice| invoice.customer_id == customer_id }
-  # end
-
-
   def find_by_customer_id(customer_id)
     @invoices.select { |invoice| invoice.customer_id == customer_id }
   end
 
+  def find_by_merchant_id(id)
+    @invoices.select { |invoice| invoice.merchant_id == id }
+  end
 
 
   def find_by_invoice_id(invoice_id)
@@ -65,9 +62,7 @@ end
 #
 #
 #
-# def find_by_merchant_id(merchant_id)
-#   #todo find_by_merchant_id
-# end
+
 #
 # def find_by_status(status)
 #   #todo find_by_status

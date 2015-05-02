@@ -24,7 +24,9 @@ class Merchant
     repository.find_items_by_(id)
   end
 
+  ### merchant(id) --> invoices(merchant_id)
+  # merchant#invoices
   def invoices
-# todo invoices returns a collection of Invoice instances associated with that merchant from their known orders
+    repository.find_invoices_by_(id)
   end
 end
