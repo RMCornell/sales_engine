@@ -15,7 +15,10 @@ class CustomerRepositoryTest < Minitest::Test
   def test_it_finds_all_invoices_for_a_customer
     customer = customers.find_by_id(1)
     invoices = customer.invoices
-    assert_equal 8, invoices
+
+    assert invoices.is_a?(Invoice)
+    assert_equal 1, invoices.id
+    assert_equal 1, invoices.customer_id
   end
 
 #-------------------- Base Method Tests --------------------
