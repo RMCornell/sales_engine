@@ -40,6 +40,17 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_invoice_knows_when_it_was_updated
     refute invoices.any? { |invoice| invoice.updated_at.nil? }
   end
+
+  # invoice#customer
+
+  def test_invoice_has_a_customer
+    invoice = invoices.find_by_id(5)
+    customer_invoice = invoice.customer
+
+    assert_equal "Sylvester", customer_invoice.first_name
+   # first_name: "Sylvester" last_name:"Nader"
+  end
+  
 end
 
 

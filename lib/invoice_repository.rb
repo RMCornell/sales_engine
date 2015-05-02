@@ -1,6 +1,9 @@
 class InvoiceRepository
   include Enumerable
 
+  attr_reader :invoices, :engine
+
+
   def initialize(engine, dir)
     @engine = engine
     load_invoices(dir)
@@ -19,6 +22,12 @@ class InvoiceRepository
     "#<InvoiceRepository: id: #{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id:#{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
   end
 
+  # invoice realationships
+
+  # invoice#customer
+  def find_customer_by_customer_(id)
+    engine.find_customer_by_customer_(id)
+  end
 
 
   def all
