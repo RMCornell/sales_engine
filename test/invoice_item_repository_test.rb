@@ -12,7 +12,25 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
 #-------------------- Relationship Method Tests --------------------
+  def test_invoice_item_can_find_its_invoice # invoice_item#invoice
+    item                       = invoice_item.find_by_invoice_id(1)
+    invoice_for_invoice_item_1 = item.invoice
 
+    assert invoice_for_invoice_item_1.is_a?(Invoice)
+    assert_equal 1, invoice_for_invoice_item_1.id
+    assert_equal "2012-03-25 09:54:09 UTC", invoice_for_invoice_item_1.created_at
+  end
+
+
+  def test_invoice_item_can_find_its_item # invoice_item#item
+    item             = invoice_item.find_by_invoice_id(1)
+    instance_of_item = item.item
+
+    assert instance_of_item.is_a?(Item)
+    assert_equal 1, instance_of_item.id
+    assert_equal "2012-03-27 14:53:59 UTC", instance_of_item.created_at
+  end
+  
 #-------------------- Base Method Tests --------------------
   def test_invoice_item_repository_exists
     assert invoice_item
@@ -131,25 +149,5 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_invoice_item_knows_when_it_was_updated
     refute invoice_item.invoice_items.any? { |invoice_item| invoice_item.updated_at.nil? }
-  end
-
-  # --- relationship tests ------------------------------------------------------
-   def test_invoice_item_can_find_its_invoice # invoice_item#invoice
-     item = invoice_item.find_by_invoice_id(1)
-     invoice_for_invoice_item_1 = item.invoice
-
-     assert invoice_for_invoice_item_1.is_a?(Invoice)
-     assert_equal 1, invoice_for_invoice_item_1.id
-     assert_equal "2012-03-25 09:54:09 UTC", invoice_for_invoice_item_1.created_at
-   end
-
-
-  def test_invoice_item_can_find_its_item # invoice_item#item
-    item = invoice_item.find_by_invoice_id(1)
-    instance_of_item = item.item
-
-    assert instance_of_item.is_a?(Item)
-    assert_equal 1, instance_of_item.id
-    assert_equal "2012-03-27 14:53:59 UTC", instance_of_item.created_at
   end
 end
