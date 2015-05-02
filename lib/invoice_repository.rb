@@ -1,13 +1,11 @@
 class InvoiceRepository
   include Enumerable
 
+  attr_reader :engine, :invoices
+
   def initialize(engine, dir)
     @engine = engine
     load_invoices(dir)
-  end
-
-  def each(&block)
-    @invoices.each(&block)
   end
 
   def load_invoices(dir)
@@ -16,62 +14,78 @@ class InvoiceRepository
   end
 
   def inspect
-    "#<InvoiceRepository: id: #{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id:#{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
+    "#<InvoiceRepository: id: #{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id:#{@merchant_id.inspect} status: #{@status.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
   end
 
+  def each(&block)
+    @invoices.each(&block)
+  end
 
-
+#-------------------- Base Repository Methods --------------------
   def all
-    @invoices
+    invoices
   end
 
-  def find_by_id(id)
-    @invoices.detect { |invoice| invoice.id == id }
+  def random
+    invoices.sample(1)
   end
 
-  def find_by_customer_id(customer_id)
-    @invoices.select { |invoice| invoice.customer_id == customer_id }
-  end
-
-  def find_by_merchant_id(id)
-    @invoices.select { |invoice| invoice.merchant_id == id }
-  end
-
-
-  def find_by_invoice_id(invoice_id)
-    @invoices.find { |invoice| invoice.id == invoice_id }
-  end
-
+#-------------------- Relationship Methods --------------------
   def find_transactions_by_invoice_id(id)
     engine.find_transactions_by_invoice_id(id)
   end
 
 
+#-------------------- Find_by Methods --------------------
+  def find_by_id(id)
+    invoices.detect { |invoice| invoice.id == id }
+  end
+
+  def find_by_customer_id(customer_id)
+    invoices.detect { |invoice| invoice.customer_id == customer_id }
+  end
+
+  def find_by_merchant_id(merchant_id)
+    invoices.detect { |invoice| invoice.merchant_id == merchant_id }
+  end
+
+  def find_by_status(status)
+    invoices.detect {|invoice| status == invoice.status}
+  end
+
+  def find_by_created_at(created_at)
+    invoices.detect {|invoice| created_at == invoice.created_at}
+  end
+
+  def find_by_updated_at(updated_at)
+    invoices.detect{|invoice| updated_at == invoice.updated_at}
+  end
+
+#-------------------- Find_all_by Methods --------------------
+  def find_all_by_id(id)
+    invoices.select{|invoice| id == invoice.id}
+  end
+
+  def find_all_by_customer_id(customer_id)
+    invoices.select{|invoice| customer_id == invoice.customer_id}
+  end
+
+  def find_all_by_merchant_id(merchant_id)
+    invoices.select{|invoice| merchant_id == invoice.merchant_id}
+  end
+
+  def find_all_by_status(status)
+    invoices.select{|invoice| status == invoice.status}
+  end
+
+  def find_all_by_created_at(created_at)
+    invoices.select{|invoice|created_at == invoice.created_at}
+  end
+
+  def find_all_by_updated_at(updated_at)
+    invoices.select{|invoice| updated_at == invoice.updated_at}
+  end
+
 end
 
 
-
-
-# def find_all #todo find all
-#   @invoices
-# end
-#
-# def random_invoice
-#   #todo find random invoice
-# end
-#
-#
-#
-
-#
-# def find_by_status(status)
-#   #todo find_by_status
-# end
-#
-# def find_by_created_at(created_at)
-#   #todo find_by_created_at
-# end
-#
-# def find_by_updated_at(updated_at)
-#   #todo find_by_updated_at
-# end

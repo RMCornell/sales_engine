@@ -11,6 +11,9 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   end
 
+#-------------------- Relationship Method Tests --------------------
+
+#-------------------- Base Method Tests --------------------
   def test_invoice_item_repository_exists
     assert invoice_item
   end
@@ -35,6 +38,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 100, total_random_invoices
   end
 
+#-------------------- Find_by Method Tests --------------------
   def test_invoice_item_repository_returns_invoice_items_by_id
     by_id = invoice_item.find_by_id(4)
     assert_equal 4, by_id.id
@@ -56,10 +60,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_unit_price
-    skip
-    by_unit_price = invoice_item.find_by_unit_price(79140)
-    assert_equal 5, by_unit_price.length
-    #unclear why this is not working
+    by_unit_price = invoice_item.find_by_unit_price("79140")
+    assert_equal 5, by_unit_price.id
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_created_at
@@ -73,7 +75,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 1, by_updated_at.id
   end
 
-#Find_all_by Method Tests
+#-------------------- Find_all_by Method Tests --------------------
   def test_invoice_repository_returns_all_invoice_items_by_id
     all_by_id = invoice_item.find_all_by_id(1)
     assert_equal 1, all_by_id.length
@@ -85,12 +87,31 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert all_by_invoice_id.first.is_a?(InvoiceItem)
   end
 
+  def test_invoice_items_repository_returns_all_invoice_items_by_quantity
+    all_by_quantity = invoice_item.find_all_by_quantity(9)
+    assert_equal 8, all_by_quantity.count
+    assert all_by_quantity.first.is_a?(InvoiceItem)
+  end
 
+  def test_invoice_item_repository_returns_all_invoices_by_unit_price
+    all_by_unit_price = invoice_item.find_all_by_unit_price("13635")
+    assert_equal 1, all_by_unit_price.count
+    assert all_by_unit_price.first.is_a?(InvoiceItem)
+  end
 
+  def test_invoice_item_repository_returns_all_invoices_by_created_at
+    all_by_created_at = invoice_item.find_all_by_created_at("2012-03-27 14:54:09 UTC")
+    assert_equal 15, all_by_created_at.count
+    assert all_by_created_at.first.is_a?(InvoiceItem)
+  end
 
+  def test_invoice_item_repository_returns_all_invoices_by_updated_at
+    all_by_updated_at = invoice_item.find_all_by_updated_at("2012-03-27 14:54:09 UTC")
+    assert_equal 15, all_by_updated_at.count
+    assert all_by_updated_at.first.is_a?(InvoiceItem)
+  end
 
-
-
+#-------------------- Initial Setup Tests --------------------
   def test_invoice_items_have_an_id
     refute invoice_item.invoice_items.any? { |invoice_item| invoice_item.id.nil? }
   end
@@ -112,5 +133,3 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
 end
-
-  #id,item_id,invoice_id,quantity,unit_price,created_at,updated_at
