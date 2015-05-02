@@ -60,47 +60,56 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_invoice_repository_returns_invoices_by_status
     by_status = invoices.find_by_status("shipped")
     assert_equal 1, by_status.id
+    assert by_status.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_invoices_by_created_at
     by_created_at = invoices.find_by_created_at("2012-03-25 09:54:09 UTC")
     assert_equal 1, by_created_at.customer_id
+    assert by_created_at.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_invoices_by_updated_at
     by_updated_at = invoices.find_by_updated_at("2012-03-07 21:54:10 UTC")
     assert_equal 1, by_updated_at.customer_id
+    assert by_updated_at.is_a?(Invoice)
   end
 
 #-------------------- Find_all_by Method Tests --------------------
   def test_invoice_repository_returns_all_invoices_by_id
     all_by_id = invoices.find_all_by_id(1)
     assert_equal 1, all_by_id.count
+    assert all_by_id.first.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_all_invoices_by_customer_id
     all_by_customer_id = invoices.find_all_by_customer_id(4)
     assert_equal 8, all_by_customer_id.count
+    assert all_by_customer_id.first.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_all_invoices_by_merchant_id
     all_by_merchant_id = invoices.find_all_by_merchant_id(86)
     assert_equal 3, all_by_merchant_id.count
+    assert all_by_merchant_id.first.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_all_invoices_by_status
     all_by_status = invoices.find_all_by_status("shipped")
     assert_equal 100, all_by_status.count
+    assert all_by_status.first.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_all_by_created_at
     all_by_created_at = invoices.find_all_by_created_at("2012-03-25 09:54:09 UTC")
     assert_equal 1, all_by_created_at.count
+    assert all_by_created_at.first.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_all_by_updated_at
     all_by_updated_at = invoices.find_all_by_updated_at("2012-03-07 21:54:10 UTC")
     assert_equal 1, all_by_updated_at.count
+    assert all_by_updated_at.first.is_a?(Invoice)
   end
 
   def test_invoices_have_a_repository
