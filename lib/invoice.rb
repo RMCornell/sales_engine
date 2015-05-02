@@ -48,7 +48,10 @@ class Invoice
     repository.find_customer_by_customer_(id)
   end
 
+
+  # invoice(merchant_id) --> merchant(id) --> invoice#merchant
+
   def merchant
-    # todo merchant returns an instance of Merchant associated with this object
+    repository.find_merchant_by_(merchant_id)
   end
 end

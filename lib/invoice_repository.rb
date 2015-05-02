@@ -46,6 +46,9 @@ class InvoiceRepository
 
 
   # invoice#merchant
+  def find_merchant_by_(merchant_id)
+    engine.find_merchant_by_(merchant_id)
+  end
 
 
 

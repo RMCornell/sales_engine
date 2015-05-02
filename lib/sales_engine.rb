@@ -94,7 +94,6 @@ class SalesEngine
   # invoice_items(item_id) --> items(id) --> invoice#items
   def find_items_by_item_(id)
     invoice_items = invoice_item_repository.find_by_invoice_id(id)
-   # binding.pry
     item_id = invoice_items.item_id
     item_repository.find_by_id(item_id)
   end
@@ -104,8 +103,13 @@ class SalesEngine
     customer_repository.find_by_id(id)
   end
 
+
+
   # invoice(merchant_id) --> merchant(id) --> invoice#merchant
-  # todo invoice merchant
+
+  def find_merchant_by_(merchant_id)
+    merchant_repository.find_by_id(merchant_id)
+  end
 
 
   # //---------- InvoiceItem Relationships-------------------------------------------//
