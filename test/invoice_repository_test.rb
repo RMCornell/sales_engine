@@ -45,11 +45,16 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_invoice_repository_returns_invoices_by_customer_id
     by_customer_id = invoices.find_by_customer_id(4)
     assert_equal 4, by_customer_id.customer_id
+    assert_equal 44, by_customer_id.merchant_id
+    assert_equal "shipped", by_customer_id.status
+    assert by_customer_id.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_invoices_by_merchant_id
     by_merchant_id = invoices.find_by_merchant_id(96)
     assert_equal 9, by_merchant_id.customer_id
+    assert_equal "shipped", by_merchant_id.status
+    assert by_merchant_id.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_invoices_by_status
@@ -97,36 +102,6 @@ class InvoiceRepositoryTest < Minitest::Test
     all_by_updated_at = invoices.find_all_by_updated_at("2012-03-07 21:54:10 UTC")
     assert_equal 1, all_by_updated_at.count
   end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   def test_invoices_have_a_repository
     assert invoices
