@@ -29,6 +29,10 @@ class InvoiceRepository
     engine.find_customer_by_customer_(id)
   end
 
+  # invoice#transactions
+  def find_transactions_by_invoice_(id)
+    engine.find_transactions_by_invoice_(id)
+  end
 
   def all
     @invoices
@@ -49,10 +53,6 @@ class InvoiceRepository
 
   def find_by_invoice_id(invoice_id)
     @invoices.find { |invoice| invoice.id == invoice_id }
-  end
-
-  def find_transactions_by_invoice_id(id)
-    engine.find_transactions_by_invoice_id(id)
   end
 
 

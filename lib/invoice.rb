@@ -21,36 +21,26 @@ class Invoice
     "#<Invoice: id:#{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id: #{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
-
+  # invoice#customer
   def customer
     repository.find_customer_by_customer_(id)
   end
 
-  # def transactions
-  #   @repository.find_transactions_by_invoice_id(id)
-  # end
-  #todo transactions returns a collection of associated Transaction instances
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  def invoice_items
-    # todo invoice_items returns a collection of associated InvoiceItem instances
+  #  invoice#transactions
+  def transactions
+    repository.find_transactions_by_(id)
   end
+
+  #  invoice#invoice_items
+  def invoice_items
+    re
+  end
+
+
+
+
+
+
 
   def items
     # todo items returns a collection of associated Items by way of InvoiceItem objects
