@@ -29,7 +29,10 @@ class InvoiceItemRepository
     invoice_items.sample(1)
   end
 
-#Find_by Methods
+#-------------------- Relationship Methods --------------------
+
+
+#-------------------- Find_by Methods --------------------
   def find_by_id(id)
     invoice_items.detect {|invoice_item| id == invoice_item.id}
   end
@@ -58,8 +61,7 @@ class InvoiceItemRepository
     invoice_items.detect {|invoice_item| updated_at == invoice_item.updated_at}
   end
 
-
-#Find_by_all Methods
+#-------------------- Find_all_by Methods --------------------
   def find_all_by_id(id)
     invoice_items.select {|invoice_item| id == invoice_item.id}
   end
@@ -68,4 +70,19 @@ class InvoiceItemRepository
     invoice_items.select {|invoice_item| invoice_id == invoice_item.invoice_id}
   end
 
+  def find_all_by_quantity(quantity)
+    invoice_items.select {|invoice_item| quantity == invoice_item.quantity}
+  end
+
+  def find_all_by_unit_price(unit_price)
+    invoice_items.select {|invoice_item| unit_price == invoice_item.unit_price}
+  end
+
+  def find_all_by_created_at(created_at)
+    invoice_items.select{|invoice_item| created_at == invoice_item.created_at}
+  end
+
+  def find_all_by_updated_at(updated_at)
+    invoice_items.select{|invoice_items| updated_at == invoice_items.updated_at}
+  end
 end
