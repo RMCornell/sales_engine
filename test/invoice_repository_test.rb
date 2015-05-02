@@ -76,8 +76,12 @@ class InvoiceRepositoryTest < Minitest::Test
     # items returns a collection of associated Items by way of InvoiceItem objects
     invoice = invoices.find_by_id(5)
     items = invoice.items
-
-    assert_equal 'asdf', items
+#<Item: id:932 name: "Item Non Necessitatibus" unit_price: 66412 merchant_id: 41
+# created_at: "2012-03-27 14:54:03 UTC" updated_at: "2012-03-27 14:54:03 UTC">
+    assert items.is_a?(Item)
+    assert_equal 932, items.id
+    assert_equal 41, items.merchant_id
+    assert_equal "2012-03-27 14:54:03 UTC", items.created_at
   end
 
   def test_invoice_has_a_customer # invoice#customer
