@@ -36,6 +36,7 @@ class InvoiceRepository
 
 
   # invoice#items
+
   def find_items_by_item_(id)
     engine.find_items_by_item_(id)
   end
@@ -70,10 +71,10 @@ class InvoiceRepository
     @invoices.select { |invoice| invoice.merchant_id == id }
   end
 
-
-  def find_by_invoice_id(invoice_id)
-    @invoices.find { |invoice| invoice.id == invoice_id }
-  end
+  #
+  # def find_by_invoice_id(invoice_id)
+  #   @invoices.find { |invoice| invoice.id == invoice_id }
+  # end
 
   ## find all methods
 

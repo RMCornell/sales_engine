@@ -90,13 +90,13 @@ class SalesEngine
     invoice_item_repository.find_by_invoice_id(id)
   end
 
-  #invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> invoice#items
-  def invoice_items_find_items_by_item_(id)
-    invoice_items = find_invoice_items_by_invoice_(id)
-
-    # binding.pry
-    # puts 'asdf'
-    item_repository.invoice_items.find_by_item_id(id)
+  # invoice(id) --> invoice_items(invoice_id) -->
+  # invoice_items(item_id) --> items(id) --> invoice#items
+  def find_items_by_item_(id)
+    invoice_items = invoice_item_repository.find_by_invoice_id(id)
+   # binding.pry
+    item_id = invoice_items.item_id
+    item_repository.find_by_id(item_id)
   end
 
   # invoice(customer_id) --> customer(id) --> invoice#customer
