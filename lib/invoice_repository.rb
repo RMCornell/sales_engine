@@ -22,18 +22,38 @@ class InvoiceRepository
     "#<InvoiceRepository: id: #{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id:#{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
   end
 
-  # invoice realationships
-
-  # invoice#customer
-  def find_customer_by_customer_(id)
-    engine.find_customer_by_customer_(id)
-  end
+  # invoice ------------------------------------------------------ relationships
 
   # invoice#transactions
   def find_transactions_by_invoice_(id)
     engine.find_transactions_by_invoice_(id)
   end
 
+  # invoice#invoice_items
+  def find_invoice_items_by_invoice_(id)
+    engine.find_invoice_items_by_invoice_(id)
+  end
+
+
+  # invoice#items
+  def find_items_by_item_(id)
+    engine.find_items_by_item_(id)
+  end
+
+
+  # invoice#customer
+  def find_customer_by_customer_(id)
+    engine.find_customer_by_customer_(id)
+  end
+
+
+
+  # invoice#merchant
+
+
+
+
+  ##### find_by methods
   def all
     @invoices
   end
@@ -55,32 +75,36 @@ class InvoiceRepository
     @invoices.find { |invoice| invoice.id == invoice_id }
   end
 
+  ## find all methods
+
+
+  # def find_all #todo find all
+  #   @invoices
+  # end
+  #
+  # def random_invoice
+  #   #todo find random invoice
+  # end
+  #
+  #
+  #
+
+  #
+  # def find_by_status(status)
+  #   #todo find_by_status
+  # end
+  #
+  # def find_by_created_at(created_at)
+  #   #todo find_by_created_at
+  # end
+  #
+  # def find_by_updated_at(updated_at)
+  #   #todo find_by_updated_at
+  # end
+
+
 
 end
 
 
 
-
-# def find_all #todo find all
-#   @invoices
-# end
-#
-# def random_invoice
-#   #todo find random invoice
-# end
-#
-#
-#
-
-#
-# def find_by_status(status)
-#   #todo find_by_status
-# end
-#
-# def find_by_created_at(created_at)
-#   #todo find_by_created_at
-# end
-#
-# def find_by_updated_at(updated_at)
-#   #todo find_by_updated_at
-# end

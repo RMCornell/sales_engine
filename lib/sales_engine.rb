@@ -86,10 +86,18 @@ class SalesEngine
   end
 
     # invoice(id) --> invoice_items(invoice_id) --> invoice#invoice_items
-    # todo
+  def find_invoice_items_by_invoice_(id)
+    invoice_item_repository.find_by_invoice_id(id)
+  end
 
-    #invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> invoice#items
-    # todo
+  #invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> invoice#items
+  def invoice_items_find_items_by_item_(id)
+    invoice_items = find_invoice_items_by_invoice_(id)
+
+    # binding.pry
+    # puts 'asdf'
+    item_repository.invoice_items.find_by_item_id(id)
+  end
 
   # invoice(customer_id) --> customer(id) --> invoice#customer
   def find_customer_by_customer_(id)

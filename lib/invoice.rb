@@ -21,32 +21,39 @@ class Invoice
     "#<Invoice: id:#{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id: #{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
-  # invoice#customer
-  def customer
-    repository.find_customer_by_customer_(id)
-  end
+
 
   #  invoice#transactions
   def transactions
-    repository.find_transactions_by_(id)
+    repository.find_transactions_by_invoice_(id)
   end
 
   #  invoice#invoice_items
   def invoice_items
-    re
+    repository.find_invoice_items_by_invoice_(id)
   end
 
-
-
-
-
-
+  #invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> invoice#items
 
   def items
-    # todo items returns a collection of associated Items by way of InvoiceItem objects
+    invoice_items = repository.find_invoice_items_by_invoice_(id)
+   # binding.pry
+   # repository.find_items_by_item_(id)
+
+    repository.find_items_by_item_(invoice_items.item_id)
+  end
+
+  # invoice#customer
+  def customer
+    repository.find_customer_by_customer_(id)
   end
 
   def merchant
     # todo merchant returns an instance of Merchant associated with this object
   end
 end
+# transactions returns a collection of associated Transaction instances
+# invoice_items returns a collection of associated InvoiceItem instances
+# items returns a collection of associated Items by way of InvoiceItem objects
+# customer returns an instance of Customer associated with this object
+# merchant returns an instance of Merchant associated with this object

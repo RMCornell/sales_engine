@@ -41,16 +41,58 @@ class InvoiceRepositoryTest < Minitest::Test
     refute invoices.any? { |invoice| invoice.updated_at.nil? }
   end
 
-  # invoice#customer
+  # //---------- Invoice relationship tests -------------------------------------------//
 
-  def test_invoice_has_a_customer
+  def test_invoice_has_successful_transactions # invoice#transactions
+    invoice = invoices.find_by_id(5)
+    invoice_transactions = invoice.transactions
+
+    assert_equal 4, invoice_transactions.id
+    assert_equal "2012-03-27 14:54:10 UTC", invoice_transactions.created_at
+    assert_equal 'success', invoice_transactions.result
+  end
+
+  def test_invoice_can_have_unsuccessful_transactions
+    invoice = invoices.find_by_id(12)
+    invoice_transactions = invoice.transactions
+
+    assert_equal 11, invoice_transactions.id
+    assert_equal "2012-03-27 14:54:10 UTC", invoice_transactions.created_at
+    assert_equal 'failed', invoice_transactions.result
+  end
+
+  def test_invoice_has_invoice_items # invoice#invoice_items
+    invoice = invoices.find_by_id(5)
+    invoice_items = invoice.invoice_items
+
+    assert invoice_items.is_a?(InvoiceItem)
+    assert_equal 5, invoice_items.invoice_id
+    assert_equal 23, invoice_items.id
+    assert_equal 932, invoice_items.item_id
+    assert_equal "2012-03-27 14:54:10 UTC", invoice_items.created_at
+  end
+
+  def test_invoice_can_display_its_items # invoice#items
+    # items returns a collection of associated Items by way of InvoiceItem objects
+    invoice = invoices.find_by_id(5)
+    items = invoice.items
+
+    assert_equal 'asdf', items
+  end
+
+  def test_invoice_has_a_customer # invoice#customer
     invoice = invoices.find_by_id(5)
     customer_invoice = invoice.customer
 
     assert_equal "Sylvester", customer_invoice.first_name
-   # first_name: "Sylvester" last_name:"Nader"
+    assert_equal "Nader", customer_invoice.last_name
   end
-  
+
+  def test_invoice_has_a_merchant # invoice#merchant
+
+  end
+
+  # -------------------------- end relationship tests
 end
 
 
