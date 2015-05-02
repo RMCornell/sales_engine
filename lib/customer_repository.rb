@@ -20,13 +20,14 @@
      "#<#{self.class} #{@customers.size} rows>"
    end
 
+  #-------------------- Relationship Methods --------------------
    # customer#invoices
    def find_invoices_by_(id)
      engine.find_invoices_by_(id)
    end
 
 
-#Customer Repository Methods
+#-------------------- Base Repository Methods --------------------
   def all
     customers
   end
@@ -35,7 +36,7 @@
    customers.sample(1)
   end
 
-#Find_by Methods
+#-------------------- Find_by Methods --------------------
    def find_by_id(id)
      customers.detect { |customer| id == customer.id }
    end
@@ -56,7 +57,7 @@
      customers.detect {|customer| updated_at == customer.updated_at}
    end
 
-#Find_all_by Methods
+#-------------------- Find_all_by Methods --------------------
    def find_all_by_id(id)
      customers.select {|customer| id == customer.id}
    end
