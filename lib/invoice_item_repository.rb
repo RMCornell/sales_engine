@@ -58,6 +58,7 @@ class InvoiceItemRepository
     invoice_items.detect {|invoice_item| updated_at == invoice_item.updated_at}
   end
 
+
 #Find_by_all Methods
   def find_all_by_id(id)
     invoice_items.select {|invoice_item| id == invoice_item.id}

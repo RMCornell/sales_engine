@@ -20,7 +20,22 @@ class MerchantRepository
     "#<#{self.class} #{@merchants.size} rows>"
   end
 
+  # merchant#items
+  def find_items_by_(id)
+    engine.find_items_by_(id)
+  end
+
+  # merchant#invoices
+  def find_invoices_by_(id)
+    engine.find_items_by_merchant_(id)
+  end
+
 #Merchant Repository Methods
+
+  def find_items_by_(id)
+    engine.find_items_by_merchant_(id)
+  end
+
 
   def all
     merchants
@@ -32,7 +47,7 @@ class MerchantRepository
 
 #Find_by Methods
   def find_by_id(id)
-    merchants.detect { |merchant| id == merchant.id}
+    merchants.detect { |merchant| id == merchant.id }
   end
 
   def find_by_name(merchant_name)
