@@ -22,10 +22,11 @@ class MerchantRepositoryTest < Minitest::Test
     assert merchant_items.first.is_a?(Item)
   end
 
+  # merchant#invoices
   def test_merchant_can_find_its_invoices
-    merchant = merchants.find_by_id(1)
+    merchant = merchants.find_by_id(2)
     merchant_invoices = merchant.invoices
-    assert_equal 15, merchant_invoices.size
+    assert_equal 38, merchant_invoices.size
   end
 
 
