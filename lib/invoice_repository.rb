@@ -1,6 +1,7 @@
 class InvoiceRepository
   include Enumerable
 
+
   attr_reader :engine, :invoices
 
   def initialize(engine, dir)
@@ -17,6 +18,39 @@ class InvoiceRepository
     "#<InvoiceRepository: id: #{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id:#{@merchant_id.inspect} status: #{@status.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
   end
 
+  # invoice ------------------------------------------------------ relationships
+
+  # invoice#transactions
+  def find_transactions_by_invoice_(id)
+    engine.find_transactions_by_invoice_(id)
+  end
+
+  # invoice#invoice_items
+  def find_invoice_items_by_invoice_(id)
+    engine.find_invoice_items_by_invoice_(id)
+  end
+
+
+  # invoice#items
+
+  def find_items_by_item_(id)
+    engine.find_items_by_item_(id)
+  end
+
+
+  # invoice#customer
+  def find_customer_by_customer_(id)
+    engine.find_customer_by_customer_(id)
+  end
+
+
+
+  # invoice#merchant
+
+
+
+
+  ##### find_by methods
   def each(&block)
     @invoices.each(&block)
   end
@@ -48,6 +82,7 @@ class InvoiceRepository
   def find_by_merchant_id(merchant_id)
     invoices.detect { |invoice| invoice.merchant_id == merchant_id }
   end
+
 
   def find_by_status(status)
     invoices.detect {|invoice| status == invoice.status}
@@ -85,7 +120,7 @@ class InvoiceRepository
   def find_all_by_updated_at(updated_at)
     invoices.select{|invoice| updated_at == invoice.updated_at}
   end
-
 end
+
 
 

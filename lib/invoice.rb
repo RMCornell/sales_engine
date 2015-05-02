@@ -4,7 +4,8 @@ class Invoice
               :merchant_id,
               :status,
               :created_at,
-              :updated_at
+              :updated_at,
+              :repository
 
   def initialize(invoice, repository)
     @repository     = repository
@@ -21,38 +22,30 @@ class Invoice
   end
 
 
-  # def customer
-  #   @repository.find_customer_by_customer_id(customer_id)
-  # end
-  #
-  # def transactions
-  #   @repository.find_transactions_by_invoice_id(id)
-  # end
-  #todo transactions returns a collection of associated Transaction instances
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  def invoice_items
-    # todo invoice_items returns a collection of associated InvoiceItem instances
+  #  invoice#transactions
+  def transactions
+    repository.find_transactions_by_invoice_(id)
   end
 
+  #  invoice#invoice_items
+  def invoice_items
+    # invoice_items returns a collection of associated InvoiceItem instances
+
+    repository.find_invoice_items_by_invoice_(id)
+  end
+
+
+
+  #invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> invoice#items
+
   def items
-    # todo items returns a collection of associated Items by way of InvoiceItem objects
+    repository.find_items_by_item_(id)
+  end
+
+  # invoice#customer
+  def customer
+    repository.find_customer_by_customer_(id)
   end
 
   def merchant

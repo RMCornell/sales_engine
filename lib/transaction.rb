@@ -25,10 +25,9 @@ class Transaction
   end
 
   ### transactions(invoice_id) --> invoice(id)
-  # transactions#invoice
 
   def invoice
-    repository.find_invoice_by_(invoice_id)
+    repository.find_invoice_by_(invoice_id) # transactions#invoice
   end
 end
 

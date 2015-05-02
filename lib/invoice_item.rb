@@ -15,7 +15,7 @@ class InvoiceItem
     @item_id      = invoice_item[:item_id].to_i
     @invoice_id   = invoice_item[:invoice_id].to_i
     @quantity     = invoice_item[:quantity].to_i
-    @unit_price   = invoice_item[:unit_price]
+    @unit_price   = invoice_item[:unit_price].to_i
     @created_at   = invoice_item[:created_at]
     @updated_at   = invoice_item[:updated_at]
   end
@@ -24,12 +24,15 @@ class InvoiceItem
     "#<#{self.class}: id:#{@id.inspect} item_id: #{@item_id.inspect} invoice_id: #{@invoice_id.inspect} quantity: #{@quantity.inspect} unit_price: #{@unit_price.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
+  # invoice(id) --> invoice_item(invoice_id) --> invoice_item#invoice
 
   def invoice
   # todo invoice returns an instance of Invoice associated with this object
+    repository.find_invoice_by_invoice_(id)
   end
 
   def item
+    repository.find_item_by_item_(id)
     # todo item returns an instance of Item associated with this object
   end
 end

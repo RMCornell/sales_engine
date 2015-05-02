@@ -68,42 +68,81 @@ class SalesEngine
     @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
-  # //---------- Relationships-------------------------------------------//
-
-  ### customer(id) --> invoice(customer_id)
-  # customer#invoices
-  def find_invoices_by_(id)
-    invoice_repository.find_by_customer_id(id)
-  end
-
-  ### transactions(invoice_id) --> invoice(id)
-  # transaction#invoice
-  def find_invoice_by_(invoice_id)
-    invoice_repository.find_by_invoice_id(invoice_id)
-  end
-
-
-  ### merchant(id) --> items(merchant_id)
-  # merchant#items
-
+  # //----------Merchant Relationships-------------------------------------------//
+    # merchant(id) --> items(merchant_id) --> merchant#items
   def find_items_by_merchant_(id)
     item_repository.find_by_merchant_id(id)
   end
 
-  ### merchant(id) --> invoices(merchant_id)
-  # merchant#invoices
-
+    # merchant(id) --> invoices(merchant_id) --> # merchant#invoices
   def find_invoices_by_merchant_(id)
     invoice_repository.find_by_merchant_id(id)
   end
 
-  def find_customer_by_customer_id(customer_id)
-    customer_repository.find_by_customer_id(customer_id)
-  end
-
-  def find_transactions_by_invoice_id(id)
+  # //---------- Invoice Relationships-------------------------------------------//
+    # invoice(id) --> transaction(invoice_id) --> invoice#transactions
+  def find_transactions_by_invoice_(id)
     transaction_repository.find_by_invoice_id(id)
   end
 
+    # invoice(id) --> invoice_items(invoice_id) --> invoice#invoice_items
+  def find_invoice_items_by_invoice_(id)
+    invoice_item_repository.find_by_invoice_id(id)
+  end
 
+  # invoice(id) --> invoice_items(invoice_id) -->
+  # invoice_items(item_id) --> items(id) --> invoice#items
+  def find_items_by_item_(id)
+    invoice_items = invoice_item_repository.find_by_invoice_id(id)
+   # binding.pry
+    item_id = invoice_items.item_id
+    item_repository.find_by_id(item_id)
+  end
+
+  # invoice(customer_id) --> customer(id) --> invoice#customer
+  def find_customer_by_customer_(id)
+    customer_repository.find_by_id(id)
+  end
+
+  # invoice(merchant_id) --> merchant(id) --> invoice#merchant
+  # todo invoice merchant
+
+
+  # //---------- InvoiceItem Relationships-------------------------------------------//
+
+  # invoice_item(invoice_id) --> invoice(id) --> invoice_item#invoice
+
+  def find_invoice_by_invoice_(id)
+    invoice_repository.find_by_id(id)
+  end
+
+  def find_item_by_item_(id)
+    item_repository.find_by_id(id)
+  end
+
+
+
+  #invoice returns an instance of Invoice associated with this object
+  #item returns an instance of Item associated with this object
+
+  # //---------- Item Relationships-------------------------------------------//
+  # invoice_items returns a collection of InvoiceItems associated with this object
+  # merchant returns an instance of Merchant associated with this object
+
+
+
+
+  # //---------- Transaction Relationships-------------------------------------------//
+  ### transactions(invoice_id) --> invoice(id) --> transaction#invoice
+  def find_invoice_by_(invoice_id)
+    invoice_repository.find_by_id(invoice_id)
+  end
+
+
+  # //---------- Customer Relationships-------------------------------------------//
+  ### customer(id) --> invoice(customer_id)
+
+  def find_invoices_by_(id) # customer#invoices
+    invoice_repository.find_by_customer_id(id)
+  end
 end
