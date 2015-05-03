@@ -37,22 +37,11 @@ class Invoice
   end
 
 
-
-
-
-
-
   #invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> invoice#items
 
   def items
     repository.find_items_by_item_(id) # invoice#items
   end
-
-
-
-
-
-
 
   # invoice#customer
   def customer
