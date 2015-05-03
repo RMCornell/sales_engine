@@ -61,7 +61,7 @@ class InvoiceRepository
   end
 
   def random
-    invoices.sample(1)
+    invoices.sample
   end
 
 #-------------------- Relationship Methods --------------------
