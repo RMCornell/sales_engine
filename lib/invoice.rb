@@ -33,13 +33,8 @@ class Invoice
   def invoice_items
     # invoice_items returns a collection of associated InvoiceItem instances
 
-    repository.find_items_for_invoice_items(id)
+    repository.find_invoice_items_for_(id)
   end
-
-
-
-
-
 
 
   #invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> invoice#items
@@ -47,12 +42,6 @@ class Invoice
   def items
     repository.find_items_by_item_(id) # invoice#items
   end
-
-
-
-
-
-
 
   # invoice#customer
   def customer

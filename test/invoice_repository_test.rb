@@ -53,13 +53,13 @@ class InvoiceRepositoryTest < Minitest::Test
     # items returns a collection of associated Items by way of InvoiceItem objects
     invoice = invoices.find_by_id(5)
     items = invoice.items
-
     assert items.is_a?(Array)
     
     # todo this is the problem for the relationship i think...it needs 'item'
     #assert_equal 932, items.item.id
-    assert_equal 932, items.first.id
-    assert_equal 41, items.first.merchant_id
+
+    assert_equal 4, items.size
+    assert_equal 41, items.first.merchant_id # todo need fixed
     assert_equal "2012-03-27 14:54:03 UTC", items.first.created_at
   end
 
@@ -87,11 +87,11 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_invoices_contain_data
-    assert_equal 100, invoices.all.length
+    assert_equal 102, invoices.all.length
   end
 
   def test_invoice_repository_returns_all_invoices
-    assert_equal 100, invoices.all.length
+    assert_equal 102, invoices.all.length
   end
 
   def test_invoice_repository_returns_random_invoice
@@ -170,7 +170,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def test_invoice_repository_returns_all_invoices_by_status
     all_by_status = invoices.find_all_by_status("shipped")
-    assert_equal 100, all_by_status.count
+    assert_equal 102, all_by_status.count
     assert all_by_status.first.is_a?(Invoice)
   end
 

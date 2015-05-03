@@ -1,5 +1,6 @@
  class CustomerRepository
    include Enumerable
+
    attr_reader :engine, :customers
 
    def initialize(engine, dir)
