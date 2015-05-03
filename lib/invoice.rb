@@ -33,7 +33,7 @@ class Invoice
   def invoice_items
     # invoice_items returns a collection of associated InvoiceItem instances
 
-    repository.find_items_for_invoice_items(id)
+    repository.find_invoice_items_for_(id)
   end
 
 

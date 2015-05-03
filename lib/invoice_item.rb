@@ -32,7 +32,7 @@ class InvoiceItem
   end
 
   def item # invoice#item
-    repository.find_invoice_items_item_by_(item_id)
+    repository.find_invoice_items_items_by_(item_id)
     # item returns an instance of Item associated with this object
   end
 end

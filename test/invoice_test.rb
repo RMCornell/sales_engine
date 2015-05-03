@@ -14,6 +14,7 @@ class InvoiceTest < Minitest::Test
     invoice = engine.invoice_repository.find_by_id(1002)
     item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
 
+    assert_equal 3, invoice.items.size
     assert item
   end
 end

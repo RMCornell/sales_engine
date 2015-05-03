@@ -85,11 +85,13 @@ class SalesEngine
     transaction_repository.find_all_by_invoice_id(id)
   end
 
+
+
     # invoice(id) --> invoice_items(invoice_id) --> invoice#invoice_items
 
-  def find_invoice_items_by_invoice_(invoice_id)
+  def find_invoice_items_for_(invoice_id)  ### this should be returning the invoice_items not the items
     invoice_item_repository.find_all_by_invoice_id(invoice_id)
-  end
+  end #### fixed....
 
 
 
@@ -106,14 +108,7 @@ class SalesEngine
   def find_items_for_invoice_items(id) # invoice#items
     invoice = invoice_repository.find_by_id(id)
     items = invoice_item_repository.find_all_by_invoice_id(invoice.id)
-
-    if items.size > 1
-      items.map { |item| item_repository.find_by_id(item.item_id) }
-    else
-      item = items.first
-      item = item_repository.find_by_id(item.item_id)
-      binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
-    end
+    items.map { |item| item_repository.find_by_id(item.item_id) }
   end
 
 
@@ -151,9 +146,57 @@ class SalesEngine
     invoice_repository.find_by_id(invoice_id)
   end
 
-  def find_invoice_items_item_by_(item_id) # invoice_item#item
-    item_repository.find_by_id(item_id)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  def find_invoice_items_items_by_(item_id) # invoice_item#item
+
+   item = item_repository.find_by_id(item_id)
+    #item_id.map { |item| item_repository.find_by_id(item.item_id) }
+
+
+
+   # invoice = invoice_repository.find_by_id(1002)
+   # invoice_items = invoice_item_repository.find_all_by_invoice_id(1002)
+   # invoice_items.map { |item| item_repository.find_by_id(item.item_id) }
+
+
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
