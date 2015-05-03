@@ -154,6 +154,6 @@ class SalesEngine
   # customer(id) --> invoice(customer_id)
 
   def find_invoices_by_(id) # customer#invoices
-    invoice_repository.find_by_customer_id(id)
+    invoice_repository.find_all_by_customer_id(id)
   end
 end
