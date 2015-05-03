@@ -18,24 +18,20 @@ class InvoiceItemRepository
   end
 
   # --------- invoice item relationships ---------------------------------------------------------
-  def find_invoice_by_invoice_(id)
-    engine.find_invoice_by_invoice_(id)
+
+
+  def find_invoice_items_invoice_by_(invoice_id) #invoice_item#invoice
+    engine.find_invoice_items_invoice_by_(invoice_id)
   end
 
-  def find_item_by_item_(id)
-    engine.find_item_by_item_(id)
+  def find_invoice_items_item_by_(item_id)
+    engine.find_invoice_items_item_by_(item_id)
   end
-
-
-
-
-
-
-
 
 
 
   # ------------------------------------------------------------------------------------------------
+
   def each(&block)
     @invoice_items.each(&block)
   end
@@ -49,16 +45,14 @@ class InvoiceItemRepository
     invoice_items.sample
   end
 
-#-------------------- Relationship Methods --------------------
-
-
 #-------------------- Find_by Methods --------------------
   def find_by_id(id)
     invoice_items.detect {|invoice_item| id == invoice_item.id}
   end
 
-  def find_by_item_id(id)
-    invoice_items.detect {|invoice_item| id == invoice_item.id}
+
+  def find_by_item_id(item_id)
+    invoice_items.detect {|invoice_item| item_id == invoice_item.item_id }
   end
 
   def find_by_invoice_id(invoice_id)
@@ -84,6 +78,10 @@ class InvoiceItemRepository
 #-------------------- Find_all_by Methods --------------------
   def find_all_by_id(id)
     invoice_items.select {|invoice_item| id == invoice_item.id}
+  end
+
+  def find_all_by_item_id(item_id)
+    invoice_items.select { |invoice_item| invoice_item.item_id == item_id }
   end
 
   def find_all_by_invoice_id(invoice_id)

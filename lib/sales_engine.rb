@@ -70,79 +70,139 @@ class SalesEngine
 
   # //----------Merchant Relationships-------------------------------------------//
     # merchant(id) --> items(merchant_id) --> merchant#items
-  def find_items_by_merchant_(id)
-    item_repository.find_by_merchant_id(id)
+  def find_merchant_items_by_(merchant_id)
+    item_repository.find_all_by_merchant_id(merchant_id)
   end
 
     # merchant(id) --> invoices(merchant_id) --> # merchant#invoices
-  def find_invoices_by_merchant_(id)
-    invoice_repository.find_by_merchant_id(id)
+  def find_merchant_invoices_by_(merchant_id)
+    invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
   # //---------- Invoice Relationships-------------------------------------------//
     # invoice(id) --> transaction(invoice_id) --> invoice#transactions
   def find_transactions_by_invoice_(id)
-    transaction_repository.find_by_invoice_id(id)
+    transaction_repository.find_all_by_invoice_id(id)
   end
 
     # invoice(id) --> invoice_items(invoice_id) --> invoice#invoice_items
-  def find_invoice_items_by_invoice_(id)
-    invoice_item_repository.find_by_invoice_id(id)
+
+  def find_invoice_items_by_invoice_(invoice_id)
+    invoice_item_repository.find_all_by_invoice_id(invoice_id)
   end
+
+
+
+
+
+
+
+
 
   # invoice(id) --> invoice_items(invoice_id) -->
-  # invoice_items(item_id) --> items(id) --> invoice#items
-  def find_items_by_item_(id)
-    invoice_items = invoice_item_repository.find_by_invoice_id(id)
-   # binding.pry
-    item_id = invoice_items.item_id
-    item_repository.find_by_id(item_id)
+  # invoice_items(item_id) --> items(id) -->
+
+
+  def find_items_for_invoice_items(id) # invoice#items
+    invoice_items = invoice_item_repository.find_all_by_invoice_id(id)
+    item = invoice_item_repository.find_by_invoice_id(id)
+    if invoice_items.size > 1
+      invoice_items.map do |item|
+        #next if item.nil?
+        #binding.pry
+        item_repository.find_by_id(item.item_id)
+      end
+    else
+      item_id = invoice_items.item_id
+
+      ### from spec
+      #item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
+
+      item_repository.find_by_id(item_id)
+      binding.pry
+      puts 'asdf'
+    end
+
   end
+
+
+  # 6) SalesEngine invoices Relationships #items has one with a specific name
+  # Failure/Error: item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   # invoice(customer_id) --> customer(id) --> invoice#customer
-  def find_customer_by_customer_(id)
-    customer_repository.find_by_id(id)
+  def find_customer_by_(customer_id)
+    customer_repository.find_by_id(customer_id)
   end
 
+
+
   # invoice(merchant_id) --> merchant(id) --> invoice#merchant
-  # todo invoice merchant
+
+  def find_merchant_by_(merchant_id)
+    merchant_repository.find_by_id(merchant_id)
+  end
 
 
   # //---------- InvoiceItem Relationships-------------------------------------------//
 
   # invoice_item(invoice_id) --> invoice(id) --> invoice_item#invoice
 
-  def find_invoice_by_invoice_(id)
-    invoice_repository.find_by_id(id)
+
+  def find_invoice_items_invoice_by_(invoice_id)
+    invoice_repository.find_by_id(invoice_id)
   end
 
-  def find_item_by_item_(id)
-    item_repository.find_by_id(id)
+  def find_invoice_items_item_by_(item_id) # invoice_item#item
+    item_repository.find_by_id(item_id)
   end
 
 
 
-  #invoice returns an instance of Invoice associated with this object
-  #item returns an instance of Item associated with this object
 
   # //---------- Item Relationships-------------------------------------------//
-  # invoice_items returns a collection of InvoiceItems associated with this object
-  # merchant returns an instance of Merchant associated with this object
+
+
+  def find_item_invoice_items_by_(id) # item#invoice_items
+    invoice_item_repository.find_all_by_item_id(id)
+  end
+
+  def find_item_merchant_by_(merchant_id)
+    merchant_repository.find_by_id(merchant_id)
+  end
 
 
 
 
   # //---------- Transaction Relationships-------------------------------------------//
-  ### transactions(invoice_id) --> invoice(id) --> transaction#invoice
+
+  # transactions(invoice_id) --> invoice(id) --> transaction#invoice
+
+
+  # todo Failure/Error: expect(transaction.invoice.customer.first_name).to eq invoice_customer.first_name
+
   def find_invoice_by_(invoice_id)
     invoice_repository.find_by_id(invoice_id)
   end
 
 
   # //---------- Customer Relationships-------------------------------------------//
-  ### customer(id) --> invoice(customer_id)
+  # customer(id) --> invoice(customer_id)
 
   def find_invoices_by_(id) # customer#invoices
-    invoice_repository.find_by_customer_id(id)
+    invoice_repository.find_all_by_customer_id(id)
   end
 end

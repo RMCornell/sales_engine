@@ -25,10 +25,12 @@ class InvoiceItemRepositoryTest < Minitest::Test
   def test_invoice_item_can_find_its_item # invoice_item#item
     item             = invoice_item.find_by_invoice_id(1)
     instance_of_item = item.item
+   # todo fix...this may be fixed
+
 
     assert instance_of_item.is_a?(Item)
-    assert_equal 1, instance_of_item.id
-    assert_equal "2012-03-27 14:53:59 UTC", instance_of_item.created_at
+    assert_equal 539, instance_of_item.id
+    assert_equal "2012-03-27 14:54:01 UTC", instance_of_item.created_at
   end
 
 #-------------------- Base Method Tests --------------------

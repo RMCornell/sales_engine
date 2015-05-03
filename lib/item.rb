@@ -26,12 +26,17 @@ class Item
     "#<#{self.class}: id:#{@id.inspect} name: #{@name.inspect} unit_price: #{@unit_price.inspect} merchant_id: #{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
-  def invoice_items
+
+  # item(id) --> invoice_items(item_id) --> item#invoice_items
+  def invoice_items #item#invoice_items
+
+    repository.find_item_invoice_items_by_(id)
     #todo invoice_items returns a collection of InvoiceItems associated with this object
   end
 
-  def merchant
-    #todo merchant returns an instance of Merchant associated with this object
+  # item(merchant_id) --> merchant(id) --> # item#merchant
+  def merchant # item#merchant
+    repository.find_item_merchant_by_(merchant_id)
   end
 end
 

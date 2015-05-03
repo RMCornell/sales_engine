@@ -17,6 +17,17 @@ class ItemRepository
     "#<#{self.class}: #{@items.size} rows>"
   end
 
+  # --------------------- Relationship Methods --------------------------
+
+  def find_item_invoice_items_by_(id) # item#invoice_items
+    engine.find_item_invoice_items_by_(id)
+  end
+
+  def find_item_merchant_by_(merchant_id) # item#merchant
+    engine.find_merchant_by_(merchant_id)
+  end
+
+
   def all
     items
   end

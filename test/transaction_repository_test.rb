@@ -15,17 +15,18 @@ class TransactionRepositoryTest < Minitest::Test
   def test_transactions_can_find_their_invoice
     transaction = transactions.find_by_id(1)
     invoice = transaction.invoice.id
-
+    spec = transaction.invoice.customer.first_name
+    # todo Failure/Error: expect(transaction.invoice.customer.first_name).to eq invoice_customer.first_name
     assert_equal 1, invoice
   end
 
-  # # customer#items
-  #
-  # def test_it_finds_all_invoices_for_a_customer
-  #   customer = customer_repository.find_by_id(1)
-  #   invoices = customer.invoices
-  #   assert_equal 8, invoices.length
-  # end
+  # customer#items
+
+  def test_it_finds_all_invoices_for_a_customer
+    customer = engine.customer_repository.find_by_id(1)
+    invoices = customer.invoices
+    assert_equal 8, invoices.length
+  end
 
   # Basic SetUp Tests
 
