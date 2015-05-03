@@ -35,7 +35,7 @@ class TransactionRepository
   end
 
   def random
-    transactions.sample(1)
+    transactions.sample
   end
 
 # Find_by Methods

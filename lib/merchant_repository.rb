@@ -42,7 +42,7 @@ class MerchantRepository
   end
 
   def random
-    merchants.sample(1)
+    merchants.sample
   end
 
 #Find_by Methods

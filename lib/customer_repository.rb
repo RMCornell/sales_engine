@@ -33,7 +33,7 @@
   end
 
   def random
-   customers.sample(1)
+   customers.sample
   end
 
 #-------------------- Find_by Methods --------------------
