@@ -20,33 +20,27 @@ class InvoiceRepository
 
   # invoice ------------------------------------------------------ relationships
 
-  # invoice#transactions
-  def find_transactions_by_invoice_(id)
-    engine.find_transactions_by_invoice_(id)
+  # def find_transactions_by_invoice_id(id)
+  #   engine.find_transactions_by_invoice_id(id)
+  # end
+
+  def find_transactions_by_invoice_(id) # invoice#transactions
+  engine.find_transactions_by_invoice_(id)
   end
 
-  # invoice#invoice_items
-  def find_invoice_items_by_invoice_(id)
-    engine.find_invoice_items_by_invoice_(id)
+  def find_invoice_items_by_invoice_(id)  # invoice#invoice_items
+  engine.find_invoice_items_by_invoice_(id)
   end
 
-
-  # invoice#items
-
-  def find_items_by_item_(id)
+  def find_items_by_item_(id) # invoice#items
     engine.find_items_by_item_(id)
   end
 
-
-  # invoice#customer
-  def find_customer_by_customer_(id)
+  def find_customer_by_customer_(id) # invoice#customer
     engine.find_customer_by_customer_(id)
   end
 
-
-
-  # invoice#merchant
-  def find_merchant_by_(merchant_id)
+  def find_merchant_by_(merchant_id) # invoice#merchant
     engine.find_merchant_by_(merchant_id)
   end
 
@@ -68,9 +62,7 @@ class InvoiceRepository
   end
 
 #-------------------- Relationship Methods --------------------
-  def find_transactions_by_invoice_id(id)
-    engine.find_transactions_by_invoice_id(id)
-  end
+
 
 
 #-------------------- Find_by Methods --------------------

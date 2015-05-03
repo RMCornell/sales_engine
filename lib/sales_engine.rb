@@ -126,25 +126,32 @@ class SalesEngine
 
 
 
-  #invoice returns an instance of Invoice associated with this object
-  #item returns an instance of Item associated with this object
 
   # //---------- Item Relationships-------------------------------------------//
-  # invoice_items returns a collection of InvoiceItems associated with this object
-  # merchant returns an instance of Merchant associated with this object
+
+
+  def find_invoice_items_by_item_(id) # item#invoice_items
+    invoice_item_repository.find_by_item_id(id)
+  end
+
+  def find_item_merchant_by_(merchant_id)
+    merchant_repository.find_by_id(merchant_id)
+  end
 
 
 
 
   # //---------- Transaction Relationships-------------------------------------------//
-  ### transactions(invoice_id) --> invoice(id) --> transaction#invoice
+
+  # transactions(invoice_id) --> invoice(id) --> transaction#invoice
+
   def find_invoice_by_(invoice_id)
     invoice_repository.find_by_id(invoice_id)
   end
 
 
   # //---------- Customer Relationships-------------------------------------------//
-  ### customer(id) --> invoice(customer_id)
+  # customer(id) --> invoice(customer_id)
 
   def find_invoices_by_(id) # customer#invoices
     invoice_repository.find_by_customer_id(id)

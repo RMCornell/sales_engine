@@ -8,6 +8,31 @@ class ItemRepositoryTest < Minitest::Test
     @items = engine.item_repository
   end
 
+
+  # -------------------- Relationship Test Methods ------------------------
+
+  def test_item_invoice_items_returns_its_invoice_items
+    item = engine.item_repository.find_by_id(1)
+    invoice_items = item.invoice_items
+
+    assert invoice_items.is_a?(Array)
+    p invoice_items.first.class
+    assert invoice_items.first
+    assert_equal 'asdf', invoice_items
+
+  end
+
+  # invoice_items returns a collection of InvoiceItems associated with this object
+
+  def test_item_can_find_its_merchant
+    item = items.find_by_id(1)
+    merchant = item.merchant
+
+    assert merchant.is_a?(Merchant)
+  end
+
+
+  # --------------------- Base Test Methods ----------------------------------
   def test_items_repository_exists
     assert items
   end
@@ -32,7 +57,7 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 100, total_random_items
   end
 
-#Find_by Methods
+# --------------------------- Find_by Test Methods -------------------------------
   def test_item_repository_returns_item_by_id
     by_id = items.find_by_id(5)
     assert_equal 68723, by_id.unit_price
@@ -68,7 +93,7 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 1, by_updated_at.id
   end
 
-#Find_by_all Methods
+#----------- Find_by_all Test Methods ---------------------------
   def test_item_repository_returns_all_items_by_id
     all_by_id = items.find_all_by_id(1)
     assert_equal 1, all_by_id.count
