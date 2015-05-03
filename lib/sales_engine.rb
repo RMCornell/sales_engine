@@ -105,17 +105,18 @@ class SalesEngine
 
   def find_items_for_invoice_items(id) # invoice#items
     invoice_items = invoice_item_repository.find_all_by_invoice_id(id)
-
+    item = invoice_item_repository.find_by_invoice_id(id)
     if invoice_items.size > 1
       invoice_items.map do |item|
-       # binding.pry
-        item_repository.find_by_id(item.item_id) unless item.nil?
+        #next if item.nil?
+        #binding.pry
+        item_repository.find_by_id(item.item_id)
       end
     else
       item_id = invoice_items.item_id
 
       ### from spec
-      item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
+      #item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
 
       item_repository.find_by_id(item_id)
       binding.pry
