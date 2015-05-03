@@ -75,8 +75,8 @@ class SalesEngine
   end
 
     # merchant(id) --> invoices(merchant_id) --> # merchant#invoices
-  def find_invoices_by_merchant_(id)
-    invoice_repository.find_all_by_merchant_id(id)
+  def find_merchant_invoices_by_(merchant_id)
+    invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
   # //---------- Invoice Relationships-------------------------------------------//

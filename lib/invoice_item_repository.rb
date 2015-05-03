@@ -18,8 +18,10 @@ class InvoiceItemRepository
   end
 
   # --------- invoice item relationships ---------------------------------------------------------
-  def find_invoice_by_invoice_(id)
-    engine.find_invoice_by_invoice_(id)
+
+
+  def find_invoice_by_invoice_(invoice_id)
+    engine.find_invoice_by_invoice_(invoice_id)
   end
 
   def find_item_by_item_(id)
