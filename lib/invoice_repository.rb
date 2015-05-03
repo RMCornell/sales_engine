@@ -15,8 +15,7 @@ class InvoiceRepository
   end
 
   def inspect
-    "#<InvoiceRepository: id: #{@id.inspect} customer_id: #{@customer_id.inspect} merchant_id:#{@merchant_id.inspect} status: #{@status.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect} >"
-  end
+    "#<#{self.class}: #{@items.size} rows>"  end
 
   def each(&block)
     @invoices.each(&block)
