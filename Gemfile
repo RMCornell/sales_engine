@@ -7,3 +7,5 @@ gem 'minitest'
 gem 'pry'
 gem 'pry-byebug'
 gem 'simplecov'
+gem 'rspec', '~> 3.1.0'
+

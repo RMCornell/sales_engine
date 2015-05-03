@@ -104,30 +104,17 @@ class SalesEngine
 
 
   def find_items_for_invoice_items(id) # invoice#items
-    invoice_items = invoice_item_repository.find_all_by_invoice_id(id)
-    item = invoice_item_repository.find_by_invoice_id(id)
-    if invoice_items.size > 1
-      invoice_items.map do |item|
-        #next if item.nil?
-        #binding.pry
-        item_repository.find_by_id(item.item_id)
-      end
+    invoice = invoice_repository.find_by_id(id)
+    items = invoice_item_repository.find_all_by_invoice_id(invoice.id)
+
+    if items.size > 1
+      items.map { |item| item_repository.find_by_id(item.item_id) }
     else
-      item_id = invoice_items.item_id
-
-      ### from spec
-      #item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
-
-      item_repository.find_by_id(item_id)
-      binding.pry
-      puts 'asdf'
+      item = items.first
+      item = item_repository.find_by_id(item.item_id)
+      binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
     end
-
   end
-
-
-  # 6) SalesEngine invoices Relationships #items has one with a specific name
-  # Failure/Error: item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
 
 
 
@@ -147,8 +134,6 @@ class SalesEngine
   def find_customer_by_(customer_id)
     customer_repository.find_by_id(customer_id)
   end
-
-
 
   # invoice(merchant_id) --> merchant(id) --> invoice#merchant
 
@@ -206,3 +191,30 @@ class SalesEngine
     invoice_repository.find_all_by_customer_id(id)
   end
 end
+
+
+
+
+
+
+# invoice = engine.invoice_repository.find_by_id 1002
+# #items = engine.invoice_item_repository.find_all_by_invoice_id(invoice.id)
+#
+# item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
+
+
+# invoice_items = invoice_item_repository.find_all_by_invoice_id(id)
+# item = invoice_item_repository.find_by_invoice_id(id)
+# if invoice_items.size > 1
+#   invoice_items.map do |item|
+#     #next if item.nil?
+#     #binding.pry
+#     item_repository.find_by_id(item.item_id)
+#   end
+# else
+#   item_id = invoice_items
+#
+#   ### from spec
+#   #item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
+#   # item_list = item_repository.find_by_id(item_id)
+
