@@ -18,15 +18,15 @@ class MerchantRepositoryTest < Minitest::Test
   def test_merchant_can_find_its_items
     merchant = merchants.find_by_id(1)
     merchant_items = merchant.items
-    assert_equal 15, merchant_items.size
-    assert merchant_items.first.is_a?(Item)
+    assert_equal "Item Qui Esse", merchant_items.name
+    assert merchant_items.is_a?(Item)
   end
 
   # merchant#invoices
   def test_merchant_can_find_its_invoices
     merchant = merchants.find_by_id(2)
     merchant_invoices = merchant.invoices
-    assert_equal 38, merchant_invoices.size
+    assert_equal "Item Adipisci Sint", merchant_invoices.name
   end
 
 

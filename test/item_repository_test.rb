@@ -36,26 +36,38 @@ class ItemRepositoryTest < Minitest::Test
   def test_item_repository_returns_item_by_id
     by_id = items.find_by_id(5)
     assert_equal 68723, by_id.unit_price
+    assert_equal "Item Expedita Aliquam", by_id.name
+    assert_equal 1, by_id.merchant_id
+    assert_equal "Voluptate aut labore qui illum tempore eius. Corrupti cum et rerum. Enim illum labore voluptatem dicta consequatur. Consequatur sunt consequuntur ut officiis.", by_id.description
+    assert by_id.is_a?(Item)
   end
 
   def test_item_repository_returns_item_by_name
     by_name = items.find_by_name("Item Provident At")
     assert_equal 6, by_name.id
+    assert by_name.is_a?(Item)
   end
 
   def test_item_repositoyr_returns_item_by_description
     by_description = items.find_by_description("Numquam officiis reprehenderit eum ratione neque tenetur. Officia aut repudiandae eum at ipsum doloribus. Iure minus itaque similique. Ratione dicta alias asperiores minima ducimus nesciunt at.")
     assert_equal 6, by_description.id
+    assert by_description.is_a?(Item)
+
   end
 
   def test_item_repository_returns_item_by_unit_price
     by_unit_price = items.find_by_unit_price(15925)
     assert_equal 6, by_unit_price.id
+    assert_equal "Item Provident At", by_unit_price.name
+    assert_equal "Numquam officiis reprehenderit eum ratione neque tenetur. Officia aut repudiandae eum at ipsum doloribus. Iure minus itaque similique. Ratione dicta alias asperiores minima ducimus nesciunt at.", by_unit_price.description
+    assert by_unit_price.is_a?(Item)
   end
 
   def test_item_repository_retuns_item_by_merchant_id
     by_merchant_id = items.find_by_merchant_id(1)
-    assert_equal 15, by_merchant_id.count
+    assert_equal "Item Qui Esse", by_merchant_id.name
+    assert_equal "Nihil autem sit odio inventore deleniti. Est laudantium ratione distinctio laborum. Minus voluptatem nesciunt assumenda dicta voluptatum porro.", by_merchant_id.description
+    assert by_merchant_id.is_a?(Item)
   end
 
   def test_item_repository_returns_item_by_created_at
