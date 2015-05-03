@@ -32,11 +32,6 @@ class MerchantRepository
 
 #Merchant Repository Methods
 
-  def find_items_by_(id)
-    engine.find_items_by_merchant_(id)
-  end
-
-
   def all
     merchants
   end

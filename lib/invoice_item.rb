@@ -28,7 +28,7 @@ class InvoiceItem
 
   def invoice
   # invoice returns an instance of Invoice associated with this object
-    repository.find_invoice_by_invoice_(id)
+    repository.find_invoice_items_invoice_by_(invoice_id)
   end
 
   def item
