@@ -31,7 +31,7 @@ class InvoiceItemRepository
 
 
   # ------------------------------------------------------------------------------------------------
-  
+
   def each(&block)
     @invoice_items.each(&block)
   end
