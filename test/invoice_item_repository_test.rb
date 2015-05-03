@@ -12,6 +12,24 @@ class InvoiceItemRepositoryTest < Minitest::Test
   end
 
 #-------------------- Relationship Method Tests --------------------
+  def test_invoice_item_can_find_its_invoice # invoice_item#invoice
+    item                       = invoice_item.find_by_invoice_id(1)
+    invoice_for_invoice_item_1 = item.invoice
+
+    assert invoice_for_invoice_item_1.is_a?(Invoice)
+    assert_equal 1, invoice_for_invoice_item_1.id
+    assert_equal "2012-03-25 09:54:09 UTC", invoice_for_invoice_item_1.created_at
+  end
+
+
+  def test_invoice_item_can_find_its_item # invoice_item#item
+    item             = invoice_item.find_by_invoice_id(1)
+    instance_of_item = item.item
+
+    assert instance_of_item.is_a?(Item)
+    assert_equal 1, instance_of_item.id
+    assert_equal "2012-03-27 14:53:59 UTC", instance_of_item.created_at
+  end
 
 #-------------------- Base Method Tests --------------------
   def test_invoice_item_repository_exists
@@ -36,50 +54,69 @@ class InvoiceItemRepositoryTest < Minitest::Test
     end
 
     assert_equal 100, total_random_invoices
+    assert invoice_item1.is_a?(InvoiceItem)
+    assert invoice_item2.is_a?(InvoiceItem)
   end
 
 #-------------------- Find_by Method Tests --------------------
   def test_invoice_item_repository_returns_invoice_items_by_id
     by_id = invoice_item.find_by_id(4)
     assert_equal 4, by_id.id
+    assert_equal 535, by_id.item_id
+    assert_equal 1, by_id.invoice_id
+    assert_equal 2196, by_id.unit_price
+    assert by_id.is_a?(InvoiceItem)
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_item_id
     by_item_id = invoice_item.find_by_id(4)
     assert_equal 535, by_item_id.item_id
+    assert_equal 4, by_item_id.id
+    assert_equal 1, by_item_id.invoice_id
+    assert_equal 2196, by_item_id.unit_price
+    assert by_item_id.is_a?(InvoiceItem)
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_invoice_id
     by_invoice_id = invoice_item.find_by_invoice_id(4)
     assert_equal 4, by_invoice_id.invoice_id
+    assert_equal 680, by_invoice_id.item_id
+    assert_equal 21, by_invoice_id.id
+    assert_equal 42203, by_invoice_id.unit_price
+    assert by_invoice_id.is_a?(InvoiceItem)
+
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_quantity
     by_quantity = invoice_item.find_by_quantity(5)
     assert_equal 5, by_quantity.quantity
+    assert by_quantity.is_a?(InvoiceItem)
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_unit_price
     by_unit_price = invoice_item.find_by_unit_price(79140)
     assert_equal 7, by_unit_price.quantity
+    assert by_unit_price.is_a?(InvoiceItem)
 
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_created_at
     by_created_at = invoice_item.find_by_created_at("2012-03-27 14:54:09 UTC")
     assert_equal 1, by_created_at.id
-
+    assert by_created_at.is_a?(InvoiceItem)
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_updated_at
     by_updated_at = invoice_item.find_by_updated_at("2012-03-27 14:54:09 UTC")
     assert_equal 1, by_updated_at.id
+    assert by_updated_at.is_a?(InvoiceItem)
   end
 
 #-------------------- Find_all_by Method Tests --------------------
   def test_invoice_repository_returns_all_invoice_items_by_id
     all_by_id = invoice_item.find_all_by_id(1)
     assert_equal 1, all_by_id.length
+    assert all_by_id.first.is_a?(InvoiceItem)
   end
 
   def test_invoice_item_repository_returns_all_invoice_items_by_invoice_id
@@ -131,25 +168,5 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_invoice_item_knows_when_it_was_updated
     refute invoice_item.invoice_items.any? { |invoice_item| invoice_item.updated_at.nil? }
-  end
-
-  # --- relationship tests ------------------------------------------------------
-   def test_invoice_item_can_find_its_invoice # invoice_item#invoice
-     item = invoice_item.find_by_invoice_id(1)
-     invoice_for_invoice_item_1 = item.invoice
-
-     assert invoice_for_invoice_item_1.is_a?(Invoice)
-     assert_equal 1, invoice_for_invoice_item_1.id
-     assert_equal "2012-03-25 09:54:09 UTC", invoice_for_invoice_item_1.created_at
-   end
-
-
-  def test_invoice_item_can_find_its_item # invoice_item#item
-    item = invoice_item.find_by_invoice_id(1)
-    instance_of_item = item.item
-
-    assert instance_of_item.is_a?(Item)
-    assert_equal 1, instance_of_item.id
-    assert_equal "2012-03-27 14:53:59 UTC", instance_of_item.created_at
   end
 end

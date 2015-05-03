@@ -54,7 +54,7 @@ class ItemRepository
   end
 
   def find_by_merchant_id(id)
-    items.select { |item| item.merchant_id == id }
+    items.detect { |item| item.merchant_id == id }
   end
 
   def find_by_created_at(created_at)

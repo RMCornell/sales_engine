@@ -32,6 +32,7 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_customer_repository_returns_all_customers
     assert_equal 100, customers.all.length
+    assert customers.all.first.is_a?(Customer)
   end
 
   def test_customer_repository_returns_random_customer
@@ -45,55 +46,77 @@ class CustomerRepositoryTest < Minitest::Test
     end
 
     assert_equal 100, total_random_customers
+    assert customer1.is_a?(Customer)
+    assert customer2.is_a?(Customer)
   end
 
 #-------------------- Find_by Method Tests --------------------
   def test_customer_repository_returns_customer_first_name_by_id
     by_id = customers.find_by_id(4)
     assert_equal "Leanne", by_id.first_name
+    assert_equal "Braun", by_id.last_name
+    assert by_id.is_a?(Customer)
   end
 
   def test_customer_repository_returns_customer_last_name_by_id
     by_id = customers.find_by_id(4)
     assert_equal "Braun", by_id.last_name
+    assert_equal "Leanne", by_id.first_name
+    assert by_id.is_a?(Customer)
   end
 
   def test_customer_repository_returns_customer_by_first_name
     by_first_name = customers.find_by_first_name("Leanne")
     assert_equal 4, by_first_name.id
+    assert_equal "Braun", by_first_name.last_name
+    assert by_first_name.is_a?(Customer)
   end
 
   def test_customer_repository_returns_customer_by_last_name
     by_last_name = customers.find_by_last_name("Braun")
     assert_equal 4, by_last_name.id
+    assert_equal "Leanne", by_last_name.first_name
+    assert by_last_name.is_a?(Customer)
   end
 
   def test_customer_repository_returns_customer_by_created_at
     by_created_at = customers.find_by_created_at("2012-03-27 14:54:10 UTC")
     assert_equal "2012-03-27 14:54:10 UTC", by_created_at.created_at
+    assert_equal 2, by_created_at.id
+    assert_equal "Cecelia", by_created_at.first_name
+    assert_equal "Osinski", by_created_at.last_name
+    assert by_created_at.is_a?(Customer)
   end
 
   def test_customer_repository_returns_customer_by_updated_at
     by_updated_at = customers.find_by_updated_at("2012-03-27 14:54:10 UTC")
     assert_equal "2012-03-27 14:54:10 UTC", by_updated_at.updated_at
+    assert_equal 2, by_updated_at.id
+    assert_equal "Cecelia", by_updated_at.first_name
+    assert_equal "Osinski", by_updated_at.last_name
+    assert by_updated_at.is_a?(Customer)
   end
 
 #-------------------- Find_all_by Method Tests --------------------
   def test_customer_repository_returns_all_by_id
     all_by_id = customers.find_all_by_id(4)
     assert_equal 1, all_by_id.count
+    assert_equal "Leanne", all_by_id.first.first_name
+    assert_equal "Braun", all_by_id.first.last_name
     assert all_by_id.first.is_a?(Customer)
   end
 
   def test_customer_repository_returns_all_by_first_name
     all_by_first_name = customers.find_all_by_first_name("Leanne")
     assert_equal 1, all_by_first_name.count
+    assert_equal "Braun", all_by_first_name.first.last_name
     assert all_by_first_name.first.is_a?(Customer)
   end
 
   def test_customer_repository_returns_all_by_last_name
     all_by_last_name = customers.find_all_by_last_name("Braun")
     assert_equal 1, all_by_last_name.count
+    assert_equal "Leanne", all_by_last_name.first.first_name
     assert all_by_last_name.first.is_a?(Customer)
   end
 

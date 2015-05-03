@@ -27,12 +27,12 @@ class InvoiceItem
   # invoice(id) --> invoice_item(invoice_id) --> invoice_item#invoice
 
   def invoice
-  # todo invoice returns an instance of Invoice associated with this object
+  # invoice returns an instance of Invoice associated with this object
     repository.find_invoice_by_invoice_(id)
   end
 
   def item
     repository.find_item_by_item_(id)
-    # todo item returns an instance of Item associated with this object
+    # item returns an instance of Item associated with this object
   end
 end
