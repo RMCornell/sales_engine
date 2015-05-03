@@ -37,11 +37,11 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_items_repository_contains_data
-    assert_equal 103, items.all.length
+    assert_equal 104, items.all.length
   end
 
   def test_item_repository_returns_all_items
-    assert_equal 103, items.all.length
+    assert_equal 104, items.all.length
   end
 
   def test_item_repository_returns_random_item
@@ -130,9 +130,9 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_item_repository_returns_all_items_by_unit_price
-    skip #failing program rake
-    all_by_unit_price = items.find_all_by_unit_price("159.25")
-    assert_equal 0, all_by_unit_price.count
+    #failing program rake
+    all_by_unit_price = items.find_all_by_unit_price(159.25)
+    assert_equal 1, all_by_unit_price.count
     assert all_by_unit_price.first.is_a?(Item)
   end
 
@@ -150,7 +150,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_item_repository_returns_all_items_by_updated_at
     all_by_updated_at = items.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
-    assert_equal 103, all_by_updated_at.count
+    assert_equal 104, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Item)
   end
 end

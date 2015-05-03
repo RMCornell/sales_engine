@@ -17,8 +17,9 @@ class MerchantRepositoryTest < Minitest::Test
     merchant_items = merchant.items
 
     # todo fix
-    assert_equal "Item Qui Esse", merchant_items
+    assert_equal "Item Qui Esse", merchant_items.first.name
     assert merchant_items.is_a?(Array)
+
   end
 
   # merchant#invoices
