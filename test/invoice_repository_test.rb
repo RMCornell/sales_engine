@@ -39,7 +39,11 @@ class InvoiceRepositoryTest < Minitest::Test
 #-------------------- Find_by Method Tests --------------------
   def test_invoice_repository_returns_invoices_by_id
     by_id = invoices.find_by_id(4)
+    assert_equal 1, by_id.customer_id
     assert_equal 4, by_id.id
+    assert_equal 33, by_id.merchant_id
+    assert_equal "shipped", by_id.status
+    assert by_id.is_a?(Invoice)
   end
 
   def test_invoice_repository_returns_invoices_by_customer_id
