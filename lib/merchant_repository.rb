@@ -22,12 +22,12 @@ class MerchantRepository
 
   # merchant#items
   def find_items_by_(id)
-    engine.find_items_by_(id)
+    engine.find_all_items_by_(id)
   end
 
   # merchant#invoices
   def find_invoices_by_(id)
-    engine.find_items_by_merchant_(id)
+    engine.find_all_items_by_merchant_(id)
   end
 
 #Merchant Repository Methods

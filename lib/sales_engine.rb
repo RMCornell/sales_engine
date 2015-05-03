@@ -71,23 +71,23 @@ class SalesEngine
   # //----------Merchant Relationships-------------------------------------------//
     # merchant(id) --> items(merchant_id) --> merchant#items
   def find_items_by_merchant_(id)
-    item_repository.find_by_merchant_id(id)
+    item_repository.find_all_by_merchant_id(id)
   end
 
     # merchant(id) --> invoices(merchant_id) --> # merchant#invoices
   def find_invoices_by_merchant_(id)
-    invoice_repository.find_by_merchant_id(id)
+    invoice_repository.find_all_by_merchant_id(id)
   end
 
   # //---------- Invoice Relationships-------------------------------------------//
     # invoice(id) --> transaction(invoice_id) --> invoice#transactions
   def find_transactions_by_invoice_(id)
-    transaction_repository.find_by_invoice_id(id)
+    transaction_repository.find_all_by_invoice_id(id)
   end
 
     # invoice(id) --> invoice_items(invoice_id) --> invoice#invoice_items
   def find_invoice_items_by_invoice_(id)
-    invoice_item_repository.find_by_invoice_id(id)
+    invoice_item_repository.find_all_by_invoice_id(id)
   end
 
   # invoice(id) --> invoice_items(invoice_id) -->
@@ -120,7 +120,7 @@ class SalesEngine
     invoice_repository.find_by_id(id)
   end
 
-  def find_item_by_item_(id)
+  def find_item_by_item_(id) # invoice_item#item
     item_repository.find_by_id(id)
   end
 
@@ -144,6 +144,9 @@ class SalesEngine
   # //---------- Transaction Relationships-------------------------------------------//
 
   # transactions(invoice_id) --> invoice(id) --> transaction#invoice
+
+
+  # todo Failure/Error: expect(transaction.invoice.customer.first_name).to eq invoice_customer.first_name
 
   def find_invoice_by_(invoice_id)
     invoice_repository.find_by_id(invoice_id)

@@ -21,12 +21,12 @@ class Merchant
   ### merchant(id) --> items(merchant_id)
   # merchant#items
   def items
-    repository.find_items_by_(id)
+    repository.find_all_items_by_(id)
   end
 
   ### merchant(id) --> invoices(merchant_id)
   # merchant#invoices
   def invoices
-    repository.find_invoices_by_(id)
+    repository.find_all_invoices_by_(id)
   end
 end
