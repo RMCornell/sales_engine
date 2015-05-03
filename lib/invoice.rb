@@ -45,7 +45,7 @@ class Invoice
 
   # invoice#customer
   def customer
-    repository.find_customer_by_customer_(id)
+    repository.find_customer_by_(customer_id)
   end
 
 

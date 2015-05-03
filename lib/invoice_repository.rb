@@ -37,8 +37,8 @@ class InvoiceRepository
     engine.find_items_by_item_(id)
   end
 
-  def find_customer_by_customer_(id) # invoice#customer
-    engine.find_customer_by_customer_(id)
+  def find_customer_by_(customer_id) # invoice#customer
+    engine.find_customer_by_(customer_id)
   end
 
   def find_merchant_by_(merchant_id) # invoice#merchant

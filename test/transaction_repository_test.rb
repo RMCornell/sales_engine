@@ -15,9 +15,7 @@ class TransactionRepositoryTest < Minitest::Test
   def test_transactions_can_find_their_invoice
     transaction = transactions.find_by_id(1)
     invoice = transaction.invoice.id
-    binding.pry
     spec = transaction.invoice.customer.first_name
-    puts 'asdf'
     # todo Failure/Error: expect(transaction.invoice.customer.first_name).to eq invoice_customer.first_name
     assert_equal 1, invoice
   end
