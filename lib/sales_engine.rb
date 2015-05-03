@@ -92,8 +92,16 @@ class SalesEngine
 
   # invoice(id) --> invoice_items(invoice_id) -->
   # invoice_items(item_id) --> items(id) --> invoice#items
+
+  # 6) SalesEngine invoices Relationships #items has one with a specific name
+  # Failure/Error: item = invoice.items.find {|i| i.name == 'Item Accusamus Officia' }
+  # NoMethodError:
+  #   undefined method `find' for #<Item:0x007f87a20eed00>
+  #    # ./spec/invoice_spec.rb:49:in `block (4 levels) in <top (required)>'
+  #
+
   def find_items_by_item_(id)
-    invoice_items = invoice_item_repository.find_by_invoice_id(id)
+    invoice_items = invoice_item_repository.find_all_by_invoice_id(id)
     item_id = invoice_items.item_id
     item_repository.find_by_id(item_id)
   end
