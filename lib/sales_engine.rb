@@ -70,8 +70,8 @@ class SalesEngine
 
   # //----------Merchant Relationships-------------------------------------------//
     # merchant(id) --> items(merchant_id) --> merchant#items
-  def find_items_by_merchant_(id)
-    item_repository.find_all_by_merchant_id(id)
+  def find_merchant_items_by_(id)
+    item_repository.find_all_by_merchant_id(merchant_id)
   end
 
     # merchant(id) --> invoices(merchant_id) --> # merchant#invoices
