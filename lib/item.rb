@@ -26,7 +26,8 @@ class Item
 
   # item(id) --> invoice_items(item_id) --> item#invoice_items
   def invoice_items #item#invoice_items
-    repository.find_invoice_items_by_item_(id)
+
+    repository.find_item_invoice_items_by_(id)
     #todo invoice_items returns a collection of InvoiceItems associated with this object
   end
 

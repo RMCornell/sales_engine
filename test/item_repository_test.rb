@@ -1,4 +1,5 @@
 require_relative 'test_helper'
+require_relative '../lib/invoice_item_repository'
 
 class ItemRepositoryTest < Minitest::Test
   attr_reader :items, :engine
@@ -12,17 +13,14 @@ class ItemRepositoryTest < Minitest::Test
   # -------------------- Relationship Test Methods ------------------------
 
   def test_item_invoice_items_returns_its_invoice_items
-    item = engine.item_repository.find_by_id(1)
+    item = engine.item_repository.find_by_id(1830)
     invoice_items = item.invoice_items
 
     assert invoice_items.is_a?(Array)
-    p invoice_items.first.class
-    assert invoice_items.first
-    assert_equal 'asdf', invoice_items
-
+    assert invoice_items.first.is_a?(InvoiceItem)
+    assert_equal 10, invoice_items.first.id
+    assert_equal "2012-03-27 14:54:09 UTC", invoice_items.first.created_at
   end
-
-  # invoice_items returns a collection of InvoiceItems associated with this object
 
   def test_item_can_find_its_merchant
     item = items.find_by_id(1)
@@ -38,11 +36,11 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_items_repository_contains_data
-    assert_equal 101, items.all.length
+    assert_equal 103, items.all.length
   end
 
   def test_item_repository_returns_all_items
-    assert_equal 101, items.all.length
+    assert_equal 103, items.all.length
   end
 
   def test_item_repository_returns_random_item
@@ -132,7 +130,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_item_repository_returns_all_items_by_updated_at
     all_by_updated_at = items.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
-    assert_equal 101, all_by_updated_at.count
+    assert_equal 103, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Item)
   end
 end

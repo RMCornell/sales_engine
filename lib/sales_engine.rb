@@ -130,8 +130,8 @@ class SalesEngine
   # //---------- Item Relationships-------------------------------------------//
 
 
-  def find_invoice_items_by_item_(id) # item#invoice_items
-    invoice_item_repository.find_by_item_id(id)
+  def find_item_invoice_items_by_(id) # item#invoice_items
+    invoice_item_repository.find_all_by_item_id(id)
   end
 
   def find_item_merchant_by_(merchant_id)

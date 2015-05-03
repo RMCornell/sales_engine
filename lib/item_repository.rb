@@ -19,8 +19,8 @@ class ItemRepository
 
   # --------------------- Relationship Methods --------------------------
 
-  def find_invoice_items_by_item_(id) # item#invoice_items
-    engine.find_invoice_items_by_item_(id)
+  def find_item_invoice_items_by_(id) # item#invoice_items
+    engine.find_item_invoice_items_by_(id)
   end
 
   def find_item_merchant_by_(merchant_id) # item#merchant
