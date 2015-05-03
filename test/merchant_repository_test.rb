@@ -15,15 +15,17 @@ class MerchantRepositoryTest < Minitest::Test
   def test_merchant_can_find_its_items
     merchant = merchants.find_by_id(1)
     merchant_items = merchant.items
-    assert_equal "Item Qui Esse", merchant_items.name
-    assert merchant_items.is_a?(Item)
+
+    # todo fix
+    assert_equal "Item Qui Esse", merchant_items
+    assert merchant_items.is_a?(Array)
   end
 
   # merchant#invoices
   def test_merchant_can_find_its_invoices
     merchant = merchants.find_by_id(2)
     merchant_invoices = merchant.invoices
-    assert_equal "Item Adipisci Sint", merchant_invoices.name
+    assert_equal 2, merchant_invoices.size
   end
 
 
@@ -31,10 +33,8 @@ class MerchantRepositoryTest < Minitest::Test
     customer = engine.customer_repository.find_by_id(1)
     invoices = customer.invoices
 
-
+   # todo more tests
     assert invoices.is_a?(Array)
-    assert_equal 1, invoices.id
-    assert_equal 1, invoices.customer_id
   end
 
   #Base Tests

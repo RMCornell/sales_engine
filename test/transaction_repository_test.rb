@@ -23,7 +23,7 @@ class TransactionRepositoryTest < Minitest::Test
   # customer#items
 
   def test_it_finds_all_invoices_for_a_customer
-    customer = customer_repository.find_by_id(1)
+    customer = engine.customer_repository.find_by_id(1)
     invoices = customer.invoices
     assert_equal 8, invoices.length
   end
