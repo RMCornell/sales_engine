@@ -57,8 +57,8 @@ class InvoiceItemRepository
     invoice_items.detect {|invoice_item| id == invoice_item.id}
   end
 
-  def find_by_item_id(item_id)
-    invoice_items.detect {|invoice_item| item_id == invoice_item.item_id}
+  def find_by_item_id(id)
+    invoice_items.detect {|invoice_item| id == invoice_item.id}
   end
 
   def find_by_invoice_id(invoice_id)
