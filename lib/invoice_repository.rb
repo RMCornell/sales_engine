@@ -1,3 +1,5 @@
+require_relative 'invoice'
+
 class InvoiceRepository
   include Enumerable
 
@@ -15,7 +17,8 @@ class InvoiceRepository
   end
 
   def inspect
-    "#<#{self.class}: #{@items.size} rows>"  end
+    "#<#{self.class}: #{@items.size} rows>"
+  end
 
   def each(&block)
     @invoices.each(&block)
@@ -32,14 +35,9 @@ class InvoiceRepository
     engine.find_invoice_items_for_(id)
   end
 
-
-
   def find_items_by_item_(id) # invoice#items
     engine.find_items_for_invoice_items(id)
   end
-
-
-
 
   def find_customer_by_(customer_id) # invoice#customer
     engine.find_customer_by_(customer_id)
@@ -109,6 +107,15 @@ class InvoiceRepository
 
   def find_all_by_updated_at(updated_at)
     invoices.select { |invoice| invoice.updated_at == updated_at }
+  end
+
+  # //---------- Business Logic -------------------------------------------//
+
+  def paid_invoices
+    engine
+      .transaction_repository
+      .successful_transactions
+      .map { |trans| trans.invoice }
   end
 end
 

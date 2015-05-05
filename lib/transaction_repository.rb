@@ -1,3 +1,5 @@
+require_relative 'transaction'
+
 class TransactionRepository
   include Enumerable
   attr_reader :engine, :transactions
@@ -24,11 +26,6 @@ class TransactionRepository
   def find_invoice_by_(invoice_id)
     engine.find_invoice_by_(invoice_id)
   end
-
-
-
-
-
 
   def all
     transactions
@@ -95,6 +92,14 @@ class TransactionRepository
   def find_all_by_updated_at(updated_at)
     transactions.select {|transaction| updated_at == transaction.updated_at}
   end
+
+
+  # //---------- Business Logic -------------------------------------------//
+
+  def successful_transactions
+    transactions.select { |transaction| transaction.success? }
+  end
+
 
 end
 

@@ -1,20 +1,17 @@
 require 'csv'
 require 'pry'
-
+require 'bigdecimal'
 require_relative 'parser'
 
-require_relative 'customer'
 require_relative 'customer_repository'
-require_relative 'invoice'
 require_relative 'invoice_repository'
-require_relative 'merchant'
 require_relative 'merchant_repository'
-require_relative 'transaction'
 require_relative 'transaction_repository'
-require_relative 'invoice_item'
 require_relative 'invoice_item_repository'
-require_relative 'item'
 require_relative 'item_repository'
+
+
+### todo move child classes to repos
 
 
 class SalesEngine
@@ -66,7 +63,10 @@ class SalesEngine
     @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
+
   # //----------Merchant Relationships-------------------------------------------//
+
+
     # merchant(id) --> items(merchant_id) --> merchant#items
   def find_merchant_items_by_(merchant_id)
     item_repository.find_all_by_merchant_id(merchant_id)
@@ -153,4 +153,42 @@ class SalesEngine
   end
 
 
+  # //---------- Business Logic -------------------------------------------//
+
+
+
+
+  # def find_merchant_revenue_by_(id) # merchant#revenue
+  #   merchant = merchant_repository.find_by_id(id)
+  #
+  #   transaction_repository.successful_transactions
+  #     .map { |transaction| transaction.invoice }
+  #     .select { |invoice| invoice.merchant_id == id }
+  #     .map { |invoice| invoice.invoice_items }
+  #     .map { |item| item.map { |sub| sub.total } } # todo method to total all invoices
+  #     .flatten.reduce(:+).to_d / 100
+  # end
+
+  def find_merchant_revenue_by_date_(id, date) #merchant#revenue(date=nil)
+    merchant = merchant_repository.find_by_id(id)
+
+
+    transaction_repository.successful_transactions # todo add date filter
+      .map { |transaction| transaction.invoice }
+      .select { |invoice|
+               if date.nil? # refactor out...
+                 invoice.merchant_id == id
+               else
+                 #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+                 invoice.merchant_id == id && invoice.created_at == date.parse
+               end
+              } # todo method to select merchant invoices
+      .map { |invoice| invoice.invoice_items }
+      .map { |item| item.map { |sub| sub.total } } # todo method to calculate invoice_item subtotals
+      .flatten.reduce(:+).to_d / 100
+  end
 end
+
+
+
+

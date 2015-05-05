@@ -53,6 +53,8 @@ class InvoiceRepositoryTest < Minitest::Test
     # items returns a collection of associated Items by way of InvoiceItem objects
     invoice = invoices.find_by_id(5)
     items = invoice.items
+
+
     assert items.is_a?(Array)
     
     # todo this is the problem for the relationship i think...it needs 'item'
@@ -214,7 +216,14 @@ class InvoiceRepositoryTest < Minitest::Test
     refute invoices.any? { |invoice| invoice.updated_at.nil? }
   end
 
+  # -------- Business logic -------------
 
+  def test_find_paid_invoices
+    paid = engine.invoice_repository.paid_invoices
+    test =  paid.map { |invoice| invoice.transactions }.flatten.all? { |trans| trans.result == 'success' }
+    binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+    assert test
+  end
 end
 
 

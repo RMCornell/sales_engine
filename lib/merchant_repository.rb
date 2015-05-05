@@ -1,5 +1,8 @@
+require_relative 'merchant'
+
 class MerchantRepository
   include Enumerable
+
   attr_reader :engine, :merchants
 
   def initialize(engine, dir)
@@ -73,4 +76,16 @@ class MerchantRepository
   def find_all_by_updated_at(updated_at)
     merchants.select { |merchant| updated_at == merchant.updated_at}
   end
+
+  # -------- Business Logic ------------------------
+
+  def find_merchant_revenue_by_(id) # merchant#revenue
+    engine.find_merchant_revenue_by_(id)
+  end
+
+  def find_merchant_revenue_by_date_(id, date=nil) # merchant#revenue(date)
+    engine.find_merchant_revenue_by_date_(id, date)
+  end
+
+
 end

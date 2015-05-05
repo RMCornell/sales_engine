@@ -10,7 +10,7 @@ class CustomerRepositoryTest < Minitest::Test
 
 
 #-------------------- Relationship Method Tests --------------------
-  # customer#items
+  # customer#invoices
 
   def test_it_finds_all_invoices_for_a_customer
     customer = customers.find_by_id(1)
