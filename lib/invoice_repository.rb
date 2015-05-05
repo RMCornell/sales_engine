@@ -35,14 +35,9 @@ class InvoiceRepository
     engine.find_invoice_items_for_(id)
   end
 
-
-
   def find_items_by_item_(id) # invoice#items
     engine.find_items_for_invoice_items(id)
   end
-
-
-
 
   def find_customer_by_(customer_id) # invoice#customer
     engine.find_customer_by_(customer_id)

@@ -21,7 +21,7 @@ class Merchant
   #-------------------- Relationship Methods --------------------
 
 
-  # merchant(id) --> items(merchant_id) -->  merchant#items
+    # merchant(id) --> items(merchant_id) -->  merchant#items
   def items
     repository.find_merchant_items_by_(id)
   end
