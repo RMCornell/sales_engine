@@ -16,4 +16,10 @@ class InvoiceItemTest < Minitest::Test
 
     assert invoice_item_names.include?('Item Accusamus Officia')
   end
+
+  def test_calculate_total_for_invoice_item
+    invoice_item = engine.invoice_item_repository.find_by_id(10)
+    assert_equal 7436, invoice_item.total
+  end
+
 end
