@@ -93,6 +93,14 @@ class TransactionRepository
     transactions.select {|transaction| updated_at == transaction.updated_at}
   end
 
+
+  # //---------- Business Logic -------------------------------------------//
+
+  def successful_transactions
+    transactions.select { |transaction| transaction.success? }
+  end
+
+
 end
 
 
