@@ -1,7 +1,6 @@
 require_relative 'test_helper'
 
 
-
 class InvoiceItemTest < Minitest::Test
   attr_reader :invoice_items, :engine
 
