@@ -1,4 +1,7 @@
- class CustomerRepository
+require_relative 'customer'
+
+
+class CustomerRepository
    include Enumerable
 
    attr_reader :engine, :customers

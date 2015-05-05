@@ -1,5 +1,8 @@
+require_relative 'merchant'
+
 class MerchantRepository
   include Enumerable
+
   attr_reader :engine, :merchants
 
   def initialize(engine, dir)

@@ -1,3 +1,5 @@
+require_relative 'transaction'
+
 class TransactionRepository
   include Enumerable
   attr_reader :engine, :transactions
