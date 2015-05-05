@@ -156,21 +156,38 @@ class SalesEngine
   # //---------- Business Logic -------------------------------------------//
 
 
-  # merchant#revenue
 
-  def find_merchant_revenue_by_(id)
+
+  # def find_merchant_revenue_by_(id) # merchant#revenue
+  #   merchant = merchant_repository.find_by_id(id)
+  #
+  #   transaction_repository.successful_transactions
+  #     .map { |transaction| transaction.invoice }
+  #     .select { |invoice| invoice.merchant_id == id }
+  #     .map { |invoice| invoice.invoice_items }
+  #     .map { |item| item.map { |sub| sub.total } } # todo method to total all invoices
+  #     .flatten.reduce(:+).to_d / 100
+  # end
+
+  def find_merchant_revenue_by_date_(id, date) #merchant#revenue(date=nil)
     merchant = merchant_repository.find_by_id(id)
 
-    transaction_repository.successful_transactions
+
+    transaction_repository.successful_transactions # todo add date filter
       .map { |transaction| transaction.invoice }
-      .select { |invoice| invoice.merchant_id == id }
+      .select { |invoice|
+               if date.nil?
+                 invoice.merchant_id == id
+               else
+                 #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+                 invoice.merchant_id == id && invoice.created_at == date.parse
+               end
+              } # todo method to select merchant invoices
       .map { |invoice| invoice.invoice_items }
-      .map { |item| item.map { |sub| sub.total } }
+      .map { |item| item.map { |sub| sub.total } } # todo method to calculate invoice_item subtotals
       .flatten.reduce(:+).to_d / 100
   end
 end
-
-
 
 
 

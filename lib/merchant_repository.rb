@@ -79,8 +79,13 @@ class MerchantRepository
 
   # -------- Business Logic ------------------------
 
-  def find_merchant_revenue_by_(id)
+  def find_merchant_revenue_by_(id) # merchant#revenue
     engine.find_merchant_revenue_by_(id)
   end
+
+  def find_merchant_revenue_by_date_(id, date=nil) # merchant#revenue(date)
+    engine.find_merchant_revenue_by_date_(id, date)
+  end
+
 
 end
