@@ -216,6 +216,14 @@ class InvoiceRepositoryTest < Minitest::Test
     refute invoices.any? { |invoice| invoice.updated_at.nil? }
   end
 
+  # -------- Business logic -------------
+
+  def test_find_paid_invoices
+    paid = engine.paid_invoices
+    test =  paid.all? { |invoice| invoice.transactions.all? { |trans| trans.result == 'success' }  }
+    binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+    assert test
+  end
 
 end
 
