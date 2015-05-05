@@ -35,4 +35,8 @@ class InvoiceItem
     repository.find_invoice_items_items_by_(item_id)
     # item returns an instance of Item associated with this object
   end
+
+  def total
+    quantity * unit_price
+  end
 end
