@@ -73,4 +73,11 @@ class MerchantRepository
   def find_all_by_updated_at(updated_at)
     merchants.select { |merchant| updated_at == merchant.updated_at}
   end
+
+  # -------- Business Logic ------------------------
+
+  def find_merchant_revenue_by_(id)
+    engine.find_merchant_revenue_by_(id)
+  end
+
 end
