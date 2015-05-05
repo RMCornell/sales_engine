@@ -77,5 +77,10 @@
    def find_all_by_updated_at(updated_at)
      customers.select {|customer| updated_at == customer.updated_at}
    end
+
+   #Customer Business Intelligence
+   def customer_transactions(id)
+     engine.find_invoices_by_(id)
+   end
  end
 
