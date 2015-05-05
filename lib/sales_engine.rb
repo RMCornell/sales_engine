@@ -63,7 +63,10 @@ class SalesEngine
     @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
+
   # //----------Merchant Relationships-------------------------------------------//
+
+
     # merchant(id) --> items(merchant_id) --> merchant#items
   def find_merchant_items_by_(merchant_id)
     item_repository.find_all_by_merchant_id(merchant_id)
@@ -148,4 +151,27 @@ class SalesEngine
   def find_invoices_by_(id)
     invoice_repository.find_all_by_customer_id(id)
   end
+
+
+  # //---------- Business Logic -------------------------------------------//
+
+
+  # merchant#revenue
+
+  def find_merchant_revenue_by_(id)
+    merchant = merchant_repository.find_by_id(id)
+
+    transaction_repository.successful_transactions
+      .map { |transaction| transaction.invoice }
+      .select { |invoice| invoice.merchant_id == id }
+      .map { |invoice| invoice.invoice_items }
+      .map { |item| item.map { |sub| sub.total } }
+      .flatten.reduce(:+).to_d / 100
+  end
 end
+
+
+
+
+
+
