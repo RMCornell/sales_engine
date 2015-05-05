@@ -1,3 +1,4 @@
+require 'pry'
 class Customer
 
   attr_reader :id,
@@ -29,5 +30,16 @@ class Customer
 
   def transactions
     repository.customer_transactions(id)
+  end
+
+  def favorite_merchant
+    x = invoices
+    f_mer = 0
+    x.select do |i|
+      if i.status == "shipped"
+        f_mer = i.merchant_id
+      end
+    end
+    repository.engine.merchant_repository.find_by_id(f_mer)
   end
 end

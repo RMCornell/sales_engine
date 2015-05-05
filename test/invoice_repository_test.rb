@@ -221,7 +221,7 @@ class InvoiceRepositoryTest < Minitest::Test
   def test_find_paid_invoices
     paid = engine.invoice_repository.paid_invoices
     test =  paid.map { |invoice| invoice.transactions }.flatten.all? { |trans| trans.result == 'success' }
-    binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+    # binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
     assert test
   end
 end
