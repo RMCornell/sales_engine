@@ -176,7 +176,7 @@ class SalesEngine
     transaction_repository.successful_transactions # todo add date filter
       .map { |transaction| transaction.invoice }
       .select { |invoice|
-               if date.nil?
+               if date.nil? # refactor out...
                  invoice.merchant_id == id
                else
                  #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
