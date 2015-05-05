@@ -169,7 +169,7 @@ class SalesEngine
   #     .flatten.reduce(:+).to_d / 100
   # end
 
-  def find_merchant_revenue_by_date_(id, date) #merchant#revenue(date=nil)
+  def find_merchant_revenue_by_date_(id, date=nil) #merchant#revenue(date=nil)
     merchant = merchant_repository.find_by_id(id)
 
 
@@ -180,7 +180,7 @@ class SalesEngine
                  invoice.merchant_id == id
                else
                  #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
-                 invoice.merchant_id == id && invoice.created_at == date.parse
+                 invoice.merchant_id == id && invoice.created_at == date
                end
               } # todo method to select merchant invoices
       .map { |invoice| invoice.invoice_items }
