@@ -46,4 +46,44 @@ class Merchant
   def revenue(date=nil) # todo can refactor into one with revenue?
     repository.find_merchant_revenue_by_date_(id, date)
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  def favorite_customer
+    repository.find_by_id(id)
+    binding.pry
+
+    #goto merchant repo (using id)
+    #goto sales_engine (using_id)
+    #goto invoice_repository (using_id)
+    #find all invoices matching merchant_id
+    #sort by customer_id
+    #take highest customer_id
+    #return to sales_engine(with customer_id)
+    #go to customer repository (using customer_id)
+    #find customer_id and return first and last names
+  end
 end
