@@ -25,11 +25,6 @@ class TransactionRepository
     engine.find_invoice_by_(invoice_id)
   end
 
-
-
-
-
-
   def all
     transactions
   end

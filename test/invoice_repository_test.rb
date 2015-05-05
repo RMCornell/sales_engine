@@ -53,6 +53,8 @@ class InvoiceRepositoryTest < Minitest::Test
     # items returns a collection of associated Items by way of InvoiceItem objects
     invoice = invoices.find_by_id(5)
     items = invoice.items
+
+
     assert items.is_a?(Array)
     
     # todo this is the problem for the relationship i think...it needs 'item'
