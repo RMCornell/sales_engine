@@ -196,6 +196,14 @@ class SalesEngine
     invoice_items.flatten.reduce(0) { |total, invoice_item| total + invoice_item.total }.to_d / 100
   end
 
+  def create_new_invoice_item(invoice_items, row)
+    invoice_item_repository.add_invoice_items(invoice_items, row)
+  end
+
+  def add_transaction(invoice)
+    transaction_repository.add_transaction(invoice)
+  end
+
 end
 
 

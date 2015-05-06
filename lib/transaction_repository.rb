@@ -100,6 +100,10 @@ class TransactionRepository
     transactions.select { |transaction| transaction.success? }
   end
 
+  def add_transaction(invoice)
+    transactions << Transaction.new(invoice, self)
+  end
+
 
 end
 

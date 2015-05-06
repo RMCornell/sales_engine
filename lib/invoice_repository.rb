@@ -118,7 +118,39 @@ class InvoiceRepository
   #     .map { |trans| trans.invoice }
   # end
 
+  # Create Invoices
+
+  def create
+    Invoice.new(rows, self).create
+  end
+
+  def create(invoice)
+    #create new instance of invoice using above attributes
+    #push new invoice instance into invoice repository
+    row = {
+        id:          invoice[:id].to_i,
+        customer_id: invoice[:customer].id,
+        merchant_id: invoice[:merchant].id,
+        status:      invoice[:status],
+        created_at:  Time.new.to_s,
+        updated_at:  Time.new.to_s
+    }
+
+    new_invoice = Invoice.new(row, self)
+    invoices << new_invoice
+
+    engine.create_new_invoice_item(invoice[:items], row)
+    new_invoice
+  end
+
+  def add_transaction(invoice)
+    engine.add_transaction(invoice)
+  end
+
+
+
 end
+
 
 
 
