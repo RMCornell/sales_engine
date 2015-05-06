@@ -86,5 +86,9 @@ class CustomerRepository
    def customer_transactions(id)
      engine.find_invoices_by_(id)
    end
+
+    def find_favorite_merchant(merchant_id)
+      engine.find_merchant_by_(merchant_id)
+    end
  end
 

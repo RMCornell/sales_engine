@@ -220,7 +220,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
   def test_find_paid_invoices
     paid = engine.invoice_repository.paid_invoices
-    test =  paid.map { |invoice| invoice.transactions.flatten.all? { |trans| trans.result == 'success' }}
+    test =  paid.map { |invoice| invoice.transactions }.flatten.all? { |trans| trans.result == 'success' }
     assert test
   end
 end
