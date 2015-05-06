@@ -105,4 +105,54 @@ class InvoiceItemRepository
   def find_all_by_updated_at(updated_at)
     invoice_items.select{|invoice_items| updated_at == invoice_items.updated_at}
   end
+
+  def add_invoice_items(items, row)
+    group_items(items).each do |item_id, items|
+    row = {
+        invoice_id:  row[:id].to_i,
+        item_id:     item_id,
+        quantity:    items.length,
+        unit_price:  items.first.unit_price,
+        created_at:  Time.new,
+        updated_at:  Time.new
+    }
+    invoice_items << InvoiceItem.new(row, self)
+    end
+  end
+
+
+  def group_items(items)
+    items_hash ={}
+    items.each do |item|
+      if items_hash[item.id].nil?
+         items_hash[item.id] = []
+      end
+      items_hash[item.id] << item
+    end
+    items_hash
+  end
 end
+
+
+=begin
+
+def create(invoice)
+    #create new instance of invoice using above attributes
+    #push new invoice instance into invoice repository
+    row = {
+        id:          invoice[:id].to_i,
+        customer_id: invoice[:customer_id].to_i,
+        merchant_id: invoice[:merchant_id].to_i,
+        status:      invoice[:status],
+        created_at:  invoice[:created_at],
+        updated_at:  invoice[:updated_at]
+    }
+
+    new_invoice = Invoice.new(row, self)
+    invoices << new_invoice
+
+    engine.create_new_invoice_item(invoice[:items], row)
+    new_invoice
+  end
+
+=end

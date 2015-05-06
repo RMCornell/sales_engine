@@ -13,7 +13,7 @@ class Invoice
     @customer_id = invoice[:customer_id].to_i
     @merchant_id = invoice[:merchant_id].to_i
     @status      = invoice[:status]
-    @created_at  = Date.parse(invoice[:created_at]) #Date.parse()
+    @created_at  = invoice[:created_at]
     @updated_at  = invoice[:updated_at]
   end
 
@@ -47,4 +47,6 @@ class Invoice
   def merchant
     repository.find_merchant_by_(merchant_id)
   end
+
+
 end
