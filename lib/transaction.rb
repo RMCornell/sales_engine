@@ -33,6 +33,10 @@ class Transaction
   def success?
     result == 'success'
   end
+
+  def pending
+    result == 'failed'
+  end
 end
 
 

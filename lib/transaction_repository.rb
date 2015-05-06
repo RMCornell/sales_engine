@@ -97,13 +97,16 @@ class TransactionRepository
   # //---------- Business Logic -------------------------------------------//
 
   def successful_transactions
-    transactions.select { |transaction| transaction.success? }
+      successful = transactions.select { |transaction| transaction.success? }
+  end
+
+  def pending_transactions
+      pending = transactions - successful_transactions
   end
 
   def add_transaction(invoice)
     transactions << Transaction.new(invoice, self)
   end
-
 
 end
 

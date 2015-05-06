@@ -188,12 +188,20 @@ class SalesEngine
 
 
   def total_revenue_for_all_invoices(invoices)
-    invoices = invoices.map { |invoice| invoice.invoice_items }
-    calculate_invoice_totals(invoices)
+    invoice_items_for_each_invoice = invoices.map { |invoice| invoice.invoice_items }
+    calculate_invoice_totals(invoice_items_for_each_invoice)
   end
 
   def calculate_invoice_totals(invoice_items) ### this calculates invoice totals
     invoice_items.flatten.reduce(0) { |total, invoice_item| total + invoice_item.total }.to_d / 100
+  end
+
+  def customers_with_pending_invoices(merchant_id)
+    merchant_invoices = invoice_repository.find_all_by_merchant_id(merchant_id)
+    merchant_invoices = merchant_invoices.reject { |invoice| invoice_repository.paid_invoices.include?(invoice) }
+    #merchant_invoices = invoice_repository.unpaid_invoices.select { |invoice| invoice.merchant_id == merchant_id}
+    #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+    customers = merchant_invoices.map { |invoice| invoice.customer }
   end
 
   def create_new_invoice_item(invoice_items, row)

@@ -152,4 +152,21 @@ class TransactionRepositoryTest < Minitest::Test
   def test_successful_transactons_only_returns_correct_result
     engine.transaction_repository.successful_transactions.all? { |transactions| transactions.result == 'success' }
   end
+
+
+  def test_paid_transactions_can_be_found
+    paid_transactions = engine.transaction_repository.successful_transactions
+    assert paid_transactions.none? { |transaction| transaction.result == 'failed'}
+  end
+
+  def test_pending_transactions_can_be_found
+    pending_transactions = engine.transaction_repository.pending_transactions
+    assert pending_transactions.none? { |transaction| transaction.result == 'success'}
+  end
+
+  def test_correct_number_of_transactions_exist
+    paid_transactions = engine.transaction_repository.find_all_by_result('success').size
+    pending_transactions = engine.transaction_repository.pending_transactions.size
+    assert_equal transactions.all.size, (paid_transactions + pending_transactions)
+  end
 end
