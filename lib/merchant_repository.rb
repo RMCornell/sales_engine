@@ -87,9 +87,17 @@ class MerchantRepository
     engine.find_merchant_revenue_by_date_(date, id)
   end
 
-  def revenue(date)                                   # todo may been to be Date.parse()
-    found_merchants = merchants.select { |merchant| merchant.created_at = date }
+  def revenue(date)
+      p 'in merch rev'                            # todo may been to be Date.parse()
+    found_merchants = merchants.select { |merchant| merchant.invoices.created_at == date }
     total_revenue_for_merchants(found_merchants)
+
+    # correct_merchants = for each merchant in merchants
+    #   if each invoice in merchant
+    #     return true if there any successful transactions
+    #   end
+    # end
+    # filtered_merchants.reduce { |total, merchant| total + merchant.revenue(date) }
   end
 
   def total_revenue_for_merchants(merchants)

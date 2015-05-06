@@ -169,6 +169,7 @@ class SalesEngine
       .flatten.reduce(:+).to_d / 100
   end
 
+
   def find_merchant_revenue_by_date_(date=nil, id) #merchant#revenue(date=nil)
      merchant = merchant_repository.find_by_id(id)
 
@@ -176,9 +177,14 @@ class SalesEngine
        .map { |transaction| transaction.invoice }
        .select { |invoice| invoice.merchant_id == id } # todo method to select merchant invoices
        .select { |invoice| Date.parse(invoice.created_at) == date }
-
      total_revenue_for_all_invoices(revenue_by_date)
   end
+
+
+  # def find_all_merchant_revenue ### this grabs all paid invoices
+  #   invoice_items = invoice_repository.paid_invoices.map { |invoice| invoice.invoice_items }
+  #   calculate_invoice_totals(invoice_items)
+  # end
 
 
   def total_revenue_for_all_invoices(invoices)
@@ -186,20 +192,10 @@ class SalesEngine
     calculate_invoice_totals(invoices)
   end
 
-  def find_all_merchant_revenue
-    invoice_items = invoice_repository.paid_invoices.map { |invoice| invoice.invoice_items }
-    calculate_invoice_totals(invoice_items)
+  def calculate_invoice_totals(invoice_items) ### this calculates invoice totals
+    invoice_items.flatten.reduce(0) { |total, invoice_item| total + invoice_item.total }.to_d / 100
   end
-
-  def calculate_invoice_totals(invoices)
-    invoices.map { |item| item_total(item) }
-  end
-
-  def item_total(item)
-    item.map { |sub| sub.total }.flatten.reduce(:+).to_d / 100
-  end
-
-
+  
 end
 
 
