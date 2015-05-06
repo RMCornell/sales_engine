@@ -111,12 +111,13 @@ class InvoiceRepository
 
   # //---------- Business Logic -------------------------------------------//
 
-  def paid_invoices
-    engine
-      .transaction_repository
-      .successful_transactions
-      .map { |trans| trans.invoice }
-  end
+  # def paid_invoices  doesn't work correctly
+  #   engine
+  #     .transaction_repository
+  #     .successful_transactions
+  #     .map { |trans| trans.invoice }
+  # end
+
 end
 
 

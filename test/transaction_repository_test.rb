@@ -147,4 +147,9 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 20, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Transaction)
   end
+
+
+  def test_successful_transactons_only_returns_correct_result
+    engine.transaction_repository.successful_transactions.all? { |transactions| transactions.result == 'success' }
+  end
 end

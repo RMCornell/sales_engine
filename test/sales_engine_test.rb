@@ -23,9 +23,16 @@ class SalesEngineTest < Minitest::Test
 
   def test_merchant_can_calculate_total_revenue
     merchant = engine.merchant_repository.find_by_id(62)
-
-   puts merchant.revenue
     assert_equal "0.514976E4", merchant.revenue.to_s
+  end
+
+  def test_merchant_can_calculate_total_revenue_by_date
+    skip
+    p merchant = engine.merchant_repository.find_by_id(3)
+    p date = Date.parse("Fri, 09 Mar 2012")
+    p merchant.revenue(date)
+    p BigDecimal.new("8373.29")
+    assert_equal BigDecimal.new("8373.29"), merchant.revenue(date)
   end
 end
 

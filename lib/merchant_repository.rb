@@ -83,9 +83,20 @@ class MerchantRepository
     engine.find_merchant_revenue_by_(id)
   end
 
-  def find_merchant_revenue_by_date_(id, date=nil) # merchant#revenue(date)
-    engine.find_merchant_revenue_by_date_(id, date)
+  def find_merchant_revenue_by_date_(date=nil, id) # merchant#revenue(date)
+    engine.find_merchant_revenue_by_date_(date, id)
   end
 
+  def revenue(date)
+    #p date.strftime("%Y-%m-%d %I:%m:%S UTC")
 
+    invoices = engine.invoice_repository.all.select { |invoice| invoice.created_at == date }
+
+    total_revenue = invoices.select { |invoice|
+      invoice.transactions.any? { |transaction|
+        transaction.success?
+      }
+    }
+    engine.total_revenue_for_all_invoices(total_revenue)
+  end
 end
