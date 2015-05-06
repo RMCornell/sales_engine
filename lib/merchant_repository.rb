@@ -83,9 +83,26 @@ class MerchantRepository
     engine.find_merchant_revenue_by_(id)
   end
 
-  def find_merchant_revenue_by_date_(id, date=nil) # merchant#revenue(date)
-    engine.find_merchant_revenue_by_date_(id, date)
+  def find_merchant_revenue_by_date_(date=nil, id) # merchant#revenue(date)
+    engine.find_merchant_revenue_by_date_(date, id)
   end
 
+  def revenue(date)                                   # todo may been to be Date.parse()
+    found_merchants = merchants.select { |merchant| merchant.created_at = date }
+    total_revenue_for_merchants(found_merchants)
+  end
 
+  def total_revenue_for_merchants(merchants)
+    # why was i sending merchants?
+    paid_invoices = engine.invoice_repository.paid_invoices
+    puts '-' * 70
+   engine.total_revenue_for_all_invoices(paid_invoices).is_a? Array
+  end
 end
+
+
+
+
+
+#engine.invoice_repository.paid_invoices
+#merchants.select { |total_revenue| total_revenue.created_at == date }.map { |merchant| merchant.invoice }

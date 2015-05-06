@@ -37,13 +37,15 @@ class Merchant
     # revenue returns the total revenue for that merchant across all transactions
     # merchant --> invoices --> transactions
     # successful transactions --> invoices --> merchant invoices --> invoice items
-  # def revenue
-  #   repository.find_merchant_revenue_by_(id)
-  # end
+
 
     # returns the total revenue for that merchant for a specific invoice date
 
-  def revenue(date=nil) # todo can refactor into one with revenue?
-    repository.find_merchant_revenue_by_date_(id, date=nil)
+  def revenue(date=nil)
+    if date
+      repository.find_merchant_revenue_by_date_(date, id)
+    else
+      repository.find_merchant_revenue_by_(id)
+    end
   end
 end
