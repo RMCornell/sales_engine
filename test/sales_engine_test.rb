@@ -25,7 +25,7 @@ class SalesEngineTest < Minitest::Test
 
   def test_merchant_can_calculate_total_revenue
     merchant = engine.merchant_repository.find_by_id(62)
-    assert_equal "0.514976E4", merchant.revenue.to_s
+    assert_equal "0.58011587E6", merchant.revenue.to_s
   end
 
   def test_merchant_can_calculate_total_revenue_by_date
@@ -37,10 +37,9 @@ class SalesEngineTest < Minitest::Test
     assert_equal BigDecimal.new("8373.29"), merchant.revenue(date)
   end
 
-
-  def test_find_customers_with_pending_invoices_for_a_merchant
-    merchant = engine.merchant_repository.find_by_id(57)
-    assert_equal "", merchant.customers_with_pending_invoices
-  end
+  # def test_find_customers_with_pending_invoices_for_a_merchant
+  #   merchant = engine.merchant_repository.find_by_id(57)
+  #   assert_equal 4, merchant.customers_with_pending_invoices.size
+  # end
 end
 

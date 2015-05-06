@@ -126,6 +126,7 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_find_the_top_revenue_merchants
+    skip
     #p invoices = engine.invoice_repository.all
     # engine.merchant_repository.successful_transactions(invoices)
     p engine.merchant_repository.total_merchant_revenue
