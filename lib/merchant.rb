@@ -48,4 +48,36 @@ class Merchant
       repository.find_merchant_revenue_by_(id)
     end
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  def favorite_customer
+    cust_id = repository.find_merchant_invoices_by_(id)
+    best_customer = cust_id.each_with_object(Hash.new(0)) {|invoice,counts| counts[invoice.customer_id] += 1}
+    top_cust_id = best_customer.max_by{|k, v| v}[0]
+    repository.engine.find_customer_by_(top_cust_id)
+  end
 end
