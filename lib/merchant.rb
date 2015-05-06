@@ -73,17 +73,9 @@ class Merchant
 
 
   def favorite_customer
-    repository.find_by_id(id)
-    binding.pry
-
-    #goto merchant repo (using id)
-    #goto sales_engine (using_id)
-    #goto invoice_repository (using_id)
-    #find all invoices matching merchant_id
-    #sort by customer_id
-    #take highest customer_id
-    #return to sales_engine(with customer_id)
-    #go to customer repository (using customer_id)
-    #find customer_id and return first and last names
+    cust_id = repository.find_merchant_invoices_by_(id)
+    best_customer = cust_id.each_with_object(Hash.new(0)) {|invoice,counts| counts[invoice.customer_id] += 1}
+    top_cust_id = best_customer.max_by{|k, v| v}[0]
+    repository.engine.find_customer_by_(top_cust_id)
   end
 end
