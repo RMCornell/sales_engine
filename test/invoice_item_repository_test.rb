@@ -18,7 +18,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
     assert invoice_for_invoice_item_1.is_a?(Invoice)
     assert_equal 1, invoice_for_invoice_item_1.id
-    assert_equal "2012-03-25 09:54:09 UTC", invoice_for_invoice_item_1.created_at
+    assert_equal Date.parse("2012-03-25 09:54:09 UTC"), invoice_for_invoice_item_1.created_at
   end
 
 
