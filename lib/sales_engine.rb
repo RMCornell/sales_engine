@@ -200,6 +200,10 @@ class SalesEngine
     invoice_item_repository.add_invoice_items(invoice_items, row)
   end
 
+  def add_transaction(invoice)
+    transaction_repository.add_transaction(invoice)
+  end
+
 end
 
 

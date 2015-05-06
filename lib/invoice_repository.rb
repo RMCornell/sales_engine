@@ -132,8 +132,8 @@ class InvoiceRepository
         customer_id: invoice[:customer].id,
         merchant_id: invoice[:merchant].id,
         status:      invoice[:status],
-        created_at:  invoice[:created_at],
-        updated_at:  invoice[:updated_at]
+        created_at:  Time.new.to_s,
+        updated_at:  Time.new.to_s
     }
 
     new_invoice = Invoice.new(row, self)
@@ -141,6 +141,10 @@ class InvoiceRepository
 
     engine.create_new_invoice_item(invoice[:items], row)
     new_invoice
+  end
+
+  def add_transaction(invoice)
+    engine.add_transaction(invoice)
   end
 
 

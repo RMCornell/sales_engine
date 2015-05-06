@@ -13,7 +13,7 @@ class Invoice
     @customer_id = invoice[:customer_id].to_i
     @merchant_id = invoice[:merchant_id].to_i
     @status      = invoice[:status]
-    @created_at  = invoice[:created_at]
+    @created_at  = Date.parse(invoice[:created_at]) #consider moving date parse into the date/revenue method
     @updated_at  = invoice[:updated_at]
   end
 
@@ -48,5 +48,15 @@ class Invoice
     repository.find_merchant_by_(merchant_id)
   end
 
+  def charge(invoice)
+    transaction_data = {
+        invoice_id: id,
+        cc_number: invoice[:credit_card_number],
+        cc_expiration_date: invoice[:credit_card_expiration],
+        result: invoice[:result]
+    }
+
+    repository.add_transaction(transaction_data)
+  end
 
 end
