@@ -204,6 +204,14 @@ class SalesEngine
     customers = merchant_invoices.map { |invoice| invoice.customer }
   end
 
+  def create_new_invoice_item(invoice_items, row)
+    invoice_item_repository.add_invoice_items(invoice_items, row)
+  end
+
+  def add_transaction(invoice)
+    transaction_repository.add_transaction(invoice)
+  end
+
 end
 
 
