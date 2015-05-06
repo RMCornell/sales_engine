@@ -115,4 +115,26 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal 8, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Merchant)
   end
+
+  def test_can_find_invoices_with_successful_transactions
+    ivS = [engine.invoice_repository.find_by_id(12)] #success
+    ivF = [engine.invoice_repository.find_by_id(13)] #failure
+
+    assert_equal 1, engine.merchant_repository.successful_transactions(ivS).size
+    assert_equal [], engine.merchant_repository.successful_transactions(ivF)
+    #assert_equal 1, [ivS, ivF].flatten.size
+  end
+
+  def test_can_find_the_top_revenue_merchants
+    #p invoices = engine.invoice_repository.all
+    # engine.merchant_repository.successful_transactions(invoices)
+    p engine.merchant_repository.total_merchant_revenue
+    # engine.merchant_repository.most_revenue(5)
+    assert engine.merchant_repository.most_revenue(5)
+  end
+
+  def customers_with_pending_invoices_test
+    customers = engine.transaction_repository.pending_transactions.size
+    assert_equal 4, customers
+  end
 end

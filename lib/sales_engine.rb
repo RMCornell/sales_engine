@@ -188,8 +188,8 @@ class SalesEngine
 
 
   def total_revenue_for_all_invoices(invoices)
-    invoices = invoices.map { |invoice| invoice.invoice_items }
-    calculate_invoice_totals(invoices)
+    invoice_items_for_each_invoice = invoices.map { |invoice| invoice.invoice_items }
+    calculate_invoice_totals(invoice_items_for_each_invoice)
   end
 
   def calculate_invoice_totals(invoice_items) ### this calculates invoice totals

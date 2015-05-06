@@ -89,14 +89,25 @@ class MerchantRepository
 
   def revenue(date)
     #p date.strftime("%Y-%m-%d %I:%m:%S UTC")
-
     invoices = engine.invoice_repository.all.select { |invoice| invoice.created_at == date }
+    #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+    paid_invoices = successful_transactions(invoices)
+    #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+    engine.total_revenue_for_all_invoices(paid_invoices)
+  end
 
-    total_revenue = invoices.select { |invoice|
-      invoice.transactions.any? { |transaction|
-        transaction.success?
-      }
-    }
-    engine.total_revenue_for_all_invoices(total_revenue)
+  def successful_transactions(invoices)
+    invoices.select { |invoice| invoice.transactions.any? { |transaction| transaction.success? } }
+  end
+
+  def total_merchant_revenue
+   p  invoices = engine.invoice_repository.all
+    paid_invoices = successful_transactions(invoices)
+    # highest = paid_invoices.sort_by { |invoice| }
+    p engine.total_revenue_for_all_invoices(paid_invoices)
+  end
+
+  def customers_with_pending_invoices
+    customers = engine.transaction_repository.pending_transactions.size
   end
 end

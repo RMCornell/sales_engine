@@ -218,11 +218,14 @@ class InvoiceRepositoryTest < Minitest::Test
 
   # -------- Business logic -------------
 
-  def test_find_paid_invoices
-    skip
-    #paid = engine.invoice_repository.paid_invoices
-    #test =  paid.map { |invoice| invoice.transactions.flatten }.all? { |trans| trans.result == 'success' }
-    #assert test
+  def test_unpaid_invoices
+    assert engine.invoice_repository.unpaid_invoices
+    assert engine.invoice_repository.unpaid_invoices.all? { |invoice| invoice.transactions.all? { |result| result.result == 'failed' } }
+  end
+
+  def test_paid_invoices
+    assert engine.invoice_repository.paid_invoices
+    assert engine.invoice_repository.paid_invoices.all? { |invoice| invoice.transactions.one? { |result| result.result == 'success' } }
   end
 end
 
