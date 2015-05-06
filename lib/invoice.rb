@@ -13,7 +13,7 @@ class Invoice
     @customer_id = invoice[:customer_id].to_i
     @merchant_id = invoice[:merchant_id].to_i
     @status      = invoice[:status]
-    @created_at  = invoice[:created_at]
+    @created_at  = Date.parse(invoice[:created_at]) #Date.parse()
     @updated_at  = invoice[:updated_at]
   end
 
@@ -21,7 +21,6 @@ class Invoice
     "#<#{self.class}: id:#{@id.inspect} cust_id: #{@customer_id.inspect} mer_id: #{@merchant_id.inspect}"\
     "status:#{@status.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
-
 
 
     # invoice(id) --> transaction(invoice_id) --> invoice#transactions

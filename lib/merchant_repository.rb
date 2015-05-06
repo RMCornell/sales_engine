@@ -88,16 +88,49 @@ class MerchantRepository
   end
 
   def revenue(date)
-      p 'in merch rev'                            # todo may been to be Date.parse()
-    found_merchants = merchants.select { |merchant| merchant.invoices.created_at == date }
-    total_revenue_for_merchants(found_merchants)
+    p date.strftime("%Y-%m-%d %I:%m:%S UTC")
+    #   p 'in merch rev'
+    #p "2012-03-25 09:54:09 UTC"
+    p date
+    #                       # todo may been to be Date.parse()
+    # found_merchants = merchants.select { |merc  hant| merchant.invoices.created_at == date }
+    # total_revenue_for_merchants(found_merchants)
 
-    # correct_merchants = for each merchant in merchants
-    #   if each invoice in merchant
-    #     return true if there any successful transactions
-    #   end
-    # end
-    # filtered_merchants.reduce { |total, merchant| total + merchant.revenue(date) }
+   # binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+
+    # fix find_all_by)_created_at
+    #   1) change the test to pass in a ruby object
+    #   2) maybe change the Invoice class to parse the date (right now its being stored as a string)
+
+     p invoices = engine.invoice_repository.all.select { |invoice| invoice.created_at == date }
+     p "#{invoices.size} ------------------------------------------------------------"
+      success = invoices.select { |invoice|
+         invoice.transactions.any? { |transaction|
+         transaction.success?
+         }
+       }
+   # binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+    p "#{success.size} =================================================================="
+
+
+
+    # filter invoices to only successful invoices
+    # for each invoice
+    #   only add it the new array if it has at least one successful transaction
+
+
+  total_revenue = success
+    total_revenue = success.reduce(0) do |total, invoice|
+
+      if invoice.created_at == date
+        total + invoice.invoice_items.reduce(0) do |sum, invoice_item|
+          sum + invoice_item.total
+        end
+      else
+        total
+      end
+    end
+    total_revenue.to_d / 100
   end
 
   def total_revenue_for_merchants(merchants)

@@ -176,7 +176,7 @@ class SalesEngine
      revenue_by_date = transaction_repository.successful_transactions # todo add date filter
        .map { |transaction| transaction.invoice }
        .select { |invoice| invoice.merchant_id == id } # todo method to select merchant invoices
-       .select { |invoice| Date.parse(invoice.created_at) == date }
+       .select { |invoice| invoice.created_at == date }
      total_revenue_for_all_invoices(revenue_by_date)
   end
 
@@ -195,7 +195,7 @@ class SalesEngine
   def calculate_invoice_totals(invoice_items) ### this calculates invoice totals
     invoice_items.flatten.reduce(0) { |total, invoice_item| total + invoice_item.total }.to_d / 100
   end
-  
+
 end
 
 
