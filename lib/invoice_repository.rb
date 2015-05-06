@@ -102,7 +102,6 @@ class InvoiceRepository
   end
 
   def find_all_by_created_at(created_at)
-    binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
     invoices.select { |invoice| invoice.created_at == created_at }
   end
 
@@ -112,12 +111,12 @@ class InvoiceRepository
 
   # //---------- Business Logic -------------------------------------------//
 
-  def paid_invoices
-    engine
-      .transaction_repository
-      .successful_transactions
-      .map { |trans| trans.invoice }
-  end
+  # def paid_invoices  doesn't work correctly
+  #   engine
+  #     .transaction_repository
+  #     .successful_transactions
+  #     .map { |trans| trans.invoice }
+  # end
 
 end
 
