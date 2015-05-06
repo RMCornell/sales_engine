@@ -107,7 +107,7 @@ class MerchantRepository
     p engine.total_revenue_for_all_invoices(paid_invoices)
   end
 
-  def customers_with_pending_invoices
-    customers = engine.transaction_repository.pending_transactions.size
+  def customers_with_pending_invoices(id)
+    engine.customers_with_pending_invoices(id)
   end
 end

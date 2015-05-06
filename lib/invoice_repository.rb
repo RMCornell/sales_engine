@@ -115,7 +115,7 @@ class InvoiceRepository
     engine.transaction_repository.successful_transactions.map { |transaction| transaction.invoice }
   end
 
-  def unpaid_invoices  #doesn't work correctly
+  def unpaid_invoices
     invoices - paid_invoices
   end
 

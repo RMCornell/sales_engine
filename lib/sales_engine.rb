@@ -196,6 +196,14 @@ class SalesEngine
     invoice_items.flatten.reduce(0) { |total, invoice_item| total + invoice_item.total }.to_d / 100
   end
 
+  def customers_with_pending_invoices(merchant_id)
+    merchant_invoices = invoice_repository.find_all_by_merchant_id(merchant_id)
+    merchant_invoices = merchant_invoices.reject { |invoice| invoice_repository.paid_invoices.include?(invoice) }
+    #merchant_invoices = invoice_repository.unpaid_invoices.select { |invoice| invoice.merchant_id == merchant_id}
+    #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
+    customers = merchant_invoices.map { |invoice| invoice.customer }
+  end
+
 end
 
 

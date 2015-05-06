@@ -62,6 +62,6 @@ class Merchant
   end
 
   def customers_with_pending_invoices
-    repository.customers_with_pending_invoices
+    repository.customers_with_pending_invoices(id)
   end
 end

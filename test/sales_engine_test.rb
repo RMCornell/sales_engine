@@ -4,7 +4,9 @@ class SalesEngineTest < Minitest::Test
   attr_reader :engine
 
   def setup
-    @engine = SalesEngine.new('./test/fixtures')
+    #@engine = SalesEngine.new('./test/fixtures')
+    @engine = SalesEngine.new('./data')
+
     engine.startup
   end
 
@@ -33,6 +35,12 @@ class SalesEngineTest < Minitest::Test
     p merchant.revenue(date)
     p BigDecimal.new("8373.29")
     assert_equal BigDecimal.new("8373.29"), merchant.revenue(date)
+  end
+
+
+  def test_find_customers_with_pending_invoices_for_a_merchant
+    merchant = engine.merchant_repository.find_by_id(57)
+    assert_equal "", merchant.customers_with_pending_invoices
   end
 end
 
