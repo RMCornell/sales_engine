@@ -154,8 +154,6 @@ class SalesEngine
   # //---------- Business Logic -------------------------------------------//
 
   def find_merchant_revenue_by_(id) # merchant#revenue
-    merchant = merchant_repository.find_by_id(id)
-
     transaction_repository.successful_transactions
       .map { |transaction| transaction.invoice }
       .select { |invoice| invoice.merchant_id == id }
@@ -164,22 +162,13 @@ class SalesEngine
       .flatten.reduce(:+).to_d / 100
   end
 
-
   def find_merchant_revenue_by_date_(date=nil, id) #merchant#revenue(date=nil)
-     merchant = merchant_repository.find_by_id(id)
-
      revenue_by_date = transaction_repository.successful_transactions # todo add date filter
        .map { |transaction| transaction.invoice }
        .select { |invoice| invoice.merchant_id == id } # todo method to select merchant invoices
        .select { |invoice| invoice.created_at == date }
      total_revenue_for_all_invoices(revenue_by_date)
   end
-
-
-  # def find_all_merchant_revenue ### this grabs all paid invoices
-  #   invoice_items = invoice_repository.paid_invoices.map { |invoice| invoice.invoice_items }
-  #   calculate_invoice_totals(invoice_items)
-  # end
 
   def total_revenue_for_all_invoices(invoices)
     invoice_items_for_each_invoice = invoices.map { |invoice| invoice.invoice_items }
@@ -193,9 +182,7 @@ class SalesEngine
   def customers_with_pending_invoices(merchant_id)
     merchant_invoices = invoice_repository.find_all_by_merchant_id(merchant_id)
     merchant_invoices = merchant_invoices.reject { |invoice| invoice_repository.paid_invoices.include?(invoice) }
-    #merchant_invoices = invoice_repository.unpaid_invoices.select { |invoice| invoice.merchant_id == merchant_id}
-    #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
-    customers = merchant_invoices.map { |invoice| invoice.customer }
+    merchant_invoices.map { |invoice| invoice.customer }
   end
 
   def create_new_invoice_item(invoice_items, row)
@@ -211,30 +198,3 @@ class SalesEngine
     calculate_item_totals(items_for_each_invoice)
   end
 end
-
-
-
-
-
-
-
-
-
-
-
-# def find_merchant_revenue_by_date_(date=nil, id) #merchant#revenue(date=nil)
-#   merchant = merchant_repository.find_by_id(id)
-#
-#   transaction_repository.successful_transactions # todo add date filter
-#     .map { |transaction| transaction.invoice }
-#     .select { |invoice|  p Date.parse(invoice.created_at);
-#   if date # refactor out...
-#     invoice.merchant_id == id && Date.parse(invoice.created_at) == date
-#   else
-#     invoice.merchant_id == id
-#   end
-#   } # todo method to select merchant invoices
-#     .map { |invoice| invoice.invoice_items }
-#     .map { |item| item.map { |sub| sub.total } } # todo method to calculate invoice_item subtotals
-#     .flatten.reduce(:+).to_d / 100
-# end
