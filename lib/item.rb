@@ -66,7 +66,6 @@ class Item
     item_revenue.flatten.reduce(0, :+)
   end
 
-
   def quantity_sold
     selected_invoices ||= invoice_items.map { |invoice_item|
       invoice_item.nil? ? [] : invoice_item.invoice }

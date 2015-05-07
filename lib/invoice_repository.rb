@@ -129,7 +129,6 @@ class InvoiceRepository
         created_at:  Time.new.to_s,
         updated_at:  Time.new.to_s
     }
-
     new_invoice = Invoice.new(row, self)
     invoices << new_invoice
 
@@ -140,11 +139,4 @@ class InvoiceRepository
   def add_transaction(invoice)
     engine.add_transaction(invoice)
   end
-
-
-
 end
-
-
-
-

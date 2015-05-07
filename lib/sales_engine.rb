@@ -146,17 +146,12 @@ class SalesEngine
 
   # //---------- Customer Relationships-------------------------------------------//
 
-
     # customer(id) --> invoice(customer_id) --> # customer#invoices
   def find_invoices_by_(id)
     invoice_repository.find_all_by_customer_id(id)
   end
 
-
   # //---------- Business Logic -------------------------------------------//
-
-
-
 
   def find_merchant_revenue_by_(id) # merchant#revenue
     merchant = merchant_repository.find_by_id(id)
@@ -186,12 +181,10 @@ class SalesEngine
   #   calculate_invoice_totals(invoice_items)
   # end
 
-
   def total_revenue_for_all_invoices(invoices)
     invoice_items_for_each_invoice = invoices.map { |invoice| invoice.invoice_items }
     calculate_invoice_totals(invoice_items_for_each_invoice)
   end
-
 
   def calculate_invoice_totals(invoice_items) ### this calculates invoice totals
     invoice_items.flatten.reduce(0) { |total, invoice_item| total + invoice_item.total }.to_d / 100
@@ -212,8 +205,6 @@ class SalesEngine
   def add_transaction(invoice)
     transaction_repository.add_transaction(invoice)
   end
-
-
 
   def total_revenue_for_all_items(x)
     items_for_each_invoice = item_repository.map {|item| item.id }

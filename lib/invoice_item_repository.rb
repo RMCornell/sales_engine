@@ -120,7 +120,6 @@ class InvoiceItemRepository
     end
   end
 
-
   def group_items(items)
     items_hash ={}
     items.each do |item|

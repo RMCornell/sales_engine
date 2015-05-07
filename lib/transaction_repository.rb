@@ -93,7 +93,6 @@ class TransactionRepository
     transactions.select {|transaction| updated_at == transaction.updated_at}
   end
 
-
   # //---------- Business Logic -------------------------------------------//
 
   def successful_transactions
@@ -107,27 +106,4 @@ class TransactionRepository
   def add_transaction(invoice)
     transactions << Transaction.new(invoice, self)
   end
-
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

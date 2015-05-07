@@ -42,7 +42,7 @@ class ItemRepository
     items.detect { |item| id == item.id }
   end
 
-#Find_by Methods
+  # --------------------- Find_by_Methods --------------------------
   def find_by_name(name)
     items.detect {|item| name == item.name}
   end
@@ -67,7 +67,7 @@ class ItemRepository
     items.detect {|item| updated_at == item.created_at}
   end
 
-#Find_all_by methods
+  # --------------------- Find_by_all Methods --------------------------
   def find_all_by_id(id)
     items.select{|item| id == item.id}
   end
@@ -96,7 +96,7 @@ class ItemRepository
     items.select {|item| updated_at = item.updated_at}
   end
 
-  #Business intellingence
+  # --------------------- Business Intelligence --------------------------
   def most_revenue(x)
     items.sort_by do |item|
       item.revenue.nil? ? 0 : item.revenue
@@ -110,14 +110,3 @@ class ItemRepository
   end
 
 end
-
-=begin
-
-def favorite_customer
-    cust_id = repository.find_merchant_invoices_by_(id)
-    best_customer = cust_id.each_with_object(Hash.new(0)) {|invoice,counts| counts[invoice.customer_id] += 1}
-    top_cust_id = best_customer.max_by{|k, v| v}[0]
-    repository.engine.find_customer_by_(top_cust_id)
-  end
-
-=end
