@@ -1,5 +1,4 @@
 require_relative 'test_helper'
-
 require 'bigdecimal'
 
 class ItemRepositoryTest < Minitest::Test
@@ -9,9 +8,6 @@ class ItemRepositoryTest < Minitest::Test
     @engine    = SalesEngine.new('./test/fixtures')
     @items = engine.item_repository
   end
-
-
-  # -------------------- Relationship Test Methods ------------------------
 
   def test_item_invoice_items_returns_its_invoice_items
     item = engine.item_repository.find_by_id(1830)
@@ -30,18 +26,16 @@ class ItemRepositoryTest < Minitest::Test
     assert merchant.is_a?(Merchant)
   end
 
-
-  # --------------------- Base Test Methods ----------------------------------
   def test_items_repository_exists
     assert items
   end
 
   def test_items_repository_contains_data
-    assert_equal 156, items.all.length
+    assert_equal 157, items.all.length
   end
 
   def test_item_repository_returns_all_items
-    assert_equal 156, items.all.length
+    assert_equal 157, items.all.length
   end
 
   def test_item_repository_returns_random_item
@@ -56,7 +50,6 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 100, total_random_items
   end
 
-# --------------------------- Find_by Test Methods -------------------------------
   def test_item_repository_returns_item_by_id
     by_id = items.find_by_id(5)
     assert_equal "Item Expedita Aliquam", by_id.name
@@ -87,12 +80,6 @@ class ItemRepositoryTest < Minitest::Test
     assert by_unit_price.is_a?(Item)
   end
 
-=begin
-    results = item_repository.find_by_unit_price(BigDecimal.new("751.07"))
-    assert_equal BigDecimal.new("751.07"), results.unit_price
-=end
-
-
   def test_item_repository_retuns_item_by_merchant_id
     by_merchant_id = items.find_by_merchant_id(1)
     assert_equal "Item Qui Esse", by_merchant_id.name
@@ -110,7 +97,6 @@ class ItemRepositoryTest < Minitest::Test
     assert_equal 1, by_updated_at.id
   end
 
-#----------- Find_by_all Test Methods ---------------------------
   def test_item_repository_returns_all_items_by_id
     all_by_id = items.find_all_by_id(1)
     assert_equal 1, all_by_id.count
@@ -130,7 +116,6 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_item_repository_returns_all_items_by_unit_price
-    #failing program rake
     all_by_unit_price = items.find_all_by_unit_price(159.25)
     assert_equal 1, all_by_unit_price.count
     assert all_by_unit_price.first.is_a?(Item)
@@ -150,7 +135,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_item_repository_returns_all_items_by_updated_at
     all_by_updated_at = items.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
-    assert_equal 156, all_by_updated_at.count
+    assert_equal 157, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Item)
   end
 end

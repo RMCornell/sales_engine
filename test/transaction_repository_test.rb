@@ -9,26 +9,17 @@ class TransactionRepositoryTest < Minitest::Test
     @transactions = engine.transaction_repository
   end
 
-
-  # transactions#invoice
-
   def test_transactions_can_find_their_invoice
     transaction = transactions.find_by_id(1)
     invoice = transaction.invoice.id
-    spec = transaction.invoice.customer.first_name
-    # todo Failure/Error: expect(transaction.invoice.customer.first_name).to eq invoice_customer.first_name
     assert_equal 1, invoice
   end
-
-  # customer#items
 
   def test_it_finds_all_invoices_for_a_customer
     customer = engine.customer_repository.find_by_id(1)
     invoices = customer.invoices
     assert_equal 8, invoices.length
   end
-
-  # Basic SetUp Tests
 
   def test_transaction_repository_exists
     assert transactions
@@ -38,15 +29,12 @@ class TransactionRepositoryTest < Minitest::Test
     assert_equal 99, transactions.all.length
   end
 
-#Find_by Method Tests
   def test_transaction_repository_returns_all_transactions
     assert_equal 99, transactions.all.length
   end
 
   def test_transaction_repository_returns_random_transaction
-
     transaction1, transaction2 = transactions.random, transactions.random
-
     total_random_transactions = 0
     until total_random_transactions == 100
       total_random_transactions += 1 if transaction1 == transaction2
@@ -105,7 +93,6 @@ class TransactionRepositoryTest < Minitest::Test
     assert by_updated_at.is_a?(Transaction)
   end
 
-#Find_by_all Method Tests
   def test_transaction_repository_finds_all_by_id
     all_by_id = transactions.find_all_by_id(4)
     assert_equal 1, all_by_id.count
@@ -148,11 +135,9 @@ class TransactionRepositoryTest < Minitest::Test
     assert all_by_updated_at.first.is_a?(Transaction)
   end
 
-
   def test_successful_transactons_only_returns_correct_result
     engine.transaction_repository.successful_transactions.all? { |transactions| transactions.result == 'success' }
   end
-
 
   def test_paid_transactions_can_be_found
     paid_transactions = engine.transaction_repository.successful_transactions

@@ -19,16 +19,13 @@ class ItemRepository
     "#<#{self.class}: #{@items.size} rows>"
   end
 
-  # --------------------- Relationship Methods --------------------------
-
-  def find_item_invoice_items_by_(id) # item#invoice_items
+  def find_item_invoice_items_by_(id)
     engine.find_item_invoice_items_by_(id)
   end
 
-  def find_item_merchant_by_(merchant_id) # item#merchant
+  def find_item_merchant_by_(merchant_id)
     engine.find_merchant_by_(merchant_id)
   end
-
 
   def all
     items
@@ -42,7 +39,6 @@ class ItemRepository
     items.detect { |item| id == item.id }
   end
 
-  # --------------------- Find_by_Methods --------------------------
   def find_by_name(name)
     items.detect {|item| name == item.name}
   end
@@ -67,7 +63,6 @@ class ItemRepository
     items.detect {|item| updated_at == item.created_at}
   end
 
-  # --------------------- Find_by_all Methods --------------------------
   def find_all_by_id(id)
     items.select{|item| id == item.id}
   end
@@ -96,7 +91,6 @@ class ItemRepository
     items.select {|item| updated_at = item.updated_at}
   end
 
-  # --------------------- Business Intelligence --------------------------
   def most_revenue(x)
     items.sort_by do |item|
       item.revenue.nil? ? 0 : item.revenue
@@ -108,5 +102,4 @@ class ItemRepository
       item.quantity_sold.nil? ? 0 : item.quantity_sold
     end.reverse.first(x)
   end
-
 end

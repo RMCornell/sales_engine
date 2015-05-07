@@ -8,20 +8,6 @@ class CustomerRepositoryTest < Minitest::Test
     @customers = engine.customer_repository
   end
 
-
-#-------------------- Relationship Method Tests --------------------
-  # customer#invoices
-
-  def test_it_finds_all_invoices_for_a_customer
-    customer = customers.find_by_id(1)
-    invoices = customer.invoices
-
-    assert invoices.is_a?(Array)
-    #assert_equal 1, invoices.id
-    #assert_equal 1, invoices.customer_id
-  end
-
-#-------------------- Base Method Tests --------------------
   def test_customer_repository_exists
     assert customers
   end
@@ -36,9 +22,7 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_customer_repository_returns_random_customer
-
     customer1, customer2 = customers.random, customers.random
-
     total_random_customers = 0
     until total_random_customers == 100
       total_random_customers += 1 if customer1 == customer2
@@ -50,7 +34,6 @@ class CustomerRepositoryTest < Minitest::Test
     assert customer2.is_a?(Customer)
   end
 
-#-------------------- Find_by Method Tests --------------------
   def test_customer_repository_returns_customer_first_name_by_id
     by_id = customers.find_by_id(4)
     assert_equal "Leanne", by_id.first_name
@@ -98,7 +81,6 @@ class CustomerRepositoryTest < Minitest::Test
     assert_instance_of Customer, by_updated_at
   end
 
-#-------------------- Find_all_by Method Tests --------------------
   def test_customer_repository_returns_all_by_id
     all_by_id = customers.find_all_by_id(4)
     assert_equal 1, all_by_id.count
@@ -131,6 +113,14 @@ class CustomerRepositoryTest < Minitest::Test
     all_by_updated_at = customers.find_all_by_updated_at("2012-03-27 14:54:10 UTC")
     assert_equal 6, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Customer)
+  end
+
+  def test_it_finds_all_invoices_for_a_customer
+    customer = customers.find_by_id(1)
+    invoices = customer.invoices
+
+    assert invoices.is_a?(Array)
+    assert_equal 8, invoices.size
   end
 
   def test_customer_transactions

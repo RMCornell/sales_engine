@@ -2,8 +2,6 @@ require_relative 'invoice'
 
 class InvoiceRepository
   include Enumerable
-
-
   attr_reader :engine, :invoices
 
   def initialize(engine, dir)
@@ -17,37 +15,32 @@ class InvoiceRepository
   end
 
   def inspect
-    "#<#{self.class}: #{@items.size} rows>"
+    "#<#{self.class}: #{@invoices.size} rows>"
   end
 
   def each(&block)
     @invoices.each(&block)
   end
 
-  # invoice ------------------------------------------------------ relationships
-
-
-  def find_transactions_by_invoice_(id) # invoice#transactions
+  def find_transactions_by_invoice_(id)
     engine.find_transactions_by_invoice_(id)
   end
 
-  def find_invoice_items_for_(id) # invoice#invoice_items
+  def find_invoice_items_for_(id)
     engine.find_invoice_items_for_(id)
   end
 
-  def find_items_by_item_(id) # invoice#items
+  def find_items_by_item_(id)
     engine.find_items_for_invoice_items(id)
   end
 
-  def find_customer_by_(customer_id) # invoice#customer
+  def find_customer_by_(customer_id)
     engine.find_customer_by_(customer_id)
   end
 
-  def find_merchant_by_(merchant_id) # invoice#merchant
+  def find_merchant_by_(merchant_id)
     engine.find_merchant_by_(merchant_id)
   end
-
-#-------------------- Base Repository Methods --------------------
 
   def all
     invoices
@@ -56,8 +49,6 @@ class InvoiceRepository
   def random
     invoices.sample
   end
-
-#-------------------- Find_by Methods --------------------
 
   def find_by_id(id)
     invoices.detect { |invoice| invoice.id == id }
@@ -83,8 +74,6 @@ class InvoiceRepository
     invoices.detect { |invoice| invoice.updated_at == updated_at }
   end
 
-#-------------------- Find_all_by Methods --------------------
-
   def find_all_by_id(id)
     invoices.select { |invoice| invoice.id == id }
   end
@@ -109,8 +98,6 @@ class InvoiceRepository
     invoices.select { |invoice| invoice.updated_at == updated_at }
   end
 
-  # //---------- Business Logic -------------------------------------------//
-
   def paid_invoices
     engine.transaction_repository
         .successful_transactions.map { |transaction| transaction.invoice }
@@ -120,7 +107,6 @@ class InvoiceRepository
     invoices - paid_invoices
   end
 
-  # Create Invoices
   def create(invoice)
     row = {
         id:          invoice[:id].to_i,

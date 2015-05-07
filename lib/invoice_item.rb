@@ -20,22 +20,14 @@ class InvoiceItem
   end
 
   def inspect
-    "#<#{self.class}: id:#{@id.inspect}
-    item_id: #{@item_id.inspect}
-    invoice_id: #{@invoice_id.inspect}
-    quantity: #{@quantity.inspect}
-    unit_price: #{@unit_price.inspect}
-    created_at: #{@created_at.inspect}
-    updated_at: #{@updated_at.inspect}>"
+    "#<#{self.class}: id:#{@id.inspect}>"
   end
-
-  # invoice(id) --> invoice_item(invoice_id) --> invoice_item#invoice
 
   def invoice
     repository.find_invoice_items_invoice_by_(invoice_id)
   end
 
-  def item # invoice#item
+  def item
     repository.find_invoice_items_items_by_(item_id)
   end
 

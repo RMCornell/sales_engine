@@ -2,7 +2,6 @@ require_relative 'merchant'
 
 class MerchantRepository
   include Enumerable
-
   attr_reader :engine, :merchants
 
   def initialize(engine, dir)
@@ -23,17 +22,13 @@ class MerchantRepository
     "#<#{self.class} #{@merchants.size} rows>"
   end
 
-  # merchant#items
   def find_merchant_items_by_(id)
     engine.find_merchant_items_by_(id)
   end
 
-  # merchant#invoices
   def find_merchant_invoices_by_(id)
     engine.find_merchant_invoices_by_(id)
   end
-
-#Merchant Repository Methods
 
   def all
     merchants
@@ -43,7 +38,6 @@ class MerchantRepository
     merchants.sample
   end
 
-#Find_by Methods
   def find_by_id(id)
     merchants.detect { |merchant| id == merchant.id }
   end
@@ -60,7 +54,6 @@ class MerchantRepository
     merchants.detect { |merchant| updated_at == merchant.updated_at}
   end
 
-#Find_by_all Methods
   def find_all_by_id(id)
     merchants.select { |merchant| id == merchant.id }
   end
@@ -77,13 +70,11 @@ class MerchantRepository
     merchants.select { |merchant| updated_at == merchant.updated_at}
   end
 
-  # -------- Business Logic ------------------------
-
-  def find_merchant_revenue_by_(id) # merchant#revenue
+  def find_merchant_revenue_by_(id)
     engine.find_merchant_revenue_by_(id)
   end
 
-  def find_merchant_revenue_by_date_(date=nil, id) # merchant#revenue(date)
+  def find_merchant_revenue_by_date_(date=nil, id)
     engine.find_merchant_revenue_by_date_(date, id)
   end
 
@@ -95,7 +86,9 @@ class MerchantRepository
   end
 
   def successful_transactions(invoices)
-    invoices.select { |invoice| invoice.transactions.any? { |transaction| transaction.successful? } }
+    invoices.select { |invoice|
+      invoice.transactions.any? { |transaction|
+        transaction.successful? } }
   end
 
   def total_merchant_revenue

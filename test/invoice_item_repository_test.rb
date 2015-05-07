@@ -1,19 +1,15 @@
 require_relative 'test_helper'
 
-
-
 class InvoiceItemRepositoryTest < Minitest::Test
   attr_reader :invoice_item, :engine
 
   def setup
     @engine = SalesEngine.new('./test/fixtures')
     @invoice_item = engine.invoice_item_repository
-
   end
 
-#-------------------- Relationship Method Tests --------------------
-  def test_invoice_item_can_find_its_invoice # invoice_item#invoice
-    item                       = invoice_item.find_by_invoice_id(1)
+  def test_invoice_item_can_find_its_invoice
+    item = invoice_item.find_by_invoice_id(1)
     invoice_for_invoice_item_1 = item.invoice
 
     assert invoice_for_invoice_item_1.is_a?(Invoice)
@@ -21,29 +17,20 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal Date.parse("2012-03-25 09:54:09 UTC"), invoice_for_invoice_item_1.created_at
   end
 
-
-  def test_invoice_item_can_find_its_item # invoice_item#item
-    item             = invoice_item.find_by_invoice_id(1)
+  def test_invoice_item_can_find_its_item
+    item = invoice_item.find_by_invoice_id(1)
     instance_of_item = item.item
-   # todo fix...this may be fixed
-
-
     assert instance_of_item.is_a?(Item)
     assert_equal 539, instance_of_item.id
     assert_equal "2012-03-27 14:54:01 UTC", instance_of_item.created_at
   end
 
-#-------------------- Base Method Tests --------------------
   def test_invoice_item_repository_exists
     assert invoice_item
   end
 
-  def test_invoice_item_repository_contains_data
-    assert_equal 108, invoice_item.all.length
-  end
-
   def test_invoice_item_repository_returns_all_invoice_items
-    assert_equal 108, invoice_item.all.length
+    assert_equal 122, invoice_item.all.length
   end
 
   def test_invoice_item_repository_returns_random_invoice_item
@@ -60,7 +47,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert invoice_item2.is_a?(InvoiceItem)
   end
 
-#-------------------- Find_by Method Tests --------------------
   def test_invoice_item_repository_returns_invoice_items_by_id
     by_id = invoice_item.find_by_id(4)
     assert_equal 4, by_id.id
@@ -86,7 +72,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 21, by_invoice_id.id
     assert_equal 42203, by_invoice_id.unit_price
     assert by_invoice_id.is_a?(InvoiceItem)
-
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_quantity
@@ -99,7 +84,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
     by_unit_price = invoice_item.find_by_unit_price(79140)
     assert_equal 7, by_unit_price.quantity
     assert by_unit_price.is_a?(InvoiceItem)
-
   end
 
   def test_invoice_items_repository_returns_invoice_items_by_created_at
@@ -114,7 +98,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert by_updated_at.is_a?(InvoiceItem)
   end
 
-#-------------------- Find_all_by Method Tests --------------------
   def test_invoice_repository_returns_all_invoice_items_by_id
     all_by_id = invoice_item.find_all_by_id(1)
     assert_equal 1, all_by_id.length
@@ -129,7 +112,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_invoice_items_repository_returns_all_invoice_items_by_quantity
     all_by_quantity = invoice_item.find_all_by_quantity(9)
-    assert_equal 9, all_by_quantity.count
+    assert_equal 12, all_by_quantity.count
     assert all_by_quantity.first.is_a?(InvoiceItem)
   end
 
@@ -151,7 +134,6 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert all_by_updated_at.first.is_a?(InvoiceItem)
   end
 
-#-------------------- Initial Setup Tests --------------------
   def test_invoice_items_have_an_id
     refute invoice_item.invoice_items.any? { |invoice_item| invoice_item.id.nil? }
   end

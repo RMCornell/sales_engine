@@ -19,10 +19,7 @@ class InvoiceItemRepository
     "#<#{self.class}: #{@invoice_items.size} rows>"
   end
 
-  # --------- invoice item relationships --------------------
-
-
-  def find_invoice_items_invoice_by_(invoice_id) #invoice_item#invoice
+  def find_invoice_items_invoice_by_(invoice_id)
     engine.find_invoice_items_invoice_by_(invoice_id)
   end
 
@@ -34,7 +31,6 @@ class InvoiceItemRepository
     @invoice_items.each(&block)
   end
 
-#-------------------- Base Repository Methods --------------------
   def all
     invoice_items
   end
@@ -43,11 +39,9 @@ class InvoiceItemRepository
     invoice_items.sample
   end
 
-#-------------------- Find_by Methods --------------------
   def find_by_id(id)
     invoice_items.detect {|invoice_item| id == invoice_item.id}
   end
-
 
   def find_by_item_id(item_id)
     invoice_items.detect {|invoice_item| item_id == invoice_item.item_id }
@@ -73,7 +67,6 @@ class InvoiceItemRepository
     invoice_items.detect {|invoice_item| updated_at == invoice_item.updated_at}
   end
 
-#-------------------- Find_all_by Methods --------------------
   def find_all_by_id(id)
     invoice_items.select {|invoice_item| id == invoice_item.id}
   end

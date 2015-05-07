@@ -9,36 +9,27 @@ class MerchantRepositoryTest < Minitest::Test
     @merchants = engine.merchant_repository
   end
 
-  # Merchant relationship tests
-
-  # merchant#items
   def test_merchant_can_find_its_items
     merchant = merchants.find_by_id(1)
     merchant_items = merchant.items
 
-    # todo fix
     assert_equal "Item Qui Esse", merchant_items.first.name
     assert merchant_items.is_a?(Array)
-
   end
 
-  # merchant#invoices
   def test_merchant_can_find_its_invoices
     merchant = merchants.find_by_id(2)
     merchant_invoices = merchant.invoices
     assert_equal 2, merchant_invoices.size
   end
 
-
   def test_it_finds_all_invoices_for_a_customer
     customer = engine.customer_repository.find_by_id(1)
     invoices = customer.invoices
 
-   # todo more tests
     assert invoices.is_a?(Array)
   end
 
-  #Base Tests
   def test_merchant_repository_exists
     assert merchants
   end
@@ -65,7 +56,6 @@ class MerchantRepositoryTest < Minitest::Test
     assert merchant2.is_a?(Merchant)
   end
 
-#Find_by Method Tests
   def test_merchant_repository_returns_by_merchant_id
     by_id = merchants.find_by_id(3)
     assert_equal 3, by_id.id
@@ -91,7 +81,6 @@ class MerchantRepositoryTest < Minitest::Test
     assert by_updated_at.is_a?(Merchant)
   end
 
-#Find_by_all Method Tests
   def test_merchant_repository_returns_all_merchants_by_id
     all_by_id = merchants.find_all_by_id(4)
     assert_equal 1, all_by_id.count
@@ -117,21 +106,11 @@ class MerchantRepositoryTest < Minitest::Test
   end
 
   def test_can_find_invoices_with_successful_transactions
-    ivS = [engine.invoice_repository.find_by_id(12)] #success
-    ivF = [engine.invoice_repository.find_by_id(13)] #failure
+    ivS = [engine.invoice_repository.find_by_id(12)]
+    ivF = [engine.invoice_repository.find_by_id(13)]
 
     assert_equal 1, engine.merchant_repository.successful_transactions(ivS).size
     assert_equal [], engine.merchant_repository.successful_transactions(ivF)
-    #assert_equal 1, [ivS, ivF].flatten.size
-  end
-
-  def test_can_find_the_top_revenue_merchants
-    skip
-    #p invoices = engine.invoice_repository.all
-    # engine.merchant_repository.successful_transactions(invoices)
-    p engine.merchant_repository.total_merchant_revenue
-    # engine.merchant_repository.most_revenue(5)
-    assert engine.merchant_repository.most_revenue(5)
   end
 
   def customers_with_pending_invoices_test
