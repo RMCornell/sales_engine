@@ -36,6 +36,7 @@ class Item
   def merchant
     repository.find_item_merchant_by_(merchant_id)
   end
+<<<<<<< HEAD
 
   def quantity_sold
     invoice_items.inject(0) do |total, invoice_item|
@@ -44,5 +45,98 @@ class Item
   end
 
 end
+=======
+>>>>>>> master
 
+  def revenue
+    selected_invoices ||= invoice_items.map { |invoice_item|
+      invoice_item.invoice }
 
+    selected_invoices.uniq!
+
+    selected_transactions ||= selected_invoices.map { |invoice|
+      invoice.transactions }.flatten
+
+    successful_transactions ||= selected_transactions.select { |transaction|
+      transaction.result == "success" }
+
+    successful_invoices ||= successful_transactions.map { |transaction|
+      transaction.invoice }
+
+    successful_invoice_items ||= successful_invoices.map { |invoice|
+      invoice.invoice_items }.flatten
+
+    invoice_items_for_item ||= successful_invoice_items.select { |invoice_item|
+      invoice_item.item_id == id }
+
+    item_revenue = invoice_items_for_item.map { |invoice_item|
+      invoice_item.unit_price * invoice_item.quantity }
+
+    item_revenue.flatten.reduce(0, :+)
+  end
+
+  def quantity_sold
+    selected_invoices ||= invoice_items.map { |invoice_item|
+      invoice_item.nil? ? [] : invoice_item.invoice }
+
+    selected_invoices.uniq!
+
+    selected_transactions ||= selected_invoices.map { |invoice|
+      invoice.transactions }.flatten
+
+    successful_transactions ||= selected_transactions.select { |transaction|
+      transaction.result == "success" }
+
+    successful_invoices ||= successful_transactions.map { |transaction|
+      transaction.invoice }.uniq
+
+    successful_invoice_items ||= successful_invoices.map { |invoice|
+      invoice.invoice_items }.flatten
+
+    invoice_items_for_item ||= successful_invoice_items.select { |invoice_item|
+      invoice_item.item_id == id }
+
+    invoice_items_for_item.flatten.map { |invoice_item|
+      invoice_item.quantity }.reduce(:+)
+  end
+
+  def items_invoices
+    @items_invoices ||= invoice_items.map do |invoice_item|
+      invoice_item.nil? ? [] : invoice_item.invoice
+    end.uniq
+  end
+
+  def invoices_transactions(items_invoices)
+    @invoices_transactions ||= items_invoices.flat_map do |invoice|
+      invoice.transactions
+    end
+  end
+
+  def successful_transactions(invoices_transactions)
+    @successful_transactions ||= invoices_transactions.reject do |transaction|
+      !transaction.successful?
+    end
+  end
+
+  def successful_invoices(successful_transactions)
+    @successful_invoices ||= successful_transactions.map do |transaction|
+      transaction.invoice
+    end
+  end
+
+  def successful_invoice_items(successful_invoices)
+    @successful_invoice_items ||= successful_invoices.flat_map do |invoice|
+      invoice.invoice_items
+    end
+  end
+
+  def final_invoice_items(successful_invoice_items)
+    @final_invoice_items ||= successful_invoice_items.select do |invoice_item|
+      invoice_item.item_id == id
+    end
+  end
+
+  def most_sold
+    invoice_items.max_by { |invoice_item| invoice_item.quantity }
+  end
+end

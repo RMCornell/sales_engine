@@ -22,7 +22,6 @@ class Customer
     "#{@last_name.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}"
   end
 
-
   ### customer(id) --> invoice(customer_id) --> customer#invoices
   def invoices
     repository.find_invoices_by_(id)

@@ -30,7 +30,6 @@ class CustomerRepository
      engine.find_invoices_by_(id)
    end
 
-
 #-------------------- Base Repository Methods --------------------
   def all
     customers
@@ -82,7 +81,7 @@ class CustomerRepository
      customers.select {|customer| updated_at == customer.updated_at}
    end
 
-   #Customer Business Intelligence
+  #-------------------- Customer Business Intellingence --------------------
    def customer_transactions(id)
      engine.find_invoices_by_(id)
    end

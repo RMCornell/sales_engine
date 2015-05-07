@@ -42,7 +42,7 @@ class ItemRepository
     items.detect { |item| id == item.id }
   end
 
-#Find_by Methods
+  # --------------------- Find_by_Methods --------------------------
   def find_by_name(name)
     items.detect {|item| name == item.name}
   end
@@ -67,7 +67,7 @@ class ItemRepository
     items.detect {|item| updated_at == item.created_at}
   end
 
-#Find_all_by methods
+  # --------------------- Find_by_all Methods --------------------------
   def find_all_by_id(id)
     items.select{|item| id == item.id}
   end
@@ -96,7 +96,17 @@ class ItemRepository
     items.select {|item| updated_at = item.updated_at}
   end
 
+  # --------------------- Business Intelligence --------------------------
+  def most_revenue(x)
+    items.sort_by do |item|
+      item.revenue.nil? ? 0 : item.revenue
+    end.reverse.first(x)
+  end
 
-  #Business Intellingence
-  #most_items
+  def most_items(x)
+    items.sort_by do |item|
+      item.quantity_sold.nil? ? 0 : item.quantity_sold
+    end.reverse.first(x)
+  end
+
 end

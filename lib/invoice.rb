@@ -22,7 +22,6 @@ class Invoice
     "status:#{@status.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
   end
 
-
     # invoice(id) --> transaction(invoice_id) --> invoice#transactions
   def transactions
     repository.find_transactions_by_invoice_(id)
@@ -55,7 +54,6 @@ class Invoice
         cc_expiration_date: invoice[:credit_card_expiration],
         result: invoice[:result]
     }
-
     repository.add_transaction(transaction_data)
   end
 
