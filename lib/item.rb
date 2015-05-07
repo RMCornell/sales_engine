@@ -36,17 +36,12 @@ class Item
   def merchant
     repository.find_item_merchant_by_(merchant_id)
   end
-<<<<<<< HEAD
 
-  def quantity_sold
-    invoice_items.inject(0) do |total, invoice_item|
-      total + invoice_item.quantity
-    end
-  end
-
-end
-=======
->>>>>>> master
+  # def quantity_sold
+  #   invoice_items.inject(0) do |total, invoice_item|
+  #     total + invoice_item.quantity
+  #   end
+  # end
 
   def revenue
     selected_invoices ||= invoice_items.map { |invoice_item|
