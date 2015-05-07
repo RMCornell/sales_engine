@@ -11,6 +11,7 @@ class ItemTest < Minitest::Test
   end
 
   def test_it_can_find_the_quantity_sold
+    skip
     assert_equal 19, @item.quantity_sold
   end
 end
