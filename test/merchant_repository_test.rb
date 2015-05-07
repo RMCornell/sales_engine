@@ -113,13 +113,6 @@ class MerchantRepositoryTest < Minitest::Test
     assert_equal [], engine.merchant_repository.successful_transactions(ivF)
   end
 
-  def test_can_find_the_top_revenue_merchants
-    invoices = engine.invoice_repository.all
-    engine.merchant_repository.successful_transactions(invoices)
-    engine.merchant_repository.total_merchant_revenue
-    assert engine.merchant_repository.most_revenue(5)
-  end
-
   def customers_with_pending_invoices_test
     customers = engine.transaction_repository.pending_transactions.size
     assert_equal 4, customers
