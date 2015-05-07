@@ -18,28 +18,13 @@ class Merchant
     "#<#{self.class}: id:#{@id.inspect}>"
   end
 
-  #-------------------- Relationship Methods --------------------
-
-
-    # merchant(id) --> items(merchant_id) -->  merchant#items
   def items
     repository.find_merchant_items_by_(id)
   end
 
-    # merchant(id) --> invoices(merchant_id) --> merchant#invoices
   def invoices
     repository.find_merchant_invoices_by_(id)
   end
-
-
-  #-------------------- Business Logic --------------------
-
-# revenue returns the total revenue for that merchant across all transactions
-# merchant --> invoices --> transactions
-# successful transactions --> invoices --> merchant invoices --> invoice items
-
-
-    # returns the total revenue for that merchant for a specific invoice date
 
   def revenue(date=nil)
     if date

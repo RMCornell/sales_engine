@@ -26,22 +26,13 @@ class Item
     "#<#{self.class}: id:#{@id.inspect}>"
   end
 
-
-  # item(id) --> invoice_items(item_id) --> item#invoice_items
   def invoice_items
     repository.find_item_invoice_items_by_(id)
   end
 
-  # item(merchant_id) --> merchant(id) --> # item#merchant
   def merchant
     repository.find_item_merchant_by_(merchant_id)
   end
-
-  # def quantity_sold
-  #   invoice_items.inject(0) do |total, invoice_item|
-  #     total + invoice_item.quantity
-  #   end
-  # end
 
   def revenue
     selected_invoices ||= invoice_items.map { |invoice_item|

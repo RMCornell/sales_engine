@@ -23,13 +23,11 @@ class InvoiceItem
     "#<#{self.class}: id:#{@id.inspect}>"
   end
 
-  # invoice(id) --> invoice_item(invoice_id) --> invoice_item#invoice
-
   def invoice
     repository.find_invoice_items_invoice_by_(invoice_id)
   end
 
-  def item # invoice#item
+  def item
     repository.find_invoice_items_items_by_(item_id)
   end
 

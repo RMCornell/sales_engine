@@ -21,26 +21,22 @@ class Invoice
     "#<#{self.class}: id:#{@id.inspect}>"
   end
 
-    # invoice(id) --> transaction(invoice_id) --> invoice#transactions
   def transactions
     repository.find_transactions_by_invoice_(id)
   end
 
-    # invoice(id) --> invoice_items(invoice_id) --> invoice#invoice_items
   def invoice_items
     repository.find_invoice_items_for_(id)
   end
 
   def items
-    repository.find_items_by_item_(id) # invoice#items
+    repository.find_items_by_item_(id)
   end
 
-    # invoice(customer_id) --> customer(id) --> invoice#customer
   def customer
     repository.find_customer_by_(customer_id)
   end
 
-    # invoice(merchant_id) --> merchant(id) --> invoice#merchant
   def merchant
     repository.find_merchant_by_(merchant_id)
   end
@@ -54,5 +50,4 @@ class Invoice
     }
     repository.add_transaction(transaction_data)
   end
-
 end

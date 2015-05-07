@@ -11,12 +11,8 @@ require_relative 'invoice_item_repository'
 require_relative 'item_repository'
 
 
-### todo move child classes to repos
-
-
 class SalesEngine
   include Enumerable
-
   attr_reader :customer_repository,
               :invoice_repository,
               :transaction_repository,
@@ -63,29 +59,18 @@ class SalesEngine
     @invoice_item_repository ||= InvoiceItemRepository.new(self, dir)
   end
 
-
-  # //----------Merchant Relationships-----------//
-
-
-    # merchant(id) --> items(merchant_id) --> merchant#items
   def find_merchant_items_by_(merchant_id)
     item_repository.find_all_by_merchant_id(merchant_id)
   end
 
-    # merchant(id) --> invoices(merchant_id) --> # merchant#invoices
   def find_merchant_invoices_by_(merchant_id)
     invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
-  # //---------- Invoice Relationships--------//
-
-
-    # invoice(id) --> transaction(invoice_id) --> invoice#transactions
   def find_transactions_by_invoice_(id)
     transaction_repository.find_all_by_invoice_id(id)
   end
 
-    # invoice(id) --> invoice_items(invoice_id) --> invoice#invoice_items
   def find_invoice_items_for_(invoice_id)
     invoice_item_repository.find_all_by_invoice_id(invoice_id)
   end
@@ -95,64 +80,39 @@ class SalesEngine
     items.map { |item| item_repository.find_by_id(item.item_id) }
   end
 
-    # invoice(customer_id) --> customer(id) --> invoice#customer
   def find_customer_by_(customer_id)
     customer_repository.find_by_id(customer_id)
   end
 
-    # invoice(merchant_id) --> merchant(id) --> invoice#merchant
   def find_merchant_by_(merchant_id)
     merchant_repository.find_by_id(merchant_id)
   end
 
-
-  # //---------- InvoiceItem Relationships-----------//
-
-
-    # invoice_item(invoice_id) --> invoice(id) --> invoice_item#invoice
   def find_invoice_items_invoice_by_(invoice_id)
     invoice_repository.find_by_id(invoice_id)
   end
 
-    # invoice_item(item_id) --> item(id) --> # invoice_item#item
   def find_invoice_items_items_by_(item_id)
     item_repository.find_by_id(item_id)
   end
 
-
-  # //---------- Item Relationships-------------------------------------------//
-
-
-    # item(id) --> invoice)item(item_id) --> item#invoice_item
   def find_item_invoice_items_by_(id)
     invoice_item_repository.find_all_by_item_id(id)
   end
 
-    # item(merchant_id) --> merchant(id) --> item#merchant
   def find_item_merchant_by_(merchant_id)
     merchant_repository.find_by_id(merchant_id)
   end
 
-
-  # //---------- Transaction Relationships-------------//
-
-
-    # transactions(invoice_id) --> invoice(id) --> transaction#invoice
   def find_invoice_by_(invoice_id)
     invoice_repository.find_by_id(invoice_id)
   end
 
-
-  # //---------- Customer Relationships---------------//
-
-    # customer(id) --> invoice(customer_id) --> # customer#invoices
   def find_invoices_by_(id)
     invoice_repository.find_all_by_customer_id(id)
   end
 
-  # //---------- Business Logic -------------------------------------------//
-
-  def find_merchant_revenue_by_(id) # merchant#revenue
+  def find_merchant_revenue_by_(id)
     transaction_repository.successful_transactions
       .map { |transaction| transaction.invoice }
       .select { |invoice| invoice.merchant_id == id }
@@ -161,7 +121,7 @@ class SalesEngine
       .flatten.reduce(:+).to_d / 100
   end
 
-  def find_merchant_revenue_by_date_(date=nil, id) #merchant#revenue(date=nil)
+  def find_merchant_revenue_by_date_(date=nil, id)
      revenue_by_date = transaction_repository.successful_transactions
        .map { |transaction| transaction.invoice }
        .select { |invoice| invoice.merchant_id == id }
