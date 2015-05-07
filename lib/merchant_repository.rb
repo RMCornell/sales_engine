@@ -88,11 +88,8 @@ class MerchantRepository
   end
 
   def revenue(date)
-    #p date.strftime("%Y-%m-%d %I:%m:%S UTC")
     invoices = engine.invoice_repository.all.select { |invoice| invoice.created_at == date }
-    #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
     paid_invoices = successful_transactions(invoices)
-    #binding.pry ; puts "This IS the pry you are looking for: #{self.class}"
     engine.total_revenue_for_all_invoices(paid_invoices)
   end
 
@@ -101,13 +98,27 @@ class MerchantRepository
   end
 
   def total_merchant_revenue
-   p  invoices = engine.invoice_repository.all
+    invoices = engine.invoice_repository.all
     paid_invoices = successful_transactions(invoices)
-    # highest = paid_invoices.sort_by { |invoice| }
-    p engine.total_revenue_for_all_invoices(paid_invoices)
+    engine.total_revenue_for_all_invoices(paid_invoices)
   end
 
   def customers_with_pending_invoices(id)
     engine.customers_with_pending_invoices(id)
+  end
+
+  def most_revenue(x)
+    merchants.max_by(x) { |merchant| merchant.revenue }
+  end
+
+  def most_items(x)
+    merchants.max_by(x) do |merchant|
+      paid_invoices = successful_transactions(merchant.invoices)
+      paid_invoices.inject(0) do |total, invoice|
+        total + invoice.invoice_items.inject(0) do |total, invoice_item|
+          total + invoice_item.quantity
+        end
+      end
+    end
   end
 end
