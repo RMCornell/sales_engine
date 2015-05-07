@@ -56,11 +56,6 @@ class Merchant
     repository.engine.find_customer_by_(top_cust_id)
   end
 
-  def transactions
-
-
-  end
-
   def customers_with_pending_invoices
     repository.customers_with_pending_invoices(id)
   end

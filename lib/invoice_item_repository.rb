@@ -120,7 +120,6 @@ class InvoiceItemRepository
     end
   end
 
-
   def group_items(items)
     items_hash ={}
     items.each do |item|
@@ -132,27 +131,3 @@ class InvoiceItemRepository
     items_hash
   end
 end
-
-
-=begin
-
-def create(invoice)
-    #create new instance of invoice using above attributes
-    #push new invoice instance into invoice repository
-    row = {
-        id:          invoice[:id].to_i,
-        customer_id: invoice[:customer_id].to_i,
-        merchant_id: invoice[:merchant_id].to_i,
-        status:      invoice[:status],
-        created_at:  invoice[:created_at],
-        updated_at:  invoice[:updated_at]
-    }
-
-    new_invoice = Invoice.new(row, self)
-    invoices << new_invoice
-
-    engine.create_new_invoice_item(invoice[:items], row)
-    new_invoice
-  end
-
-=end

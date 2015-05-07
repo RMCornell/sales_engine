@@ -93,41 +93,17 @@ class TransactionRepository
     transactions.select {|transaction| updated_at == transaction.updated_at}
   end
 
-
   # //---------- Business Logic -------------------------------------------//
 
   def successful_transactions
-      successful = transactions.select { |transaction| transaction.success? }
+      transactions.select { |transaction| transaction.successful? }
   end
 
   def pending_transactions
-      pending = transactions - successful_transactions
+      transactions - successful_transactions
   end
 
   def add_transaction(invoice)
     transactions << Transaction.new(invoice, self)
   end
-
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
