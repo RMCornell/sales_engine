@@ -95,6 +95,7 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal "Cecelia", by_updated_at.first_name
     assert_equal "Osinski", by_updated_at.last_name
     assert by_updated_at.is_a?(Customer)
+    assert_instance_of Customer, by_updated_at
   end
 
 #-------------------- Find_all_by Method Tests --------------------
@@ -142,12 +143,10 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_favorite_merchant
-    # binding.pry
     merchants = customers.find_favorite_merchant(26)
     assert_equal 26, merchants.id
     assert_equal "Balistreri, Schaefer and Kshlerin", merchants.name
     assert_equal "2012-03-27 14:54:01 UTC", merchants.created_at
     assert_equal "2012-03-27 14:54:01 UTC", merchants.updated_at
   end
-
 end

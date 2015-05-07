@@ -64,7 +64,7 @@ class SalesEngine
   end
 
 
-  # //----------Merchant Relationships-------------------------------------------//
+  # //----------Merchant Relationships-----------//
 
 
     # merchant(id) --> items(merchant_id) --> merchant#items
@@ -77,7 +77,7 @@ class SalesEngine
     invoice_repository.find_all_by_merchant_id(merchant_id)
   end
 
-  # //---------- Invoice Relationships-------------------------------------------//
+  # //---------- Invoice Relationships--------//
 
 
     # invoice(id) --> transaction(invoice_id) --> invoice#transactions
@@ -90,7 +90,6 @@ class SalesEngine
     invoice_item_repository.find_all_by_invoice_id(invoice_id)
   end
 
-    # invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> # invoice#items
   def find_items_for_invoice_items(invoice_id)
     items = invoice_item_repository.find_all_by_invoice_id(invoice_id)
     items.map { |item| item_repository.find_by_id(item.item_id) }
@@ -107,7 +106,7 @@ class SalesEngine
   end
 
 
-  # //---------- InvoiceItem Relationships-------------------------------------------//
+  # //---------- InvoiceItem Relationships-----------//
 
 
     # invoice_item(invoice_id) --> invoice(id) --> invoice_item#invoice
@@ -135,7 +134,7 @@ class SalesEngine
   end
 
 
-  # //---------- Transaction Relationships-------------------------------------------//
+  # //---------- Transaction Relationships-------------//
 
 
     # transactions(invoice_id) --> invoice(id) --> transaction#invoice
@@ -144,7 +143,7 @@ class SalesEngine
   end
 
 
-  # //---------- Customer Relationships-------------------------------------------//
+  # //---------- Customer Relationships---------------//
 
     # customer(id) --> invoice(customer_id) --> # customer#invoices
   def find_invoices_by_(id)
@@ -158,14 +157,14 @@ class SalesEngine
       .map { |transaction| transaction.invoice }
       .select { |invoice| invoice.merchant_id == id }
       .map { |invoice| invoice.invoice_items }
-      .map { |item| item.map { |sub| sub.total } } # todo method to total all invoices
+      .map { |item| item.map { |sub| sub.total } }
       .flatten.reduce(:+).to_d / 100
   end
 
   def find_merchant_revenue_by_date_(date=nil, id) #merchant#revenue(date=nil)
-     revenue_by_date = transaction_repository.successful_transactions # todo add date filter
+     revenue_by_date = transaction_repository.successful_transactions
        .map { |transaction| transaction.invoice }
-       .select { |invoice| invoice.merchant_id == id } # todo method to select merchant invoices
+       .select { |invoice| invoice.merchant_id == id }
        .select { |invoice| invoice.created_at == date }
      total_revenue_for_all_invoices(revenue_by_date)
   end

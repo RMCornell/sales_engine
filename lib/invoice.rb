@@ -13,13 +13,17 @@ class Invoice
     @customer_id = invoice[:customer_id].to_i
     @merchant_id = invoice[:merchant_id].to_i
     @status      = invoice[:status]
-    @created_at  = Date.parse(invoice[:created_at]) #consider moving date parse into the date/revenue method
+    @created_at  = Date.parse(invoice[:created_at])
     @updated_at  = invoice[:updated_at]
   end
 
   def inspect
-    "#<#{self.class}: id:#{@id.inspect} cust_id: #{@customer_id.inspect} mer_id: #{@merchant_id.inspect}"\
-    "status:#{@status.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
+    "#<#{self.class}: id:#{@id.inspect}
+      cust_id: #{@customer_id.inspect}
+      mer_id: #{@merchant_id.inspect}"
+      "status:#{@status.inspect}
+       created_at: #{@created_at.inspect}
+       updated_at: #{@updated_at.inspect}>"
   end
 
     # invoice(id) --> transaction(invoice_id) --> invoice#transactions
@@ -32,7 +36,6 @@ class Invoice
     repository.find_invoice_items_for_(id)
   end
 
-  #invoice(id) --> invoice_items(invoice_id) --> invoice_items(item_id) --> items(id) --> invoice#items
   def items
     repository.find_items_by_item_(id) # invoice#items
   end

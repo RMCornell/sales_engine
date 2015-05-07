@@ -88,7 +88,8 @@ class MerchantRepository
   end
 
   def revenue(date)
-    invoices = engine.invoice_repository.all.select { |invoice| invoice.created_at == date }
+    invoices = engine.invoice_repository.all
+             .select { |invoice| invoice.created_at == date }
     paid_invoices = successful_transactions(invoices)
     engine.total_revenue_for_all_invoices(paid_invoices)
   end

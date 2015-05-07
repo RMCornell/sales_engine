@@ -23,7 +23,12 @@ class Item
   end
 
   def inspect
-    "#<#{self.class}: id:#{@id.inspect} name: #{@name.inspect} unit_price: #{@unit_price.inspect} merchant_id: #{@merchant_id.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
+    "#<#{self.class}: id:#{@id.inspect}
+    name: #{@name.inspect}
+    unit_price: #{@unit_price.inspect}
+    merchant_id: #{@merchant_id.inspect}
+    created_at: #{@created_at.inspect}
+    updated_at: #{@updated_at.inspect}>"
   end
 
 
@@ -133,5 +138,10 @@ class Item
 
   def most_sold
     invoice_items.max_by { |invoice_item| invoice_item.quantity }
+  end
+
+  def best_day
+    max_item = invoice_items.max_by { |invoice_item| invoice_item.quantity }
+    Date.parse(max_item.invoice.created_at)
   end
 end

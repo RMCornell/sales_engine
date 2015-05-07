@@ -21,7 +21,13 @@ class Transaction
   end
 
   def inspect
-    "#<#{self.class}: id:#{@id.inspect} inv_id: #{@invoice_id.inspect} cc_number: #{@credit_card_number.inspect} cc_exp_date: #{@credit_card_expiration_date.inspect} result: #{@result.inspect} created_at: #{@created_at.inspect} updated_at: #{@updated_at.inspect}>"
+    "#<#{self.class}: id:#{@id.inspect}
+    inv_id: #{@invoice_id.inspect}
+    cc_number: #{@credit_card_number.inspect}
+    cc_exp_date: #{@credit_card_expiration_date.inspect}
+    result: #{@result.inspect}
+    created_at: #{@created_at.inspect}
+    updated_at: #{@updated_at.inspect}>"
   end
 
   ### transactions(invoice_id) --> invoice(id) --> transactions#invoice
