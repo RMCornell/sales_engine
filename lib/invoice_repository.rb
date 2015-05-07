@@ -17,7 +17,7 @@ class InvoiceRepository
   end
 
   def inspect
-    "#<#{self.class}: #{@items.size} rows>"
+    "#<#{self.class}: #{@invoices.size} rows>"
   end
 
   def each(&block)
