@@ -30,7 +30,7 @@ class Transaction
     repository.find_invoice_by_(invoice_id)
   end
 
-  def success?
+  def successful?
     result == 'success'
   end
 

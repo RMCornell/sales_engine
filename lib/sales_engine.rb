@@ -192,6 +192,7 @@ class SalesEngine
     calculate_invoice_totals(invoice_items_for_each_invoice)
   end
 
+
   def calculate_invoice_totals(invoice_items) ### this calculates invoice totals
     invoice_items.flatten.reduce(0) { |total, invoice_item| total + invoice_item.total }.to_d / 100
   end
@@ -212,6 +213,12 @@ class SalesEngine
     transaction_repository.add_transaction(invoice)
   end
 
+
+
+  def total_revenue_for_all_items(x)
+    items_for_each_invoice = item_repository.map {|item| item.id }
+    calculate_item_totals(items_for_each_invoice)
+  end
 end
 
 

@@ -96,7 +96,28 @@ class ItemRepository
     items.select {|item| updated_at = item.updated_at}
   end
 
+  #Business intellingence
+  def most_revenue(x)
+    items.sort_by do |item|
+      item.revenue.nil? ? 0 : item.revenue
+    end.reverse.first(x)
+  end
 
-  #Business Intellingence
-  #most_items
+  def most_items(x)
+    items.sort_by do |item|
+      item.quantity_sold.nil? ? 0 : item.quantity_sold
+    end.reverse.first(x)
+  end
+
 end
+
+=begin
+
+def favorite_customer
+    cust_id = repository.find_merchant_invoices_by_(id)
+    best_customer = cust_id.each_with_object(Hash.new(0)) {|invoice,counts| counts[invoice.customer_id] += 1}
+    top_cust_id = best_customer.max_by{|k, v| v}[0]
+    repository.engine.find_customer_by_(top_cust_id)
+  end
+
+=end

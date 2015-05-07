@@ -120,14 +120,7 @@ class InvoiceRepository
   end
 
   # Create Invoices
-
-  def create
-    Invoice.new(rows, self).create
-  end
-
   def create(invoice)
-    #create new instance of invoice using above attributes
-    #push new invoice instance into invoice repository
     row = {
         id:          invoice[:id].to_i,
         customer_id: invoice[:customer].id,
