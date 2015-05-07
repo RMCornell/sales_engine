@@ -95,7 +95,9 @@ class MerchantRepository
   end
 
   def successful_transactions(invoices)
-    invoices.select { |invoice| invoice.transactions.any? { |transaction| transaction.successful? } }
+    invoices.select { |invoice|
+      invoice.transactions.any? { |transaction|
+        transaction.successful? } }
   end
 
   def total_merchant_revenue

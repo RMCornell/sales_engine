@@ -23,12 +23,7 @@ class Item
   end
 
   def inspect
-    "#<#{self.class}: id:#{@id.inspect}
-    name: #{@name.inspect}
-    unit_price: #{@unit_price.inspect}
-    merchant_id: #{@merchant_id.inspect}
-    created_at: #{@created_at.inspect}
-    updated_at: #{@updated_at.inspect}>"
+    "#<#{self.class}: id:#{@id.inspect}>"
   end
 
 

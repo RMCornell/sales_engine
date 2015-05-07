@@ -18,12 +18,7 @@ class Invoice
   end
 
   def inspect
-    "#<#{self.class}: id:#{@id.inspect}
-      cust_id: #{@customer_id.inspect}
-      mer_id: #{@merchant_id.inspect}"
-      "status:#{@status.inspect}
-       created_at: #{@created_at.inspect}
-       updated_at: #{@updated_at.inspect}>"
+    "#<#{self.class}: id:#{@id.inspect}>"
   end
 
     # invoice(id) --> transaction(invoice_id) --> invoice#transactions

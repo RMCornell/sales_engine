@@ -170,17 +170,20 @@ class SalesEngine
   end
 
   def total_revenue_for_all_invoices(invoices)
-    invoice_items_for_each_invoice = invoices.map { |invoice| invoice.invoice_items }
+    invoice_items_for_each_invoice = invoices.map { |invoice|
+      invoice.invoice_items }
     calculate_invoice_totals(invoice_items_for_each_invoice)
   end
 
-  def calculate_invoice_totals(invoice_items) ### this calculates invoice totals
-    invoice_items.flatten.reduce(0) { |total, invoice_item| total + invoice_item.total }.to_d / 100
+  def calculate_invoice_totals(invoice_items)
+    invoice_items.flatten.reduce(0) { |total, invoice_item|
+      total + invoice_item.total }.to_d / 100
   end
 
   def customers_with_pending_invoices(merchant_id)
     merchant_invoices = invoice_repository.find_all_by_merchant_id(merchant_id)
-    merchant_invoices = merchant_invoices.reject { |invoice| invoice_repository.paid_invoices.include?(invoice) }
+    merchant_invoices = merchant_invoices.reject { |invoice|
+      invoice_repository.paid_invoices.include?(invoice) }
     merchant_invoices.map { |invoice| invoice.customer }
   end
 
