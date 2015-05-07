@@ -135,7 +135,7 @@ class ItemRepositoryTest < Minitest::Test
 
   def test_item_repository_returns_all_items_by_updated_at
     all_by_updated_at = items.find_all_by_updated_at("2012-03-27 14:53:59 UTC")
-    assert_equal 156, all_by_updated_at.count
+    assert_equal 157, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Item)
   end
 end

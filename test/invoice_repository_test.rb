@@ -14,8 +14,8 @@ class InvoiceRepositoryTest < Minitest::Test
     invoice_transactions = invoice.transactions
 
     refute invoice_transactions.empty? , invoice_transactions
-    assert_equal "2012-03-27 14:54:10 UTC", invoice_transactions
-    assert_equal 'success', invoice_transactions
+    assert_equal "2012-03-27 14:54:10 UTC", invoice_transactions[0].created_at
+    assert_equal 'success', invoice_transactions[0].result
   end
 
   def test_invoice_can_have_unsuccessful_transactions
@@ -32,9 +32,7 @@ class InvoiceRepositoryTest < Minitest::Test
 
     assert invoice_items.is_a?(Array)
     assert_equal 4, invoice_items.size
-    assert_equal 23, invoice_items
-    assert_equal 932, invoice_items
-    assert_equal "2012-03-27 14:54:10 UTC", invoice_items
+    assert_equal "2012-03-27 14:54:10 UTC", invoice_items.first.created_at
   end
 
   def test_invoice_can_display_its_items
@@ -42,9 +40,7 @@ class InvoiceRepositoryTest < Minitest::Test
     items = invoice.items
 
     assert items.is_a?(Array)
-    assert_equal 932, items.item.id
     assert_equal 4, items.size
-    assert_equal 41, items.first.merchant_id
     assert_equal "2012-03-27 14:54:03 UTC", items.first.created_at
   end
 

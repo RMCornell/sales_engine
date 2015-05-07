@@ -29,12 +29,8 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert invoice_item
   end
 
-  def test_invoice_item_repository_contains_data
-    assert_equal 108, invoice_item.all.length
-  end
-
   def test_invoice_item_repository_returns_all_invoice_items
-    assert_equal 108, invoice_item.all.length
+    assert_equal 122, invoice_item.all.length
   end
 
   def test_invoice_item_repository_returns_random_invoice_item
@@ -116,7 +112,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
 
   def test_invoice_items_repository_returns_all_invoice_items_by_quantity
     all_by_quantity = invoice_item.find_all_by_quantity(9)
-    assert_equal 9, all_by_quantity.count
+    assert_equal 12, all_by_quantity.count
     assert all_by_quantity.first.is_a?(InvoiceItem)
   end
 
