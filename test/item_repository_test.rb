@@ -31,11 +31,11 @@ class ItemRepositoryTest < Minitest::Test
   end
 
   def test_items_repository_contains_data
-    assert_equal 156, items.all.length
+    assert_equal 157, items.all.length
   end
 
   def test_item_repository_returns_all_items
-    assert_equal 156, items.all.length
+    assert_equal 157, items.all.length
   end
 
   def test_item_repository_returns_random_item

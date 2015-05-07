@@ -23,10 +23,10 @@ class SalesEngineTest < Minitest::Test
   end
 
   def test_merchant_can_calculate_total_revenue_by_date
-    p merchant = engine.merchant_repository.find_by_id(3)
-    p date = Date.parse("Fri, 09 Mar 2012")
-    p merchant.revenue(date)
-    p BigDecimal.new("8373.29")
+     merchant = engine.merchant_repository.find_by_id(3)
+     date = Date.parse("Fri, 09 Mar 2012")
+     merchant.revenue(date)
+     BigDecimal.new("8373.29")
     assert_equal BigDecimal.new("8373.29"), merchant.revenue(date)
   end
 
