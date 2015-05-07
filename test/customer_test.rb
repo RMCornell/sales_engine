@@ -36,4 +36,10 @@ class CustomerTest < Minitest::Test
     # todo need these probably set to 'created_at'
     refute customers.any? { |customer| customer.updated_at.nil? }
   end
+
+
+  
+  def test_sustomer_finds_favorite_merchant
+
+  end
 end

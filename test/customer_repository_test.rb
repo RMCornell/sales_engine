@@ -95,6 +95,7 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal "Cecelia", by_updated_at.first_name
     assert_equal "Osinski", by_updated_at.last_name
     assert by_updated_at.is_a?(Customer)
+    assert_instance_of Customer, by_updated_at
   end
 
 #-------------------- Find_all_by Method Tests --------------------
@@ -130,5 +131,22 @@ class CustomerRepositoryTest < Minitest::Test
     all_by_updated_at = customers.find_all_by_updated_at("2012-03-27 14:54:10 UTC")
     assert_equal 6, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Customer)
+  end
+
+  def test_customer_transactions
+    transactions = customers.find_invoices_by_(1)
+    assert_equal 8, transactions.count
+    assert_equal 1, transactions[0].id
+    assert_equal 26, transactions[0].merchant_id
+    assert_equal "shipped", transactions[0].status
+    assert_equal "2012-03-25 09:54:09 UTC", transactions[0].updated_at
+  end
+
+  def test_favorite_merchant
+    merchants = customers.find_favorite_merchant(26)
+    assert_equal 26, merchants.id
+    assert_equal "Balistreri, Schaefer and Kshlerin", merchants.name
+    assert_equal "2012-03-27 14:54:01 UTC", merchants.created_at
+    assert_equal "2012-03-27 14:54:01 UTC", merchants.updated_at
   end
 end

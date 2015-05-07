@@ -19,7 +19,7 @@ class InvoiceItemRepository
     "#<#{self.class}: #{@invoice_items.size} rows>"
   end
 
-  # --------- invoice item relationships ---------------------------------------------------------
+  # --------- invoice item relationships --------------------
 
 
   def find_invoice_items_invoice_by_(invoice_id) #invoice_item#invoice
@@ -29,10 +29,6 @@ class InvoiceItemRepository
   def find_invoice_items_items_by_(item_id)
     engine.find_invoice_items_items_by_(item_id)
   end
-
-
-
-  # ------------------------------------------------------------------------------------------------
 
   def each(&block)
     @invoice_items.each(&block)

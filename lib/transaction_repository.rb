@@ -2,7 +2,7 @@ require_relative 'transaction'
 
 class TransactionRepository
   include Enumerable
-  attr_reader :engine, :transactions
+  attr_reader :engine, :trans
 
   def initialize(engine, dir)
     @engine = engine
@@ -11,15 +11,15 @@ class TransactionRepository
 
   def load_transactions(dir)
     file = Parser.parse("#{dir}/transactions.csv")
-    @transactions = file.map { |row| Transaction.new(row, self) }
+    @trans = file.map { |row| Transaction.new(row, self) }
   end
 
   def each(&block)
-    @transactions.each(&block)
+    @trans.each(&block)
   end
 
   def inspect
-    "#<#{self.class}: #{@transactions.size} rows>"
+    "#<#{self.class}: #{@trans.size} rows>"
   end
 
   # transactions#invoice
@@ -28,82 +28,82 @@ class TransactionRepository
   end
 
   def all
-    transactions
+    trans
   end
 
   def random
-    transactions.sample
+    trans.sample
   end
 
-# Find_by Methods
+  # //---------- Find_by Methods ----------//
   def find_by_id(id)
-    transactions.detect { |transaction| id == transaction.id }
+    trans.detect { |trans| id == trans.id }
   end
 
   def find_by_invoice_id(invoice_id)
-    transactions.detect { |transaction| invoice_id == transaction.invoice_id }
+    trans.detect { |trans| invoice_id == trans.invoice_id }
   end
 
   def find_by_credit_card_number(credit_card_number)
-    transactions.detect { |transaction| credit_card_number == transaction.credit_card_number}
+    trans.detect{ |trans| credit_card_number == trans.credit_card_number}
   end
 
   def find_by_credit_card_expiration_date(credit_card_expiration_date)
-    transactions.detect { |transaction| credit_card_expiration_date == transaction.credit_card_expiration_date}
+    trans.detect{ |trans| credit_card_expiration_date == trans.credit_card_expiration_date}
   end
 
   def find_by_result(result)
-    transactions.detect {|transaction| result == transaction.result}
+    trans.detect {|trans| result == trans.result}
   end
 
   def find_by_created_at(created_at)
-    transactions.detect {|transaction| created_at == transaction.created_at}
+    trans.detect {|trans| created_at == trans.created_at}
   end
 
   def find_by_updated_at(updated_at)
-    transactions.detect {|transaction| updated_at == transaction.updated_at}
+    trans.detect {|trans| updated_at == trans.updated_at}
   end
 
-#Find_by_all Methods
+  # //---------- Find_by_all Methods ----------//
   def find_all_by_id(id)
-    transactions.select {|transaction| id == transaction.id}
+    trans.select {|trans| id == trans.id}
   end
 
   def find_all_by_invoice_id(invoice_id)
-    transactions.select {|transaction| invoice_id == transaction.invoice_id}
+    trans.select {|trans| invoice_id == trans.invoice_id}
   end
 
   def find_all_by_credit_card_number(credit_card_number)
-    transactions.select {|transaction| credit_card_number == transaction.credit_card_number}
+    trans.select {|trans| credit_card_number == trans.credit_card_number}
   end
 
   def find_all_by_credit_card_expiration_date(credit_card_expiration_date)
-    transactions.select {|transaction| credit_card_expiration_date == transaction.credit_card_expiration_date}
+    trans.select {|trans| credit_card_expiration_date == trans.credit_card_expiration_date}
   end
 
   def find_all_by_result(result)
-    transactions.select {|transaction| result == transaction.result}
+    trans.select {|trans| result == trans.result}
   end
 
   def find_all_by_created_at(created_at)
-    transactions.select {|transaction| created_at == transaction.created_at}
+    trans.select {|trans| created_at == trans.created_at}
   end
 
   def find_all_by_updated_at(updated_at)
-    transactions.select {|transaction| updated_at == transaction.updated_at}
+    trans.select {|trans| updated_at == trans.updated_at}
   end
 
-  # //---------- Business Logic -------------------------------------------//
+  # //---------- Business Logic ----------//
 
   def successful_transactions
-      transactions.select { |transaction| transaction.successful? }
+      trans.select { |trans| trans.successful? }
   end
 
   def pending_transactions
-      transactions - successful_transactions
+      trans - successful_transactions
   end
 
   def add_transaction(invoice)
-    transactions << Transaction.new(invoice, self)
+    trans << Transaction.new(invoice, self)
   end
 end

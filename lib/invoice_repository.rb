@@ -112,7 +112,8 @@ class InvoiceRepository
   # //---------- Business Logic -------------------------------------------//
 
   def paid_invoices
-    engine.transaction_repository.successful_transactions.map { |transaction| transaction.invoice }
+    engine.transaction_repository
+        .successful_transactions.map { |transaction| transaction.invoice }
   end
 
   def unpaid_invoices
