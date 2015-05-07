@@ -47,7 +47,7 @@ class Item
   #     total + invoice_item.quantity
   #   end
   # end
-
+ 
   def revenue
     selected_invoices ||= invoice_items.map { |invoice_item|
       invoice_item.invoice }
