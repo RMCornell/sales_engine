@@ -1,6 +1,5 @@
 require_relative 'test_helper'
 
-
 class InvoiceItemTest < Minitest::Test
   attr_reader :invoice_items, :engine
 
@@ -20,5 +19,4 @@ class InvoiceItemTest < Minitest::Test
     invoice_item = engine.invoice_item_repository.find_by_id(10)
     assert_equal 7436, invoice_item.total
   end
-
 end

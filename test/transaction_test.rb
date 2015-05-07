@@ -51,7 +51,6 @@ class TransactionTest < Minitest::Test
     assert_equal "2012-03-27 14:54:09 UTC", transaction.updated_at
   end
 
-
   def test_if_transaction_is_successful
     assert transaction.successful?
   end
