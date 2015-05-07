@@ -131,4 +131,6 @@ class CustomerRepositoryTest < Minitest::Test
     assert_equal 6, all_by_updated_at.count
     assert all_by_updated_at.first.is_a?(Customer)
   end
+
+
 end

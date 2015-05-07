@@ -53,6 +53,6 @@ class TransactionTest < Minitest::Test
 
 
   def test_if_transaction_is_successful
-    assert transaction.success?
+    assert transaction.successful?
   end
 end
